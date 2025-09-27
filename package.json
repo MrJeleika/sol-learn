@@ -1,0 +1,4 @@
+{
+  "name": "solana-build",
+  "packageManager": "yarn@4.9.2"
+}
