@@ -4,9 +4,15 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "yarn workspace web dev",
-    "build:dev": "yarn workspace web build"
+    "build:dev": "yarn workspace web build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:web": "yarn workspace web format"
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
 }
