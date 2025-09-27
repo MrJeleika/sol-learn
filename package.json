@@ -2,6 +2,10 @@
   "name": "solana-build",
   "version": "1.0.0",
   "license": "MIT",
+  "scripts": {
+    "start:dev": "yarn workspace web dev",
+    "build:dev": "yarn workspace web build"
+  },
   "workspaces": [
     "apps/*"
   ]
