@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
 
 import path from 'node:path'
 
@@ -11,7 +12,7 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: env.NODE_ENV === 'production',
     },
-    plugins: [react()],
+    plugins: [react(), tailwindcss()],
     define: {
       global: 'window',
       process: { env: 'import.meta.env', browser: true },
