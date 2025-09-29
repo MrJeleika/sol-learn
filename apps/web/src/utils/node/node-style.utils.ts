@@ -1,4 +1,4 @@
-import { NodeTypeEnum, type NodeType } from '@/types/nodes/base'
+import { NodeTypeEnum, type NodeType } from '@/types/node'
 
 interface NodeStyle {
   color: string
@@ -8,7 +8,8 @@ interface NodeStyle {
 
 export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.text]: { color: '#006239', width: 300 },
-  [NodeTypeEnum.hash]: { color: '#006239', width: 100 },
+  [NodeTypeEnum.hash]: { color: '#006239', width: 150 },
+  [NodeTypeEnum.keypair]: { color: '#006239', width: 150 },
 }
 
 export const getNodeStyles = (nodeType?: NodeType) => {

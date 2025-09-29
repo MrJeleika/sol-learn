@@ -17,6 +17,12 @@ const initialNodes = [
     position: { x: 0, y: 300 },
     data: { label: 'Node 4' },
   },
+  {
+    id: 'n5',
+    type: 'keypair',
+    position: { x: 0, y: 400 },
+    data: { label: 'Node 5' },
+  },
 ]
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
 

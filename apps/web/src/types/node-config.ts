@@ -1,4 +1,4 @@
-import type { HandleConfig } from './handle'
+import type { HandleConfig } from './node-handle'
 
 export type NodeConfig = {
   label: string

@@ -1,5 +1,5 @@
 import type { Node } from '@xyflow/react'
-import type { NodeTypeEnum } from './base'
+import type { NodeTypeEnum } from '../node'
 
 export type HashNodeData = {
   hash: string

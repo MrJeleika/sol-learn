@@ -1,8 +1,10 @@
-import { useNodeConnections, useNodesData } from '@xyflow/react'
+import { useNodeConnections } from '@xyflow/react'
 import { CustomNode } from '../ui/custom-node'
 import type { HashNodeData, HashNodeType } from '@/types/nodes/hash-node'
 import { useEffect, useMemo } from 'react'
 import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
+import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
+import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
 
 const simpleHash = (str?: string): string => {
   if (!str) return ''
@@ -18,18 +20,18 @@ const simpleHash = (str?: string): string => {
 export const HashNode = (props: HashNodeType) => {
   const connections = useNodeConnections({ handleType: 'target', id: props.id })
   const { updateNodeData } = useTypedReactFlow()
-  console.log(connections)
-  const inputData = useNodesData<HashNodeType>(connections?.[0]?.source)
-  console.log(inputData)
-  const hash = useMemo(() => simpleHash(inputData?.data?.hash), [inputData])
-  console.log(hash)
+  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.hash>>(connections)
+
+  const inputData = useMemo(() => String(resolved.input?.value ?? ''), [resolved])
+
+  const hash = useMemo(() => simpleHash(inputData), [inputData])
   useEffect(() => {
     updateNodeData<HashNodeData>(props.id, { hash })
   }, [hash, props.id, updateNodeData])
 
   return (
     <CustomNode {...props}>
-      <p>{simpleHash(inputData?.data?.hash)}</p>
+      <p className="text-center">{hash}</p>
     </CustomNode>
   )
 }
