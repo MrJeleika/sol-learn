@@ -1,20 +1,21 @@
-import { Handle, Position } from '@xyflow/react'
-import { useCallback } from 'react'
+import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
+import { CustomNode } from '../ui/custom-node'
+import { useState } from 'react'
+import type { TextNodeType, TextNodeData } from '@/types/nodes/text-node'
+import { Input } from '../ui/input'
 
-type Props = {}
+export const TextNode = (props: TextNodeType) => {
+  const [text, setText] = useState(props.data.text)
+  const { updateNodeData } = useTypedReactFlow()
 
-export const TextNode = (props: Props) => {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value)
-  }, [])
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value)
+    updateNodeData<TextNodeData>(props.id, { text: e.target.value })
+  }
+
   return (
-    <div className="text-updater-node">
-      <Handle type="source" position={Position.Top} />
-      <div className="p-2">
-        <label htmlFor="text">Text:</label>
-        <input id="text" name="text" onChange={onChange} className="nodrag border" />
-      </div>
-      <Handle type="target" position={Position.Bottom} />
-    </div>
+    <CustomNode {...props}>
+      <Input value={text} className="text-xs h-6" onChange={handleChange} />
+    </CustomNode>
   )
 }
