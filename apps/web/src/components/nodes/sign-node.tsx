@@ -9,11 +9,12 @@ import { sign } from '@/utils/crypto/crypto.utils'
 export const SignNode = (props: SignNodeType) => {
   const { updateNodeData } = useTypedReactFlow()
 
-  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.sign>>(props.id)
+  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.SIGN>>(props.id)
 
   const signature = useMemo(() => {
     const privateKey = resolved.privateKey?.value as string
     const message = resolved.message?.value as string
+    if (!privateKey || !message) return ''
     return sign(message, privateKey)
   }, [resolved])
 

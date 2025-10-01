@@ -1,8 +1,8 @@
 import type { Node } from '@xyflow/react'
 import type { NodeTypeEnum } from '../node'
 
-export type TextNodeData = {
-  text: string
+export type NumberNodeData = {
+  number: number
 }
 
-export type TextNodeType = Node<TextNodeData, NodeTypeEnum.text>
+export type NumberNodeType = Node<NumberNodeData, NodeTypeEnum.NUMBER>

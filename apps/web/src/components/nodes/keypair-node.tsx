@@ -15,7 +15,7 @@ export const KeypairNode = (props: KeypairNodeType) => {
     updateNodeData<KeypairNodeData>(props.id, transformKeypair(keypair))
   }, [updateNodeData, props.id])
 
-  const actions = useNodeActions<ActionsFor<NodeTypeEnum.keypair>>(props.type, {
+  const actions = useNodeActions<ActionsFor<NodeTypeEnum.KEYPAIR>>(props.type, {
     Generate: handleGenerateKeypair,
   })
 

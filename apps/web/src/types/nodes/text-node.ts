@@ -5,4 +5,4 @@ export type TextNodeData = {
   text: string
 }
 
-export type TextNodeType = Node<TextNodeData, NodeTypeEnum.text>
+export type TextNodeType = Node<TextNodeData, NodeTypeEnum.TEXT>

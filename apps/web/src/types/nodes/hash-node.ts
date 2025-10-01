@@ -5,4 +5,4 @@ export type HashNodeData = {
   hash: string
 }
 
-export type HashNodeType = Node<HashNodeData, NodeTypeEnum.hash>
+export type HashNodeType = Node<HashNodeData, NodeTypeEnum.HASH>

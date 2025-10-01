@@ -9,7 +9,7 @@ import { Copy } from '../ui/copy'
 
 export const HashNode = (props: HashNodeType) => {
   const { updateNodeData } = useTypedReactFlow()
-  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.hash>>(props.id)
+  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.HASH>>(props.id)
 
   const inputData = useMemo(() => String(resolved.input?.value ?? ''), [resolved])
 

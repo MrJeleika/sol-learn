@@ -5,13 +5,15 @@ import { TextNode } from '@/components/nodes/text-node'
 import { NodeTypeEnum, type NodeType } from '@/types/node'
 import { DisplayNode } from '@/components/nodes/display-node'
 import { NumberNode } from '@/components/nodes/number-node'
+import { VerifySignatureNode } from '@/components/nodes/verify-signature-node'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
-  [NodeTypeEnum.text]: TextNode,
-  [NodeTypeEnum.hash]: HashNode,
-  [NodeTypeEnum.keypair]: KeypairNode,
-  [NodeTypeEnum.sign]: SignNode,
-  [NodeTypeEnum.display]: DisplayNode,
-  [NodeTypeEnum.number]: NumberNode,
+  [NodeTypeEnum.TEXT]: TextNode,
+  [NodeTypeEnum.HASH]: HashNode,
+  [NodeTypeEnum.KEYPAIR]: KeypairNode,
+  [NodeTypeEnum.SIGN]: SignNode,
+  [NodeTypeEnum.DISPLAY]: DisplayNode,
+  [NodeTypeEnum.NUMBER]: NumberNode,
+  [NodeTypeEnum.VERIFY_SIGNATURE]: VerifySignatureNode,
 }

@@ -19,7 +19,7 @@ export const verify = (message: string | Uint8Array, signatureBase58: string, pu
 
 export const transformKeypair = (keypair: Keypair) => {
   return {
-    address: keypair.publicKey.toBase58(),
+    publicKey: keypair.publicKey.toBase58(),
     privateKey: bs58.encode(keypair.secretKey),
   }
 }

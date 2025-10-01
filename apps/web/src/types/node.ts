@@ -1,12 +1,13 @@
 import type { nodeConfigRegistry } from '@/utils/node/node-config-registry'
 
 export enum NodeTypeEnum {
-  text = 'text',
-  hash = 'hash',
-  keypair = 'keypair',
-  sign = 'sign',
-  display = 'display',
-  number = 'number',
+  TEXT = 'TEXT',
+  HASH = 'HASH',
+  KEYPAIR = 'KEYPAIR',
+  SIGN = 'SIGN',
+  DISPLAY = 'DISPLAY',
+  NUMBER = 'NUMBER',
+  VERIFY_SIGNATURE = 'VERIFY_SIGNATURE',
 }
 
 export type NodeType = keyof typeof NodeTypeEnum

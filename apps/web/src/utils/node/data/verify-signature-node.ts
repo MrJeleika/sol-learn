@@ -1,29 +1,30 @@
 import { Position } from '@xyflow/react'
 import type { NodeConfig } from '@/types/node-config'
 
-export const keypairNodeConfig = {
-  label: 'KEYPAIR',
+export const verifySignatureNodeConfig = {
+  label: 'VERIFY SIGNATURE',
   handles: [
     {
       position: Position.Left,
       type: 'target',
       dataType: 'string',
-      dataField: 'privateKey',
+      dataField: 'message',
+      label: 'Message',
     },
     {
-      position: Position.Right,
-      type: 'source',
+      position: Position.Left,
+      type: 'target',
       dataType: 'string',
-      dataField: 'privateKey',
-      label: 'Private Key',
+      dataField: 'signature',
+      label: 'Signature',
     },
     {
-      position: Position.Right,
-      type: 'source',
+      position: Position.Left,
+      type: 'target',
       dataType: 'string',
       dataField: 'publicKey',
       label: 'Public key',
     },
   ],
-  actions: [{ position: Position.Left, label: 'Generate' }],
+  actions: [],
 } as const satisfies NodeConfig

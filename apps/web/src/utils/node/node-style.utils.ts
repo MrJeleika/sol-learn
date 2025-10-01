@@ -7,15 +7,16 @@ interface NodeStyle {
 }
 
 export const nodeStyles: Record<NodeType, NodeStyle> = {
-  [NodeTypeEnum.text]: { color: '#006239', width: 300 },
-  [NodeTypeEnum.hash]: { color: '#006239', width: 150 },
-  [NodeTypeEnum.keypair]: { color: '#006239', width: 150 },
-  [NodeTypeEnum.sign]: { color: '#006239', width: 150 },
-  [NodeTypeEnum.display]: { color: '#006239', width: 300 },
-  [NodeTypeEnum.number]: { color: '#006239', width: 100 },
+  [NodeTypeEnum.TEXT]: { color: '#006239', width: 300 },
+  [NodeTypeEnum.HASH]: { color: '#006239', width: 150 },
+  [NodeTypeEnum.KEYPAIR]: { color: '#006239', width: 150 },
+  [NodeTypeEnum.SIGN]: { color: '#006239', width: 150 },
+  [NodeTypeEnum.DISPLAY]: { color: '#006239', width: 300 },
+  [NodeTypeEnum.NUMBER]: { color: '#006239', width: 100 },
+  [NodeTypeEnum.VERIFY_SIGNATURE]: { color: '#006239', width: 150 },
 }
 
 export const getNodeStyles = (nodeType?: NodeType) => {
-  if (!nodeType) return nodeStyles[NodeTypeEnum.text]
+  if (!nodeType) return nodeStyles[NodeTypeEnum.TEXT]
   return nodeStyles[nodeType]
 }

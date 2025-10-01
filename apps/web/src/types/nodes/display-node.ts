@@ -5,4 +5,4 @@ export type DisplayNodeData = {
   text: string
 }
 
-export type DisplayNodeType = Node<DisplayNodeData, NodeTypeEnum.display>
+export type DisplayNodeType = Node<DisplayNodeData, NodeTypeEnum.DISPLAY>

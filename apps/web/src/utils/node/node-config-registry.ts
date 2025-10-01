@@ -6,14 +6,16 @@ import { keypairNodeConfig } from './data/keypair-node-data'
 import { signNodeConfig } from './data/sign-node-data'
 import { displayNodeConfig } from './data/display-node-data'
 import { numberNodeConfig } from './data/number-node-config'
+import { verifySignatureNodeConfig } from './data/verify-signature-node'
 
 export const nodeConfigRegistry = {
-  [NodeTypeEnum.text]: textNodeConfig,
-  [NodeTypeEnum.hash]: hashNodeConfig,
-  [NodeTypeEnum.keypair]: keypairNodeConfig,
-  [NodeTypeEnum.sign]: signNodeConfig,
-  [NodeTypeEnum.display]: displayNodeConfig,
-  [NodeTypeEnum.number]: numberNodeConfig,
+  [NodeTypeEnum.TEXT]: textNodeConfig,
+  [NodeTypeEnum.HASH]: hashNodeConfig,
+  [NodeTypeEnum.KEYPAIR]: keypairNodeConfig,
+  [NodeTypeEnum.SIGN]: signNodeConfig,
+  [NodeTypeEnum.DISPLAY]: displayNodeConfig,
+  [NodeTypeEnum.NUMBER]: numberNodeConfig,
+  [NodeTypeEnum.VERIFY_SIGNATURE]: verifySignatureNodeConfig,
 } as const satisfies Record<NodeType, NodeConfig>
 
 export const getNodeConfig = (nodeType: NodeType) => {
