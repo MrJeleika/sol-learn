@@ -1,20 +1,14 @@
 import { Position } from '@xyflow/react'
 import type { NodeConfig } from '@/types/node-config'
 
-export const hashNodeConfig = {
-  label: 'HASH',
+export const numberNodeConfig = {
+  label: 'NUMBER',
   handles: [
-    {
-      position: Position.Left,
-      type: 'target',
-      dataType: 'string',
-      dataField: 'input',
-    },
     {
       position: Position.Right,
       type: 'source',
       dataType: 'string',
-      dataField: 'hash',
+      dataField: 'number',
     },
   ],
   actions: [],

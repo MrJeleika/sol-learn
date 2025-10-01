@@ -32,15 +32,17 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
 
   const maxHandleCount = Math.max(...Object.values(handleCounts))
 
+  const minHeight = Math.max(maxHandleCount * 16, nodeStyles.height ?? 0)
+
   return (
-    <div style={{ width: nodeStyles.width }} className={cn('relative rounded-[8px] text-[#e2e8f0]')}>
+    <div style={{ width: nodeStyles.width }} className={cn('relative rounded-[8px] text-foreground')}>
       <div
-        style={{ height: nodeStyles.height, minHeight: maxHandleCount * 16 }}
+        style={{ height: nodeStyles.height ?? 'auto', minHeight }}
         className={cn(
           'relative z-20',
-          'p-3 rounded-[8px] transition-all bg-[#171717] border-[#1f1f1f] border',
+          'p-3 rounded-[8px] transition-all bg-background border-border border',
           className,
-          selected && 'border-[#313131] bg-[#1f1f1f]'
+          selected && 'border-active-border bg-border'
         )}
       >
         {nodeConfig.handles.map((handle) => {
@@ -97,8 +99,8 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
       <div
         style={{ backgroundColor: nodeStyles.color }}
         className={cn(
-          'absolute z-10 top-0 flex items-end justify-center left-0 h-[calc(100%+12px)] w-full border-[#1f1f1f] border rounded-[8px]',
-          selected && 'border-[#313131]'
+          'absolute z-10 top-0 flex items-end justify-center left-0 h-[calc(100%+12px)] w-full border-border border rounded-[8px]',
+          selected && 'border-active-border'
         )}
       >
         <p className="uppercase text-[10px] leading-[12px] font-bold">{nodeConfig.label}</p>

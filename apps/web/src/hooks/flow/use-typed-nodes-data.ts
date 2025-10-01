@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useNodesData, type Node, type NodeConnection } from '@xyflow/react'
+import { useNodeConnections, useNodesData, type Node } from '@xyflow/react'
 import type { DataTypeId } from '@/types/node-handle'
 import { resolveByType } from '@/utils/node/data-resolvers'
 import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
@@ -31,7 +31,9 @@ function parseHandleMeta(
   return { dataField, dataType }
 }
 
-export function useTypedNodesData<T extends TargetFieldsForEnum<NodeTypeEnum>>(connections = [] as NodeConnection[]) {
+export function useTypedNodesData<T extends TargetFieldsForEnum<NodeTypeEnum>>(id: string) {
+  const connections = useNodeConnections({ handleType: 'target', id })
+
   const sourceIds = useMemo(() => {
     return (connections ?? []).map((c) => c.source).filter((id): id is string => Boolean(id))
   }, [connections])

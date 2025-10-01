@@ -5,7 +5,7 @@ import type { TextNodeType, TextNodeData } from '@/types/nodes/text-node'
 import { Input } from '../ui/input'
 
 export const TextNode = (props: TextNodeType) => {
-  const [text, setText] = useState(props.data.text)
+  const [text, setText] = useState('')
   const { updateNodeData } = useTypedReactFlow()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +15,7 @@ export const TextNode = (props: TextNodeType) => {
 
   return (
     <CustomNode {...props}>
-      <Input value={text} className="text-xs h-6" onChange={handleChange} />
+      <Input value={text} onChange={handleChange} />
     </CustomNode>
   )
 }

@@ -1,8 +1,8 @@
 import { Position } from '@xyflow/react'
 import type { NodeConfig } from '@/types/node-config'
 
-export const hashNodeConfig = {
-  label: 'HASH',
+export const displayNodeConfig = {
+  label: 'DISPLAY',
   handles: [
     {
       position: Position.Left,
@@ -14,7 +14,7 @@ export const hashNodeConfig = {
       position: Position.Right,
       type: 'source',
       dataType: 'string',
-      dataField: 'hash',
+      dataField: 'text',
     },
   ],
   actions: [],

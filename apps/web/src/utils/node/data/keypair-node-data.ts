@@ -14,13 +14,6 @@ export const keypairNodeConfig = {
       position: Position.Right,
       type: 'source',
       dataType: 'string',
-      dataField: 'publicKey',
-      label: 'Public Key',
-    },
-    {
-      position: Position.Right,
-      type: 'source',
-      dataType: 'string',
       dataField: 'privateKey',
       label: 'Private Key',
     },

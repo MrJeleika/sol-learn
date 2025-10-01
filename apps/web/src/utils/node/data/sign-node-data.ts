@@ -1,20 +1,29 @@
 import { Position } from '@xyflow/react'
 import type { NodeConfig } from '@/types/node-config'
 
-export const hashNodeConfig = {
-  label: 'HASH',
+export const signNodeConfig = {
+  label: 'SIGN',
   handles: [
     {
       position: Position.Left,
       type: 'target',
       dataType: 'string',
-      dataField: 'input',
+      dataField: 'privateKey',
+      label: 'Private Key',
+    },
+    {
+      position: Position.Left,
+      type: 'target',
+      dataType: 'string',
+      dataField: 'message',
+      label: 'Message',
     },
     {
       position: Position.Right,
       type: 'source',
       dataType: 'string',
-      dataField: 'hash',
+      dataField: 'signature',
+      label: 'Signature',
     },
   ],
   actions: [],

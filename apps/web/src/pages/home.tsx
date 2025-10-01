@@ -23,6 +23,18 @@ const initialNodes = [
     position: { x: 0, y: 400 },
     data: { label: 'Node 5' },
   },
+  {
+    id: 'n6',
+    type: 'display',
+    position: { x: 0, y: 500 },
+    data: { label: 'Node 6' },
+  },
+  {
+    id: 'n7',
+    type: 'number',
+    position: { x: 0, y: 600 },
+    data: { number: 0 },
+  },
 ]
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
 

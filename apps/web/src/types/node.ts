@@ -4,6 +4,9 @@ export enum NodeTypeEnum {
   text = 'text',
   hash = 'hash',
   keypair = 'keypair',
+  sign = 'sign',
+  display = 'display',
+  number = 'number',
 }
 
 export type NodeType = keyof typeof NodeTypeEnum
