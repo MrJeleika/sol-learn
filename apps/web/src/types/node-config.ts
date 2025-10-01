@@ -1,8 +1,8 @@
-import type { NodeActionConfig } from './node-action'
+import type { NodeActionConfigBase } from './node-action'
 import type { HandleConfig } from './node-handle'
 
 export type NodeConfig = {
   label: string
   handles: HandleConfig[]
-  actions?: NodeActionConfig[]
+  actions: NodeActionConfigBase[]
 }

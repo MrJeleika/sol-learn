@@ -53,8 +53,8 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
 
           return (
             <Handle
-              key={id + '-' + handle.dataField + '-' + handle.dataType}
-              id={id + '-' + handle.dataField + '-' + handle.dataType}
+              key={id + '-' + handle.dataField + '-' + handle.dataType + '-' + handle.position}
+              id={id + '-' + handle.dataField + '-' + handle.dataType + '-' + handle.position}
               className="top-1/2"
               type={handle.type}
               position={handle.position}
@@ -83,7 +83,7 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
           return (
             <button
               onClick={action.onClick}
-              key={id + '-' + action.label}
+              key={id + '-' + action.label + '-' + action.position}
               className="absolute cursor-pointer group top-1/2 flex transition-all active:scale-90 items-center gap-0.5 translate-x-[-16px] translate-y-[-50%]"
               style={{ marginTop: offsetFromCenter }}
             >

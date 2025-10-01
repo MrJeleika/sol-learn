@@ -15,5 +15,9 @@ export type TargetFieldsFor<T extends keyof NodeConfigRegistryType> = Extract<
   { type: 'target' }
 >['dataField']
 
+export type ActionsFor<T extends keyof NodeConfigRegistryType> = NonNullable<
+  NodeConfigRegistryType[T]['actions']
+>[number]['label']
+
 // Helper to accept enum values too
 export type TargetFieldsForEnum<T extends NodeTypeEnum> = TargetFieldsFor<T>

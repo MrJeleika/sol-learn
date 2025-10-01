@@ -19,12 +19,12 @@ function parseHandleMeta(
   dataField: string
   dataType: DataTypeId
 } {
-  // Convention from CustomNode: id = `${nodeId}-${dataField}-${dataType}`
+  // Convention from CustomNode: id = `${nodeId}-${dataField}-${dataType}-${position}`
   // Example: n3-text-string
   const rest = handleId.slice((nodeId + '-').length)
   const parts = rest.split('-')
   const dataField = parts[0]
-  const dataTypeRaw = parts.slice(1).join('-')
+  const dataTypeRaw = parts.slice(1, 2).join('-')
   let dataType: DataTypeId = dataTypeRaw as DataTypeId
   // Optional: basic normalization for common types
   if (dataTypeRaw === 'json') dataType = { kind: 'json' }

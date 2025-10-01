@@ -2,8 +2,8 @@ import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { CustomNode } from '../ui/custom-node'
 import type { KeypairNodeData, KeypairNodeType } from '@/types/nodes/keypair-node'
 import { Keypair } from '@solana/web3.js'
-import type { NodeActionConfig } from '@/types/node-action'
-import { Position } from '@xyflow/react'
+import { useNodeActions } from '@/hooks/flow/use-node-actions'
+import type { ActionsFor, NodeTypeEnum } from '@/types/node'
 
 export const KeypairNode = (props: KeypairNodeType) => {
   const { updateNodeData } = useTypedReactFlow()
@@ -13,13 +13,9 @@ export const KeypairNode = (props: KeypairNodeType) => {
     updateNodeData<KeypairNodeData>(props.id, { keypair })
   }
 
-  const actions = [
-    {
-      position: Position.Left,
-      label: 'Generate',
-      onClick: handleGenerateKeypair,
-    },
-  ] satisfies NodeActionConfig[]
+  const actions = useNodeActions<ActionsFor<NodeTypeEnum.keypair>>(props.type, {
+    Generate: handleGenerateKeypair,
+  })
 
   return <CustomNode {...props} actions={actions}></CustomNode>
 }

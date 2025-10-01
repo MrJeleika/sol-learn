@@ -1,9 +1,10 @@
 import type { Position } from '@xyflow/react'
 
-export type NodeActionConfig = {
+export type NodeActionConfigBase = {
   position: Position
-  label?: string
-  // Accept any args, return any type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick: (...args: any[]) => void
+  label: string
+}
+
+export type NodeActionConfig = NodeActionConfigBase & {
+  onClick: () => void
 }

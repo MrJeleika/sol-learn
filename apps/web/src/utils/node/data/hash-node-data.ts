@@ -19,4 +19,5 @@ export const hashNodeConfig = {
       dataField: 'hash',
     },
   ],
+  actions: [],
 } as const satisfies NodeConfig

@@ -32,4 +32,5 @@ export const keypairNodeConfig = {
       label: 'Address',
     },
   ],
+  actions: [{ position: Position.Left, label: 'Generate' }],
 } as const satisfies NodeConfig

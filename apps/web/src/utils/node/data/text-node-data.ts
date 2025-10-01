@@ -18,4 +18,5 @@ export const textNodeConfig = {
       dataField: 'text',
     },
   ],
+  actions: [],
 } as const satisfies NodeConfig
