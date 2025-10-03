@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Input } from '../ui/input'
 import type { NumberNodeData, NumberNodeType } from '@/types/nodes/number-node'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { getNodeStyles } from '@/utils/node/node-style.utils'
 
 export const NumberNode = (props: NumberNodeType) => {
   const [number, setNumber] = useState('')
@@ -28,27 +29,39 @@ export const NumberNode = (props: NumberNodeType) => {
     const parsed = !number ? 0 : Number(number)
 
     setNumber(String(parsed + 1))
-    updateNodeData<NumberNodeData>(props.id, { number: parsed })
+    updateNodeData<NumberNodeData>(props.id, { number: parsed + 1 })
   }
   const handleDecrement = () => {
     const parsed = !number ? 0 : Number(number)
 
     setNumber(String(parsed - 1))
-    updateNodeData<NumberNodeData>(props.id, { number: parsed })
+    updateNodeData<NumberNodeData>(props.id, { number: parsed - 1 })
   }
+
+  const nodeStyles = getNodeStyles(props.type)
 
   return (
     <CustomNode {...props}>
       <div className="relative">
-        <Input value={number} onChange={handleChange} />
+        <Input value={number} onChange={handleChange} color={nodeStyles.color} />
         <button
-          className="absolute right-0.5 transition-colors active:text-pink-600 top-1 w-3 h-3 cursor-pointer"
+          style={
+            {
+              '--primary': nodeStyles.color,
+            } as React.CSSProperties
+          }
+          className="absolute right-0.5 transition-colors active:text-primary top-1 w-3 h-3 cursor-pointer"
           onClick={handleIncrement}
         >
           <ChevronUp className="w-3 h-3" />
         </button>
         <button
-          className="absolute right-0.5 bottom-0 w-3 h-3 cursor-pointer transition-colors active:text-pink-600"
+          style={
+            {
+              '--primary': nodeStyles.color,
+            } as React.CSSProperties
+          }
+          className="absolute right-0.5 bottom-0 w-3 h-3 cursor-pointer transition-colors active:text-primary"
           onClick={handleDecrement}
         >
           <ChevronDown className="w-3 h-3" />

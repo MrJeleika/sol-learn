@@ -89,7 +89,7 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
               className="absolute cursor-pointer group top-1/2 flex transition-all active:scale-90 items-center gap-0.5 translate-x-[-16px] translate-y-[-50%]"
               style={{ marginTop: offsetFromCenter }}
             >
-              <div className="rounded-[2px] bg-[#006239] p-1"></div>
+              <div style={{ backgroundColor: nodeStyles.color }} className="rounded-[2px] p-1"></div>
               <div className={cn('text-[7px] leading-[10px]')}>{action.label}</div>
             </button>
           )

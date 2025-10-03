@@ -3,22 +3,24 @@ import { useEffect, useMemo } from 'react'
 import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
-import type { DisplayNodeData, DisplayNodeType } from '@/types/nodes/display-node'
+import { hash } from '@/utils/crypto/crypto.utils'
 import { Copy } from '../ui/copy'
+import type { NetworkNodeData, NetworkNodeType } from '@/types/nodes/network-node'
 
-export const DisplayNode = (props: DisplayNodeType) => {
+export const NetworkNode = (props: NetworkNodeType) => {
   const { updateNodeData } = useTypedReactFlow()
-  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.DISPLAY>>(props.id)
+  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.HASH>>(props.id)
 
   const inputData = useMemo(() => String(resolved.input?.value ?? ''), [resolved])
 
+  const hashed = useMemo(() => hash(inputData), [inputData])
   useEffect(() => {
-    updateNodeData<DisplayNodeData>(props.id, { text: inputData })
-  }, [inputData, props.id, updateNodeData])
+    updateNodeData<NetworkNodeData>(props.id, { network: hashed })
+  }, [hashed, props.id, updateNodeData])
 
   return (
     <CustomNode {...props}>
-      <Copy data={inputData} />
+      <Copy data={hashed} />
     </CustomNode>
   )
 }

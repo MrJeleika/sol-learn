@@ -8,6 +8,7 @@ export enum NodeTypeEnum {
   DISPLAY = 'DISPLAY',
   NUMBER = 'NUMBER',
   VERIFY_SIGNATURE = 'VERIFY_SIGNATURE',
+  NETWORK = 'NETWORK',
 }
 
 export type NodeType = keyof typeof NodeTypeEnum

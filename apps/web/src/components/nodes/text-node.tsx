@@ -3,6 +3,7 @@ import { CustomNode } from '../ui/custom-node'
 import { useState } from 'react'
 import type { TextNodeType, TextNodeData } from '@/types/nodes/text-node'
 import { Input } from '../ui/input'
+import { getNodeStyles } from '@/utils/node/node-style.utils'
 
 export const TextNode = (props: TextNodeType) => {
   const [text, setText] = useState('')
@@ -13,9 +14,10 @@ export const TextNode = (props: TextNodeType) => {
     updateNodeData<TextNodeData>(props.id, { text: e.target.value })
   }
 
+  const nodeStyles = getNodeStyles(props.type)
   return (
     <CustomNode {...props}>
-      <Input value={text} onChange={handleChange} />
+      <Input value={text} color={nodeStyles.color} onChange={handleChange} />
     </CustomNode>
   )
 }

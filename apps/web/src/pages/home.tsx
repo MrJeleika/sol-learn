@@ -1,5 +1,14 @@
 import { useState, useCallback } from 'react'
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Controls, MiniMap } from '@xyflow/react'
+import {
+  ReactFlow,
+  applyNodeChanges,
+  applyEdgeChanges,
+  addEdge,
+  Controls,
+  MiniMap,
+  useNodesState,
+  useEdgesState,
+} from '@xyflow/react'
 import { nodeMap } from '@/utils/node/node-map'
 import { NodeTypeEnum } from '@/types/node'
 
@@ -64,17 +73,9 @@ const initialNodes = [
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
 
 export default function Home() {
-  const [nodes, setNodes] = useState(initialNodes)
-  const [edges, setEdges] = useState(initialEdges)
+  const [nodes, , onNodesChange] = useNodesState(initialNodes)
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 
-  const onNodesChange = useCallback(
-    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
-    []
-  )
-  const onEdgesChange = useCallback(
-    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
-    []
-  )
   const onConnect = useCallback((params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)), [])
   return (
     <div style={{ width: '100vw', height: '100vh' }}>

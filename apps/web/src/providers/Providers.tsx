@@ -2,13 +2,16 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { FC, PropsWithChildren } from 'react'
 
 import { SolanaProvider } from './solana-provider'
+import { ReactFlowProvider } from '@xyflow/react'
 
 const queryClient = new QueryClient()
 
 const Providers: FC<PropsWithChildren> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <SolanaProvider>{children}</SolanaProvider>
+      <ReactFlowProvider>
+        <SolanaProvider>{children}</SolanaProvider>
+      </ReactFlowProvider>
     </QueryClientProvider>
   )
 }

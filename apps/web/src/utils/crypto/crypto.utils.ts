@@ -27,3 +27,7 @@ export const transformKeypair = (keypair: Keypair) => {
 export const hash = (message: string) => {
   return sha256(message)
 }
+
+export const generateNodeId = () => {
+  return crypto.randomUUID().replace(/-/g, '')
+}

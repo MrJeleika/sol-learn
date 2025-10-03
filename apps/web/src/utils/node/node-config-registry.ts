@@ -7,6 +7,7 @@ import { signNodeConfig } from './data/sign-node-data'
 import { displayNodeConfig } from './data/display-node-data'
 import { numberNodeConfig } from './data/number-node-config'
 import { verifySignatureNodeConfig } from './data/verify-signature-node'
+import { networkNodeConfig } from './data/network-node-data'
 
 export const nodeConfigRegistry = {
   [NodeTypeEnum.TEXT]: textNodeConfig,
@@ -16,6 +17,7 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.DISPLAY]: displayNodeConfig,
   [NodeTypeEnum.NUMBER]: numberNodeConfig,
   [NodeTypeEnum.VERIFY_SIGNATURE]: verifySignatureNodeConfig,
+  [NodeTypeEnum.NETWORK]: networkNodeConfig,
 } as const satisfies Record<NodeType, NodeConfig>
 
 export const getNodeConfig = (nodeType: NodeType) => {
