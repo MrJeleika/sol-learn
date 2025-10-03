@@ -6,8 +6,9 @@ import { useNodeActions } from '@/hooks/flow/use-node-actions'
 import type { ActionsFor, NodeTypeEnum } from '@/types/node'
 import { useCallback } from 'react'
 import { transformKeypair } from '@/utils/crypto/crypto.utils'
+import type { NodeProps } from '@xyflow/react'
 
-export const KeypairNode = (props: KeypairNodeType) => {
+export const KeypairNode = (props: NodeProps<KeypairNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
 
   const handleGenerateKeypair = useCallback(() => {

@@ -1,19 +1,32 @@
 import { cn } from '@/lib/utils'
-import type { NodeType } from '@/types/node'
+import { NodeTypeEnum, type NodeType } from '@/types/node'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
-import { Handle, type Node } from '@xyflow/react'
+import { Handle, Position, useReactFlow, useUpdateNodeInternals, type NodeProps } from '@xyflow/react'
 import type { PropsWithChildren } from 'react'
 import { getNodeConfig } from '@/utils/node/node-config-registry'
 import type { NodeActionConfig } from '@/types/node-action'
+import { generateNodeId } from '@/utils/crypto/crypto.utils'
 
-interface Props extends PropsWithChildren, Node {
+interface Props extends PropsWithChildren, NodeProps {
   className?: string
   actions?: NodeActionConfig[]
 }
 
 const handleSpacing = 12
 
-export const CustomNode = ({ className, children, selected, type, id, actions }: Props) => {
+export const CustomNode = ({
+  className,
+  children,
+  selected,
+  type,
+  id,
+  actions,
+  positionAbsoluteX,
+  positionAbsoluteY,
+}: Props) => {
+  const { setNodes, setEdges } = useReactFlow()
+  const updateNodeInternals = useUpdateNodeInternals()
+
   const nodeStyles = getNodeStyles(type as NodeType)
   const nodeConfig = getNodeConfig(type as NodeType)
   // Track how many handles we have rendered per position to stack them
@@ -34,6 +47,36 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
 
   const minHeight = Math.max(maxHandleCount * 16, nodeStyles.height ?? 0)
 
+  const addDisplayNodeOnDoubleClick = (handleId: string, position: Position) => {
+    if (position === Position.Left) return
+
+    const newPosition = { x: positionAbsoluteX + (nodeStyles.width ?? 200) + 50, y: positionAbsoluteY }
+    const newId = generateNodeId()
+    setNodes((nds) =>
+      nds.concat({
+        id: newId,
+        type: NodeTypeEnum.DISPLAY,
+        position: newPosition,
+        data: {},
+      })
+    )
+
+    const targetHandle = newId + '-' + 'input' + '-' + Position.Left
+
+    setTimeout(() => {
+      updateNodeInternals(newId)
+      setEdges((eds) =>
+        eds.concat({
+          id: 'xy-edge__' + handleId + '-' + targetHandle,
+          source: id,
+          sourceHandle: handleId,
+          target: newId,
+          targetHandle,
+        })
+      )
+    }, 0)
+  }
+
   return (
     <div style={{ width: nodeStyles.width }} className={cn('relative rounded-[8px] text-foreground')}>
       <div
@@ -53,15 +96,16 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
 
           handleIndices[posKey] = index + 1
 
+          const handleId = id + '-' + handle.dataField + '-' + handle.position
           return (
             <Handle
-              key={id + '-' + handle.dataField + '-' + handle.dataType + '-' + handle.position}
-              id={id + '-' + handle.dataField + '-' + handle.dataType + '-' + handle.position}
+              key={handleId}
+              id={handleId}
+              onDoubleClick={() => addDisplayNodeOnDoubleClick(handleId, handle.position)}
               className="top-1/2"
               type={handle.type}
               position={handle.position}
               style={{ marginTop: offsetFromCenter }}
-              data-type={handle.dataType}
               data-field={handle.dataField}
             >
               <div
@@ -86,7 +130,10 @@ export const CustomNode = ({ className, children, selected, type, id, actions }:
             <button
               onClick={action.onClick}
               key={id + '-' + action.label + '-' + action.position}
-              className="absolute cursor-pointer group top-1/2 flex transition-all active:scale-90 items-center gap-0.5 translate-x-[-16px] translate-y-[-50%]"
+              className={cn(
+                'absolute cursor-pointer group top-1/2 flex transition-all active:scale-90 items-center gap-0.5 translate-y-[-50%]',
+                action.position === Position.Left ? 'left-0 -translate-x-1' : 'right-0 translate-x-1 flex-row-reverse'
+              )}
               style={{ marginTop: offsetFromCenter }}
             >
               <div style={{ backgroundColor: nodeStyles.color }} className="rounded-[2px] p-1"></div>

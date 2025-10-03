@@ -1,10 +1,8 @@
 import type { NodeType } from '@/types/node'
 import type { XYPosition } from '@xyflow/react'
-import { useRef, useState } from 'react'
+import { useRef, useState, type RefObject } from 'react'
 import { useDraggable } from '@neodrag/react'
 import { cn } from '@/lib/utils'
-import { CustomNode } from '../ui/custom-node'
-import { generateNodeId } from '@/utils/crypto/crypto.utils'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
 import { getNodeConfig } from '@/utils/node/node-config-registry'
 
@@ -18,7 +16,7 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
   const draggableRef = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState<XYPosition>({ x: 0, y: 0 })
 
-  useDraggable(draggableRef, {
+  useDraggable(draggableRef as RefObject<HTMLElement>, {
     position: position,
     onDrag: ({ offsetX, offsetY }) => {
       // Calculate position relative to the viewport

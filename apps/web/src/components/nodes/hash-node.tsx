@@ -6,8 +6,9 @@ import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
 import { hash } from '@/utils/crypto/crypto.utils'
 import { Copy } from '../ui/copy'
+import type { NodeProps } from '@xyflow/react'
 
-export const HashNode = (props: HashNodeType) => {
+export const HashNode = (props: NodeProps<HashNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
   const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.HASH>>(props.id)
 

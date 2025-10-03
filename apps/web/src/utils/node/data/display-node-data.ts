@@ -7,13 +7,11 @@ export const displayNodeConfig = {
     {
       position: Position.Left,
       type: 'target',
-      dataType: 'string',
       dataField: 'input',
     },
     {
       position: Position.Right,
       type: 'source',
-      dataType: 'string',
       dataField: 'text',
     },
   ],

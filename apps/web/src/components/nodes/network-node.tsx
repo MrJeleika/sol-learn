@@ -1,26 +1,31 @@
 import { CustomNode } from '../ui/custom-node'
-import { useEffect, useMemo } from 'react'
 import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
-import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
-import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
-import { hash } from '@/utils/crypto/crypto.utils'
-import { Copy } from '../ui/copy'
 import type { NetworkNodeData, NetworkNodeType } from '@/types/nodes/network-node'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { NetworkEnum } from '@/types/network'
+import type { NodeProps } from '@xyflow/react'
 
-export const NetworkNode = (props: NetworkNodeType) => {
+export const NetworkNode = (props: NodeProps<NetworkNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
-  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.HASH>>(props.id)
 
-  const inputData = useMemo(() => String(resolved.input?.value ?? ''), [resolved])
-
-  const hashed = useMemo(() => hash(inputData), [inputData])
-  useEffect(() => {
-    updateNodeData<NetworkNodeData>(props.id, { network: hashed })
-  }, [hashed, props.id, updateNodeData])
+  const handleChange = (value: string) => {
+    updateNodeData<NetworkNodeData>(props.id, { network: value as NetworkEnum })
+  }
 
   return (
     <CustomNode {...props}>
-      <Copy data={hashed} />
+      <Select onValueChange={handleChange}>
+        <SelectTrigger>
+          <SelectValue className="" placeholder="Select a network" />
+        </SelectTrigger>
+        <SelectContent>
+          {Object.values(NetworkEnum).map((network) => (
+            <SelectItem key={network} value={network}>
+              {network}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </CustomNode>
   )
 }

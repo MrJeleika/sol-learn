@@ -1,14 +1,5 @@
-import { useState, useCallback } from 'react'
-import {
-  ReactFlow,
-  applyNodeChanges,
-  applyEdgeChanges,
-  addEdge,
-  Controls,
-  MiniMap,
-  useNodesState,
-  useEdgesState,
-} from '@xyflow/react'
+import { useCallback } from 'react'
+import { ReactFlow, addEdge, Controls, MiniMap, useNodesState, useEdgesState } from '@xyflow/react'
 import { nodeMap } from '@/utils/node/node-map'
 import { NodeTypeEnum } from '@/types/node'
 
@@ -68,6 +59,18 @@ const initialNodes = [
     type: NodeTypeEnum.SIGN,
     position: { x: 100, y: 700 },
     data: { label: 'Node 8' },
+  },
+  {
+    id: '10',
+    type: NodeTypeEnum.NETWORK,
+    position: { x: 100, y: 800 },
+    data: { label: 'Node 10' },
+  },
+  {
+    id: '11',
+    type: NodeTypeEnum.BALANCE,
+    position: { x: 100, y: 900 },
+    data: { label: 'Node 11' },
   },
 ]
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]

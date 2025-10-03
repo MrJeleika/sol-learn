@@ -26,7 +26,7 @@ export const NodeSelect = () => {
           id: generateNodeId(),
           type: nodeType,
           position,
-          data: { label: `${nodeType} node` },
+          data: { ads: 'asd' },
         }
 
         setNodes((nds) => nds.concat(newNode))

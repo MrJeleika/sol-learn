@@ -4,8 +4,9 @@ import { useState } from 'react'
 import type { TextNodeType, TextNodeData } from '@/types/nodes/text-node'
 import { Input } from '../ui/input'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
+import type { NodeProps } from '@xyflow/react'
 
-export const TextNode = (props: TextNodeType) => {
+export const TextNode = (props: NodeProps<TextNodeType>) => {
   const [text, setText] = useState('')
   const { updateNodeData } = useTypedReactFlow()
 

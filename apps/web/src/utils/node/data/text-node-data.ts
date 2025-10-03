@@ -7,14 +7,12 @@ export const textNodeConfig = {
     {
       position: Position.Left,
       type: 'target',
-      dataType: 'any',
       dataField: '_in',
       label: undefined,
     },
     {
       position: Position.Right,
       type: 'source',
-      dataType: 'string',
       dataField: 'text',
     },
   ],

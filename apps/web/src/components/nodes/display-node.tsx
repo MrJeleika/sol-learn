@@ -5,8 +5,9 @@ import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
 import type { DisplayNodeData, DisplayNodeType } from '@/types/nodes/display-node'
 import { Copy } from '../ui/copy'
+import type { NodeProps } from '@xyflow/react'
 
-export const DisplayNode = (props: DisplayNodeType) => {
+export const DisplayNode = (props: NodeProps<DisplayNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
   const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.DISPLAY>>(props.id)
 

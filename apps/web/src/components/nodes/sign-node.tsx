@@ -5,8 +5,9 @@ import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
 import { useEffect, useMemo } from 'react'
 import { sign } from '@/utils/crypto/crypto.utils'
+import type { NodeProps } from '@xyflow/react'
 
-export const SignNode = (props: SignNodeType) => {
+export const SignNode = (props: NodeProps<SignNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
 
   const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.SIGN>>(props.id)

@@ -7,7 +7,6 @@ export const networkNodeConfig = {
     {
       position: Position.Right,
       type: 'source',
-      dataType: 'string',
       dataField: 'network',
     },
   ],

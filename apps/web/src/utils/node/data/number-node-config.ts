@@ -7,7 +7,6 @@ export const numberNodeConfig = {
     {
       position: Position.Right,
       type: 'source',
-      dataType: 'string',
       dataField: 'number',
     },
   ],

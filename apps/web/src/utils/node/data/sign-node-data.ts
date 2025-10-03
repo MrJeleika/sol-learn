@@ -7,21 +7,18 @@ export const signNodeConfig = {
     {
       position: Position.Left,
       type: 'target',
-      dataType: 'string',
       dataField: 'privateKey',
       label: 'Private Key',
     },
     {
       position: Position.Left,
       type: 'target',
-      dataType: 'string',
       dataField: 'message',
       label: 'Message',
     },
     {
       position: Position.Right,
       type: 'source',
-      dataType: 'string',
       dataField: 'signature',
       label: 'Signature',
     },

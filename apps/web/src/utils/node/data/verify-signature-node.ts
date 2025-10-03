@@ -7,21 +7,18 @@ export const verifySignatureNodeConfig = {
     {
       position: Position.Left,
       type: 'target',
-      dataType: 'string',
       dataField: 'message',
       label: 'Message',
     },
     {
       position: Position.Left,
       type: 'target',
-      dataType: 'string',
       dataField: 'signature',
       label: 'Signature',
     },
     {
       position: Position.Left,
       type: 'target',
-      dataType: 'string',
       dataField: 'publicKey',
       label: 'Public key',
     },

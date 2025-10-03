@@ -5,8 +5,9 @@ import { Input } from '../ui/input'
 import type { NumberNodeData, NumberNodeType } from '@/types/nodes/number-node'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
+import type { NodeProps } from '@xyflow/react'
 
-export const NumberNode = (props: NumberNodeType) => {
+export const NumberNode = (props: NodeProps<NumberNodeType>) => {
   const [number, setNumber] = useState('')
   const { updateNodeData } = useTypedReactFlow()
 

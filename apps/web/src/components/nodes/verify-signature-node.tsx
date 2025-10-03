@@ -7,8 +7,9 @@ import { useEffect, useMemo } from 'react'
 import { verify } from '@/utils/crypto/crypto.utils'
 import { Copy } from '../ui/copy'
 import { cn } from '@/lib/utils'
+import type { NodeProps } from '@xyflow/react'
 
-export const VerifySignatureNode = (props: VerifySignatureNodeType) => {
+export const VerifySignatureNode = (props: NodeProps<VerifySignatureNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
 
   const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.VERIFY_SIGNATURE>>(props.id)
