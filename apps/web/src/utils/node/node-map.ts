@@ -8,6 +8,8 @@ import { NumberNode } from '@/components/nodes/number-node'
 import { VerifySignatureNode } from '@/components/nodes/verify-signature-node'
 import { NetworkNode } from '@/components/nodes/network-node'
 import { BalanceNode } from '@/components/nodes/balance-node'
+import { TransactionViewNode } from '@/components/nodes/transaction-view-node'
+import { PdaNode } from '@/components/nodes/pda-node'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
@@ -20,4 +22,6 @@ export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
   [NodeTypeEnum.VERIFY_SIGNATURE]: VerifySignatureNode,
   [NodeTypeEnum.NETWORK]: NetworkNode,
   [NodeTypeEnum.BALANCE]: BalanceNode,
+  [NodeTypeEnum.TRANSACTION_VIEW]: TransactionViewNode,
+  [NodeTypeEnum.PDA]: PdaNode,
 }

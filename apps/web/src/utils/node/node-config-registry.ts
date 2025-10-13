@@ -9,6 +9,8 @@ import { numberNodeConfig } from './data/number-node-config'
 import { verifySignatureNodeConfig } from './data/verify-signature-node'
 import { networkNodeConfig } from './data/network-node-data'
 import { balanceNodeConfig } from './data/balance-node-data'
+import { transactionViewNodeConfig } from './data/transaction-view-node-data'
+import { pdaNodeConfig } from './data/pda-node-data'
 
 export const nodeConfigRegistry = {
   [NodeTypeEnum.TEXT]: textNodeConfig,
@@ -20,6 +22,8 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.VERIFY_SIGNATURE]: verifySignatureNodeConfig,
   [NodeTypeEnum.NETWORK]: networkNodeConfig,
   [NodeTypeEnum.BALANCE]: balanceNodeConfig,
+  [NodeTypeEnum.TRANSACTION_VIEW]: transactionViewNodeConfig,
+  [NodeTypeEnum.PDA]: pdaNodeConfig,
 } as const satisfies Record<NodeType, NodeConfig>
 
 export const getNodeConfig = (nodeType: NodeType) => {

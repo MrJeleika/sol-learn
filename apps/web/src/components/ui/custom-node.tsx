@@ -6,10 +6,12 @@ import type { PropsWithChildren } from 'react'
 import { getNodeConfig } from '@/utils/node/node-config-registry'
 import type { NodeActionConfig } from '@/types/node-action'
 import { generateNodeId } from '@/utils/crypto/crypto.utils'
+import type { HandleConfig } from '@/types/node-handle'
 
 interface Props extends PropsWithChildren, NodeProps {
   className?: string
   actions?: NodeActionConfig[]
+  extraHandles?: HandleConfig[]
 }
 
 const handleSpacing = 12
@@ -23,6 +25,7 @@ export const CustomNode = ({
   actions,
   positionAbsoluteX,
   positionAbsoluteY,
+  extraHandles,
 }: Props) => {
   const { setNodes, setEdges } = useReactFlow()
   const updateNodeInternals = useUpdateNodeInternals()
@@ -33,7 +36,9 @@ export const CustomNode = ({
   const handleIndices: Record<string, number> = {}
   const handleCounts: Record<string, number> = {}
 
-  nodeConfig.handles.forEach((h) => {
+  const allHandles = [...nodeConfig.handles, ...(extraHandles ?? [])]
+
+  allHandles.forEach((h) => {
     const key = String(h.position)
     handleCounts[key] = (handleCounts[key] ?? 0) + 1
   })
@@ -88,7 +93,7 @@ export const CustomNode = ({
           selected && 'border-active-border bg-border'
         )}
       >
-        {nodeConfig.handles.map((handle) => {
+        {allHandles.map((handle) => {
           const posKey = String(handle.position)
           const index = handleIndices[posKey] ?? 0
           const count = handleCounts[posKey] ?? 1

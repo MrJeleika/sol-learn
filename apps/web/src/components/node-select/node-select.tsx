@@ -36,9 +36,18 @@ export const NodeSelect = () => {
   )
 
   return (
-    <div className="absolute z-50 top-0 left-0 h-full w-[100px] flex flex-col gap-2 p-2">
+    <div className="absolute z-50 pointer-events-none top-0 left-0 h-full w-[100px] flex flex-col gap-2 p-2">
       <div className="relative">
         <DraggableNode type={NodeTypeEnum.KEYPAIR} onDrop={handleNodeDrop} />
+      </div>
+      <div className="relative">
+        <DraggableNode type={NodeTypeEnum.NETWORK} onDrop={handleNodeDrop} />
+      </div>
+      <div className="relative">
+        <DraggableNode type={NodeTypeEnum.TRANSACTION_VIEW} onDrop={handleNodeDrop} />
+      </div>
+      <div className="relative">
+        <DraggableNode type={NodeTypeEnum.PDA} onDrop={handleNodeDrop} />
       </div>
     </div>
   )

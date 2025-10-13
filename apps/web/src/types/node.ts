@@ -10,6 +10,8 @@ export enum NodeTypeEnum {
   VERIFY_SIGNATURE = 'VERIFY_SIGNATURE',
   NETWORK = 'NETWORK',
   BALANCE = 'BALANCE',
+  TRANSACTION_VIEW = 'TRANSACTION_VIEW',
+  PDA = 'PDA',
 }
 
 export type NodeType = keyof typeof NodeTypeEnum

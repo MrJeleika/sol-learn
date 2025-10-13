@@ -16,6 +16,8 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.VERIFY_SIGNATURE]: { color: '#850081', width: 150 },
   [NodeTypeEnum.NETWORK]: { color: '#75511e', width: 200 },
   [NodeTypeEnum.BALANCE]: { color: '#75511e', width: 200 },
+  [NodeTypeEnum.TRANSACTION_VIEW]: { color: '#123a72', width: 300 },
+  [NodeTypeEnum.PDA]: { color: '#2a5f2b', width: 100 },
 }
 
 export const getNodeStyles = (nodeType?: NodeType) => {
