@@ -5,4 +5,5 @@ export type HandleConfig = {
   type: HandleType
   label?: string
   dataField: string
+  dataType?: string
 }

@@ -10,6 +10,9 @@ import { NetworkNode } from '@/components/nodes/network-node'
 import { BalanceNode } from '@/components/nodes/balance-node'
 import { TransactionViewNode } from '@/components/nodes/transaction-view-node'
 import { PdaNode } from '@/components/nodes/pda-node'
+import { TransactionBuilderNode } from '@/components/nodes/transaction-builder-node'
+import { InstructionsNode } from '@/components/nodes/instructions-node'
+import { TransactionNode } from '../../components/nodes/transaction-node'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
@@ -24,4 +27,7 @@ export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
   [NodeTypeEnum.BALANCE]: BalanceNode,
   [NodeTypeEnum.TRANSACTION_VIEW]: TransactionViewNode,
   [NodeTypeEnum.PDA]: PdaNode,
+  [NodeTypeEnum.TRANSACTION_BUILDER]: TransactionBuilderNode,
+  [NodeTypeEnum.INSTRUCTIONS]: InstructionsNode,
+  [NodeTypeEnum.TRANSACTION]: TransactionNode,
 }

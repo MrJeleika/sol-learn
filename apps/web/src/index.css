@@ -114,3 +114,20 @@
 body {
   letter-spacing: var(--tracking-normal);
 }
+
+.handle--highlight {
+  outline: 2px solid var(--color-primary, #4ade80);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.3);
+}
+.handle--dim {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.handle--dim:hover {
+  opacity: 0.3;
+}
+.handle--dim * {
+  opacity: inherit !important;
+  pointer-events: none !important;
+}

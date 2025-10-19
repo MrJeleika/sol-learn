@@ -12,6 +12,9 @@ export enum NodeTypeEnum {
   BALANCE = 'BALANCE',
   TRANSACTION_VIEW = 'TRANSACTION_VIEW',
   PDA = 'PDA',
+  TRANSACTION_BUILDER = 'TRANSACTION_BUILDER',
+  INSTRUCTIONS = 'INSTRUCTIONS',
+  TRANSACTION = 'TRANSACTION',
 }
 
 export type NodeType = keyof typeof NodeTypeEnum

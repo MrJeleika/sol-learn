@@ -11,6 +11,9 @@ import { networkNodeConfig } from './data/network-node-data'
 import { balanceNodeConfig } from './data/balance-node-data'
 import { transactionViewNodeConfig } from './data/transaction-view-node-data'
 import { pdaNodeConfig } from './data/pda-node-data'
+import { transactionBuilderNodeConfig } from './data/transaction-builder-node-data'
+import { instructionsNodeConfig } from './data/instructions-node-data'
+import { transactionNodeConfig } from './data/transaction-node-data'
 
 export const nodeConfigRegistry = {
   [NodeTypeEnum.TEXT]: textNodeConfig,
@@ -24,6 +27,9 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.BALANCE]: balanceNodeConfig,
   [NodeTypeEnum.TRANSACTION_VIEW]: transactionViewNodeConfig,
   [NodeTypeEnum.PDA]: pdaNodeConfig,
+  [NodeTypeEnum.TRANSACTION_BUILDER]: transactionBuilderNodeConfig,
+  [NodeTypeEnum.INSTRUCTIONS]: instructionsNodeConfig,
+  [NodeTypeEnum.TRANSACTION]: transactionNodeConfig,
 } as const satisfies Record<NodeType, NodeConfig>
 
 export const getNodeConfig = (nodeType: NodeType) => {

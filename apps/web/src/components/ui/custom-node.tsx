@@ -7,6 +7,7 @@ import { getNodeConfig } from '@/utils/node/node-config-registry'
 import type { NodeActionConfig } from '@/types/node-action'
 import { generateNodeId } from '@/utils/crypto/crypto.utils'
 import type { HandleConfig } from '@/types/node-handle'
+import { BaseTooltip } from '@/components/ui/tooltip'
 
 interface Props extends PropsWithChildren, NodeProps {
   className?: string
@@ -112,6 +113,9 @@ export const CustomNode = ({
               position={handle.position}
               style={{ marginTop: offsetFromCenter }}
               data-field={handle.dataField}
+              data-id={handleId}
+              data-handle-type={handle.type}
+              data-type={(handle as HandleConfig & { dataType?: string }).dataType}
             >
               <div
                 className={cn(
@@ -155,7 +159,10 @@ export const CustomNode = ({
           selected && 'border-active-border'
         )}
       >
-        <p className="uppercase text-[10px] leading-[12px] font-bold">{nodeConfig.label}</p>
+        <div className="flex items-center gap-1">
+          <p className="uppercase text-[10px] leading-[12px] font-bold">{nodeConfig.label}</p>
+          <BaseTooltip type={type as NodeType} />
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,14 @@
 import { useCallback } from 'react'
-import { ReactFlow, addEdge, Controls, MiniMap, useNodesState, useEdgesState } from '@xyflow/react'
+import {
+  ReactFlow,
+  addEdge,
+  Controls,
+  MiniMap,
+  useNodesState,
+  useEdgesState,
+  type Connection,
+  type IsValidConnection,
+} from '@xyflow/react'
 import { nodeMap } from '@/utils/node/node-map'
 import { NodeTypeEnum } from '@/types/node'
 
@@ -79,7 +88,52 @@ export default function Home() {
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 
-  const onConnect = useCallback((params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)), [])
+  const onConnect = useCallback(
+    (params: Connection) => {
+      setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot))
+      const all = Array.from(document.querySelectorAll('[data-handle-type]')) as HTMLElement[]
+      for (const el of all) el.classList.remove('handle--dim', 'handle--highlight')
+      document.body.removeAttribute('data-connecting-type')
+    },
+    [setEdges]
+  )
+  const isValidConnection: IsValidConnection = useCallback((edge) => {
+    if (!('sourceHandle' in edge) || !('targetHandle' in edge)) return true
+    const c = edge as Connection
+    const sourceEl = document.querySelector(`[data-id="${c.sourceHandle}"]`) as HTMLElement | null
+    const targetEl = document.querySelector(`[data-id="${c.targetHandle}"]`) as HTMLElement | null
+    const srcType = sourceEl?.getAttribute('data-type')
+    const tgtType = targetEl?.getAttribute('data-type')
+    if (!srcType || !tgtType) return true
+    return srcType === tgtType
+  }, [])
+  const onConnectStart = useCallback(
+    (_: unknown, params: { handleId: string | null; nodeId: string | null; handleType: string | null }) => {
+      if (!params?.handleId) return
+      const sourceEl = document.querySelector(`[data-id="${params.handleId}"]`) as HTMLElement | null
+      const srcType = sourceEl?.getAttribute('data-type')
+      if (!srcType) return
+      const allTargets = Array.from(document.querySelectorAll('[data-handle-type="target"]')) as HTMLElement[]
+      for (const el of allTargets) {
+        const tgtType = el.getAttribute('data-type')
+        if (!tgtType) {
+          el.classList.remove('handle--dim', 'handle--highlight')
+          continue
+        }
+        if (tgtType === srcType) {
+          el.classList.remove('handle--dim')
+        } else {
+          el.classList.add('handle--dim')
+          el.classList.remove('handle--highlight')
+        }
+      }
+    },
+    []
+  )
+  const onConnectEnd = useCallback(() => {
+    const all = Array.from(document.querySelectorAll('[data-handle-type]')) as HTMLElement[]
+    for (const el of all) el.classList.remove('handle--dim', 'handle--highlight')
+  }, [])
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <ReactFlow
@@ -90,6 +144,9 @@ export default function Home() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onConnectStart={onConnectStart}
+        onConnectEnd={onConnectEnd}
+        isValidConnection={isValidConnection}
         fitView
         className="bg-teal-50"
       >

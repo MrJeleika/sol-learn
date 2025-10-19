@@ -5,11 +5,6 @@ export const keypairNodeConfig = {
   label: 'KEYPAIR',
   handles: [
     {
-      position: Position.Left,
-      type: 'target',
-      dataField: 'privateKey',
-    },
-    {
       position: Position.Right,
       type: 'source',
       dataField: 'privateKey',

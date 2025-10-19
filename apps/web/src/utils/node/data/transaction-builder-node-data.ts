@@ -1,14 +1,15 @@
 import { Position } from '@xyflow/react'
 import type { NodeConfig } from '@/types/node-config'
 
-export const networkNodeConfig = {
-  label: 'NETWORK',
+export const transactionBuilderNodeConfig = {
+  label: 'TX BUILDER',
   handles: [
     {
       position: Position.Right,
       type: 'source',
-      dataField: 'network',
-      dataType: 'network',
+      dataField: 'transaction',
+      label: 'Transaction',
+      dataType: 'transaction',
     },
   ],
   actions: [],
