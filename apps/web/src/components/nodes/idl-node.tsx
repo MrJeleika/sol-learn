@@ -6,8 +6,8 @@ import type { NodeProps } from '@xyflow/react'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
-import { toast } from 'sonner'
 import { Check } from 'lucide-react'
+import { toast } from 'sonner'
 
 export const IdlNode = (props: NodeProps<IdlNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()

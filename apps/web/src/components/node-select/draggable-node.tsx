@@ -45,7 +45,7 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
         style={{ backgroundColor: nodeStyles.color }}
         className={cn(
           'dndnode',
-          'relative rounded-[8px] pointer-events-auto py-3 bg-background border-border w-full border z-20',
+          'relative rounded-[8px] cursor-pointer pointer-events-auto py-3 bg-background border-border w-full border z-20',
           className
         )}
       >

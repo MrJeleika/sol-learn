@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import {
   ReactFlow,
   addEdge,
@@ -8,6 +8,8 @@ import {
   useEdgesState,
   type Connection,
   type IsValidConnection,
+  type Node,
+  SelectionMode,
 } from '@xyflow/react'
 import { nodeMap } from '@/utils/node/node-map'
 import { NodeTypeEnum } from '@/types/node'
@@ -85,7 +87,7 @@ const initialNodes = [
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
 
 export default function Home() {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes)
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 
   const onConnect = useCallback(
@@ -134,6 +136,24 @@ export default function Home() {
     const all = Array.from(document.querySelectorAll('[data-handle-type]')) as HTMLElement[]
     for (const el of all) el.classList.remove('handle--dim', 'handle--highlight')
   }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.key === 'Delete' || e.key === 'Backspace') && e.target === document.body) {
+        const selectedNodes = nodes.filter((node) => (node as Node).selected)
+        if (selectedNodes.length > 0) {
+          setNodes((nds) => nds.filter((node) => !(node as Node).selected))
+          setEdges((eds) =>
+            eds.filter((edge) => !selectedNodes.some((node) => node.id === edge.source || node.id === edge.target))
+          )
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [nodes, setNodes, setEdges])
+
   return (
     <div style={{ width: '100vw', height: 'calc(100vh - 74px)' }}>
       <ReactFlow
@@ -148,6 +168,9 @@ export default function Home() {
         onConnectEnd={onConnectEnd}
         isValidConnection={isValidConnection}
         fitView
+        selectionOnDrag={true}
+        selectionMode={SelectionMode.Partial}
+        panOnDrag={false}
         className="bg-teal-50"
       >
         <MiniMap />

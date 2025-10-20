@@ -133,3 +133,6 @@ body {
   opacity: inherit !important;
   pointer-events: none !important;
 }
+.react-flow__nodesselection-rect {
+  border-radius: 8px;
+}
