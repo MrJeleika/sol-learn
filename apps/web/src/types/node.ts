@@ -15,6 +15,8 @@ export enum NodeTypeEnum {
   TRANSACTION_BUILDER = 'TRANSACTION_BUILDER',
   INSTRUCTIONS = 'INSTRUCTIONS',
   TRANSACTION = 'TRANSACTION',
+  IDL = 'IDL',
+  PROGRAM_INSTRUCTIONS = 'PROGRAM_INSTRUCTIONS',
 }
 
 export type NodeType = keyof typeof NodeTypeEnum

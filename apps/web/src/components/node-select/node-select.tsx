@@ -58,6 +58,12 @@ export const NodeSelect = () => {
       <div className="relative">
         <DraggableNode type={NodeTypeEnum.TRANSACTION} onDrop={handleNodeDrop} />
       </div>
+      <div className="relative">
+        <DraggableNode type={NodeTypeEnum.IDL} onDrop={handleNodeDrop} />
+      </div>
+      <div className="relative">
+        <DraggableNode type={NodeTypeEnum.PROGRAM_INSTRUCTIONS} onDrop={handleNodeDrop} />
+      </div>
     </div>
   )
 }

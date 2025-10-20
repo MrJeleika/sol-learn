@@ -13,6 +13,8 @@ import { PdaNode } from '@/components/nodes/pda-node'
 import { TransactionBuilderNode } from '@/components/nodes/transaction-builder-node'
 import { InstructionsNode } from '@/components/nodes/instructions-node'
 import { TransactionNode } from '../../components/nodes/transaction-node'
+import { IdlNode } from '@/components/nodes/idl-node'
+import { ProgramInstructionsNode } from '@/components/nodes/program-instructions-node'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
@@ -30,4 +32,6 @@ export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
   [NodeTypeEnum.TRANSACTION_BUILDER]: TransactionBuilderNode,
   [NodeTypeEnum.INSTRUCTIONS]: InstructionsNode,
   [NodeTypeEnum.TRANSACTION]: TransactionNode,
+  [NodeTypeEnum.IDL]: IdlNode,
+  [NodeTypeEnum.PROGRAM_INSTRUCTIONS]: ProgramInstructionsNode,
 }

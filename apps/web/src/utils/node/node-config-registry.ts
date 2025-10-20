@@ -14,6 +14,8 @@ import { pdaNodeConfig } from './data/pda-node-data'
 import { transactionBuilderNodeConfig } from './data/transaction-builder-node-data'
 import { instructionsNodeConfig } from './data/instructions-node-data'
 import { transactionNodeConfig } from './data/transaction-node-data'
+import { idlNodeConfig } from './data/idl-node-data'
+import { programInstructionsNodeConfig } from './data/program-instructions-node-data'
 
 export const nodeConfigRegistry = {
   [NodeTypeEnum.TEXT]: textNodeConfig,
@@ -30,6 +32,8 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.TRANSACTION_BUILDER]: transactionBuilderNodeConfig,
   [NodeTypeEnum.INSTRUCTIONS]: instructionsNodeConfig,
   [NodeTypeEnum.TRANSACTION]: transactionNodeConfig,
+  [NodeTypeEnum.IDL]: idlNodeConfig,
+  [NodeTypeEnum.PROGRAM_INSTRUCTIONS]: programInstructionsNodeConfig,
 } as const satisfies Record<NodeType, NodeConfig>
 
 export const getNodeConfig = (nodeType: NodeType) => {

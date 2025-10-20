@@ -21,6 +21,8 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.TRANSACTION_BUILDER]: { color: '#2a5f2b', width: 100 },
   [NodeTypeEnum.INSTRUCTIONS]: { color: '#2a5f2b', width: 300 },
   [NodeTypeEnum.TRANSACTION]: { color: '#2a5f2b', width: 300 },
+  [NodeTypeEnum.IDL]: { color: '#5a1d5f', width: 350 },
+  [NodeTypeEnum.PROGRAM_INSTRUCTIONS]: { color: '#3d1d5f', width: 350 },
 }
 
 export const getNodeStyles = (nodeType?: NodeType) => {
