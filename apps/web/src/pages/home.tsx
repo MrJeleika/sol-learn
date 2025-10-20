@@ -135,7 +135,7 @@ export default function Home() {
     for (const el of all) el.classList.remove('handle--dim', 'handle--highlight')
   }, [])
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100vw', height: 'calc(100vh - 74px)' }}>
       <ReactFlow
         colorMode="dark"
         nodes={nodes}

@@ -3,13 +3,13 @@ import { Outlet } from 'react-router-dom'
 import { Toaster } from '@/components/ui/sonner'
 
 import Providers from '@/providers/Providers'
-import { NodeSelect } from '@/components/node-select/node-select'
+import { Header } from '@/components/header/header'
 
 const DefaultLayout = memo(() => {
   return (
     <Providers>
       <div className="relative">
-        <NodeSelect />
+        <Header />
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>

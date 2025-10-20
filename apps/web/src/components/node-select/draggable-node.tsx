@@ -5,9 +5,6 @@ import { useDraggable } from '@neodrag/react'
 import { cn } from '@/lib/utils'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
 import { getNodeConfig } from '@/utils/node/node-config-registry'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { Info } from 'lucide-react'
-import { getNodeTooltip } from '@/constants/node-tooltips'
 
 export interface DraggableNodeProps {
   type: NodeType
@@ -56,20 +53,6 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
         <div className="rounded-[8px] w-full text-foreground">
           <div className="flex items-center justify-center gap-1">
             <p className="uppercase text-[10px] leading-[12px] text-center font-bold">{nodeConfig.label}</p>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <button
-                  type="button"
-                  aria-label="Node info"
-                  className="inline-flex items-center text-foreground/80 hover:text-foreground"
-                >
-                  <Info size={12} />
-                </button>
-              </TooltipTrigger>
-              <TooltipContent className="max-w-xs p-3 rounded-md border bg-background text-foreground shadow">
-                {getNodeTooltip(type)}
-              </TooltipContent>
-            </Tooltip>
           </div>
         </div>
         <div className="border-border rounded-[8px] w-full h-3 bg-background absolute bottom-0 left-0"></div>
