@@ -1,73 +1,113 @@
-# React + TypeScript + Vite
+# SOL Learn - Visual Solana Development Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**SOL Learn** is an interactive educational platform that makes Solana blockchain development accessible through visual programming. Using an intuitive node-based interface, learners can drag-and-drop components to build and understand Solana transactions, programs, and cryptographic operations. Whether you're new to Web3 or looking to deepen your Solana knowledge, SOL Learn transforms abstract blockchain concepts into tangible, interactive learning experiences.
 
-Currently, two official plugins are available:
+### Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Visual Node-Based Editor** - Drag-and-drop interface for building Solana workflows
+- **Comprehensive Node Library** - Input, Transactions, Network, Programs, and Crypto nodes
+- **Real-time Validation** - Type-safe connection validation between nodes
+- **Multi-Select & Batch Operations** - Select and manage multiple nodes simultaneously
 
-## React Compiler
+## Requirements for Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Before installing SOL Learn, ensure you have the following installed on your system:
 
-## Expanding the ESLint configuration
+- **Node.js** - v18.0.0 or higher
+- **npm** - v9.0.0 or higher (or yarn/pnpm as alternatives)
+- **Git** - For cloning the repository
+- **Basic understanding of** - React, TypeScript, and Web3 concepts (recommended)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation Guide
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 1. Clone the Repository
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/MrJeleika/sol-learn
+cd solana-build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Navigate to the Web App
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd apps/web
 ```
+
+### 3. Install Dependencies
+
+Using npm:
+
+```bash
+npm install
+```
+
+Or using yarn:
+
+```bash
+yarn install
+```
+
+Or using pnpm:
+
+```bash
+pnpm install
+```
+
+### 4. Start the Development Server
+
+```bash
+npm run dev
+```
+
+The application will start on `http://localhost:5173` (default Vite port).
+
+### 5. Build for Production
+
+```bash
+npm run build
+```
+
+The optimized build will be created in the `dist/` directory.
+
+### 6. Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+apps/web/
+├── src/
+│   ├── components/     # React components (nodes, UI, header)
+│   ├── pages/          # Application pages
+│   ├── hooks/          # Custom React hooks
+│   ├── utils/          # Utility functions
+│   ├── types/          # TypeScript types
+│   ├── constants/      # Configuration constants
+│   └── main.tsx        # Entry point
+├── index.html          # HTML template
+├── package.json        # Dependencies and scripts
+└── vite.config.ts      # Vite configuration
+```
+
+## Getting Started
+
+1. Create your first workflow by dragging nodes from the menu onto the canvas
+2. Connect nodes to build your Solana transaction flow
+3. Use area select (click and drag) to select multiple nodes
+4. Delete selected nodes with the Delete key
+5. Explore different node types to understand blockchain concepts
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For questions or issues, please open an issue on GitHub or contact the development team.
