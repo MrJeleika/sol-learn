@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:static": "next build && next export"
+    "build:static": "next build"
   },
   "dependencies": {
     "@tsparticles/engine": "^3.9.1",
