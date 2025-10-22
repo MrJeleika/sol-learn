@@ -2,6 +2,7 @@
   "name": "solana-build",
   "version": "1.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "landing:dev": "yarn workspace landing dev",
     "landing:build": "yarn workspace landing build",
