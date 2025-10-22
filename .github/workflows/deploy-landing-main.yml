@@ -6,6 +6,7 @@ on:
     paths:
       - 'apps/landing/**'
       - 'package.json'
+      - '.github/workflows/deploy-landing-main.yml'
 
 jobs:
   deploy:
