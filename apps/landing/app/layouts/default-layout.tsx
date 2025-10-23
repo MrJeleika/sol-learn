@@ -8,7 +8,7 @@ interface DefaultLayoutProps {
 
 export function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
-    <div className="relative min-h-screen pt-[96px] w-full">
+    <div className="relative min-h-screen  w-full">
       <Header />
       {children}
       <LoadOverlay />

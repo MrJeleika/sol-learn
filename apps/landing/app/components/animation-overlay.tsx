@@ -55,7 +55,7 @@ export function AnimationOverlay({ onComplete, headerRef }: AnimationOverlayProp
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 w-screen h-screen bg-black pointer-events-none"
+      className="fixed inset-0 z-999 w-screen h-screen bg-black pointer-events-none"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{

@@ -16,7 +16,7 @@ export function Header() {
     <>
       {showAnimation && <AnimationOverlay headerRef={logoSvgRef} />}
 
-      <header className="bg-background backdrop-blur-md border-b border-border flex justify-between px-8 py-4 items-center fixed top-0 left-0 right-0 z-40">
+      <header className="bg-background backdrop-blur-md border-b border-border flex justify-between xl:px-20 px-10 py-4 items-center  z-40">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4">
             <svg
