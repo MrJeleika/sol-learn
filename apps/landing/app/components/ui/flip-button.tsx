@@ -11,7 +11,9 @@ export type FlipButtonProps = HTMLMotionProps<'button'> & {
   backText: string
   transition?: Transition
   frontClassName?: string
+  frontStyle?: React.CSSProperties
   backClassName?: string
+  backStyle?: React.CSSProperties
   from?: FlipDirection
 }
 
@@ -23,7 +25,9 @@ export function FlipButton({
   transition = { type: 'spring', stiffness: 280, damping: 20 },
   className,
   frontClassName,
+  frontStyle,
   backClassName,
+  backStyle,
   from = 'top',
   ...props
 }: FlipButtonProps) {
@@ -67,6 +71,7 @@ export function FlipButton({
         variants={frontVariants}
         transition={transition}
         className={cn(DEFAULT_SPAN_CLASS_NAME, 'bg-background text-primary', frontClassName)}
+        style={frontStyle}
       >
         {frontText}
       </motion.span>
@@ -76,6 +81,7 @@ export function FlipButton({
         variants={backVariants}
         transition={transition}
         className={cn(DEFAULT_SPAN_CLASS_NAME, 'bg-primary-2 text-foreground', backClassName)}
+        style={backStyle}
       >
         {backText}
       </motion.span>
