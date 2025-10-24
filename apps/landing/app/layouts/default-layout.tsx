@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Header } from '../components/header/header'
 import { LoadOverlay } from '../components/ui/load-overlay'
+import { Footer } from '../components/footer/footer'
 
 interface DefaultLayoutProps {
   children: ReactNode
@@ -12,6 +13,7 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
       <Header />
       {children}
       <LoadOverlay />
+      <Footer />
     </div>
   )
 }

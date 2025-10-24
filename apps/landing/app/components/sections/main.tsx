@@ -1,6 +1,7 @@
 import { FlipButton } from '../ui/flip-button'
 import { SparklesCore } from '../ui/sparkles'
 import { WavyBackground } from '../ui/wavy-background'
+import { GradientText } from '../ui/gradient-text'
 
 export function Main() {
   return (
@@ -18,13 +19,14 @@ export function Main() {
         <div className="pt-[22vh] px-10 xl:px-20 flex flex-col justify-center overflow-hidden">
           <h1 className="text-7xl font-bold  max-w-[800px] relative z-20">
             Your{' '}
-            <span className="bg-linear-to-bl from-[#24ffa7] via-[#519ed4] to-[#9945ff] bg-clip-text text-transparent">
-              Solana
-            </span>{' '}
+            <GradientText
+              text="Solana"
+              gradient="linear-gradient(225deg, #24ffa7 0%, #519ed4 25%, #9945ff 50%, #519ed4 75%, #24ffa7 100%)"
+            />{' '}
             learning platform
           </h1>
           <div className="w-[800px] h-40 relative">
-            <p className="absolute z-50 top-4 text-[22px]">Build, Learn, and Grow</p>
+            <p className="absolute z-50 top-4 text-[22px]">Build, Learn and Grow</p>
             <div className="absolute inset-x-0 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-full blur-sm" />
             <div className="absolute inset-x-0 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-px w-full" />
             <div className="absolute inset-x-40 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/2 blur-sm" />
