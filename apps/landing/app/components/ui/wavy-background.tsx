@@ -13,7 +13,7 @@ export interface WavyBackgroundProps {
   blur?: number
   speed?: 'slow' | 'fast'
   waveOpacity?: number
-  [key: string]: any
+  [key: string]: unknown
 }
 export const WavyBackground = ({
   children,
@@ -31,7 +31,13 @@ export const WavyBackground = ({
   const [isClient, setIsClient] = useState(false)
 
   const noise = createNoise3D()
-  let w: number, h: number, nt: number, i: number, x: number, ctx: any, canvas: any
+  let w: number,
+    h: number,
+    nt: number,
+    i: number,
+    x: number,
+    ctx: CanvasRenderingContext2D | null,
+    canvas: HTMLCanvasElement | null
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const getSpeed = () => {
     switch (speed) {
@@ -96,6 +102,7 @@ export const WavyBackground = ({
         cancelAnimationFrame(animationId)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient, blur, backgroundFill, waveOpacity, speed, waveWidth, colors])
   useEffect(() => {
     setIsClient(true)

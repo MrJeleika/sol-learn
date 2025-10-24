@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from './mariquee'
 import { cn } from '@/app/lib/utils'
 import { FlipButton } from './flip-button'
