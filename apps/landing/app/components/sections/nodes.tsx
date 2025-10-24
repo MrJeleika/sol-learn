@@ -8,7 +8,7 @@ import { NodesText } from '../nodes/nodes-text'
 export function Nodes() {
   const [hoveredItem, setHoveredItem] = useState<MovingLineItem | null>(null)
   return (
-    <section className="bg-background relative min-h-screen text-foreground">
+    <section className="bg-background relative min-h-screen text-foreground ">
       <div className="p-12 flex flex-col gap-12">
         <h2 className="text-2xl font-bold">Overview</h2>
         <div className="flex gap-12">
@@ -18,7 +18,7 @@ export function Nodes() {
           <div className="grid -translate-y-10 w-1/2 grid-cols-2 gap-8"></div>
         </div>
       </div>
-      <div className="absolute left-0 bottom-10">
+      <div className="absolute w-screen left-0 bottom-10 overflow-x-hidden">
         <MovingLine
           onHover={setHoveredItem}
           items={[
