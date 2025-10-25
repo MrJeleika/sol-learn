@@ -1,26 +1,23 @@
-'use client'
-
-import { useState } from 'react'
 import MovingLine from '../ui/moving-line'
-import { MovingLineItem } from '@/app/types/moving-line'
 import { NodesText } from '../nodes/nodes-text'
+import { NodesAnimation } from '../nodes/nodes-animation/index'
 
 export function Nodes() {
-  const [hoveredItem, setHoveredItem] = useState<MovingLineItem | null>(null)
   return (
-    <section className="bg-background relative min-h-screen text-foreground ">
-      <div className="p-12 flex flex-col gap-12">
+    <section className="bg-background min-h-screen relative text-foreground">
+      <div className="p-12 flex flex-col flex-1 gap-12">
         <h2 className="text-2xl font-bold">Overview</h2>
         <div className="flex gap-12">
           <div className="flex w-1/2 flex-col gap-6">
-            <NodesText hoveredItem={hoveredItem} />
+            <NodesText />
           </div>
-          <div className="grid -translate-y-10 w-1/2 grid-cols-2 gap-8"></div>
+          <div className="flex -translate-y-10 w-1/2 justify-end gap-8">
+            <NodesAnimation />
+          </div>
         </div>
       </div>
       <div className="absolute w-screen left-0 bottom-10 overflow-x-hidden">
         <MovingLine
-          onHover={setHoveredItem}
           items={[
             { label: 'Node 1', text: 'Node 1', color: '#24ffa7' },
             { label: 'Node 2', text: 'Node 2', color: '#519ed4' },

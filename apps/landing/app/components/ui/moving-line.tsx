@@ -10,10 +10,9 @@ export type MovingLineProps = {
   speed?: number
   className?: string
   itemClassName?: string
-  onHover: (item: MovingLineItem | null) => void
 }
 
-export function MovingLine({ items, speed = 40, className, itemClassName, onHover }: MovingLineProps) {
+export function MovingLine({ items, speed = 40, className, itemClassName }: MovingLineProps) {
   return (
     <div className="w-full flex relative ">
       <Marquee className={className}>
@@ -21,12 +20,7 @@ export function MovingLine({ items, speed = 40, className, itemClassName, onHove
         <MarqueeContent speed={speed} pauseOnHover autoFill>
           {items.map((item, idx) => (
             <MarqueeItem key={`${item.label}-${idx}`} className={cn('mx-4', itemClassName)}>
-              <div
-                aria-label={item.label}
-                className="inline-block"
-                onMouseLeave={() => onHover(null)}
-                onMouseEnter={() => onHover(item)}
-              >
+              <div aria-label={item.label} className="inline-block">
                 <FlipButton
                   frontText={item.label}
                   backText={item.label}
