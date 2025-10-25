@@ -36,7 +36,7 @@
   --sidebar-ring: #4ade80;
   --font-sans: Outfit, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-mono: monospace;
+  --font-mono: 'Kode Mono', monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);
   --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);

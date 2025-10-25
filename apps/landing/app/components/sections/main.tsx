@@ -41,7 +41,9 @@ export function Main() {
             />
             <div className="absolute inset-0 w-full h-full bg-background mask-[radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
           </div>
-          <FlipButton frontClassName="bg-primary text-background" frontText="Launch App" backText="Launch App" />
+          <a href="https://app.sol-learn.me/" target="_blank" rel="noopener noreferrer">
+            <FlipButton frontClassName="bg-primary text-background" frontText="Launch App" backText="Launch App" />
+          </a>
         </div>
       </WavyBackground>
     </div>
