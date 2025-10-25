@@ -55,7 +55,7 @@ export function FlipButton({
 
   // Match Button sizing/typography; move color hover effect to the back face
   const baseWrapper =
-    'relative inline-flex w-max h-[60px] px-6 py-2 text-[28px] font-medium cursor-pointer rounded-sm perspective-[1000px] outline-none transition-all disabled:pointer-events-none disabled:opacity-50'
+    'relative inline-flex w-max h-[60px] xl:px-6 px-4 py-2 text-[22px] xl:text-[28px] font-medium cursor-pointer rounded-sm perspective-[1000px] outline-none transition-all disabled:pointer-events-none disabled:opacity-50'
 
   return (
     <motion.button

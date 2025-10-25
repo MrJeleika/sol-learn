@@ -1,19 +1,18 @@
 import { FOOTER_LINKS } from '@/app/constants/footer/footer-links'
 import { FooterLink } from './footer-link'
+import { FooterLogo } from '../ui/icons/footer'
 
 export function Footer() {
   return (
     <footer className="bg-background text-foreground">
       <div className="@container w-full mb-6 px-6">
-        <h2 className="w-full leading-none mb-4 text-center tracking-tight font-bold text-[clamp(32px,18cqw,500px)]">
-          SOL LEARN
-        </h2>
-        <div className="flex items-start justify-between px-10">
+        <FooterLogo className="w-full h-full" />
+        <div className="flex items-start max-lg:flex-col max-lg:gap-6 lg:justify-between">
           <div className="flex flex-col gap-2">
             <p>Solana development is easy! Prove me wrong.</p>
             <p>© {new Date().getFullYear()} SOL Learn. All rights reserved.</p>
           </div>
-          <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+          <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-8 gap-y-4">
             {FOOTER_LINKS.map((link) => (
               <FooterLink
                 key={link.href}

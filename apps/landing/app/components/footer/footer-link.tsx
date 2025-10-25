@@ -20,7 +20,6 @@ export function FooterLink({ href, label, Icon, className, iconClassName }: Foot
       <Icon
         className={cn(
           'w-12 h-12 transition-[fill,color,stroke] duration-300',
-          // ensure inner shapes also animate (for custom SVGs like X)
           '[&>*]:transition-[fill,stroke,color] [&>*]:duration-300 [&>path]:transition-[fill,stroke] [&>path]:duration-300',
           iconClassName
         )}
