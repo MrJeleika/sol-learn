@@ -6,10 +6,10 @@ interface SectionCardProps {
 
 export const SectionCard = ({ title, description, icon: Icon }: SectionCardProps) => {
   return (
-    <div className="group rounded-lg lx:p-4 flex flex-col gap-3">
-      <Icon className="h-12 w-12" />
-      <h3 className="text-2xl font-semibold">{title}</h3>
-      <p className=" text-lg leading-relaxed">{description}</p>
+    <div className="group rounded-lg lx:p-4 flex flex-col gap-4">
+      <Icon className="h-14 w-14" />
+      <h3 className="text-3xl font-semibold tracking-wide">{title}</h3>
+      <p className=" text-lg leading-relaxed opacity-90">{description}</p>
     </div>
   )
 }
