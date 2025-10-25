@@ -4,8 +4,7 @@ import { clusterApiUrl, Connection } from '@solana/web3.js'
 
 import { env } from '@/env'
 
-export const network =
-  env.VITE_PUBLIC_NETWORKS_MODE === 'mainnet' ? WalletAdapterNetwork.Mainnet : WalletAdapterNetwork.Devnet
+export const network = WalletAdapterNetwork.Mainnet
 
 export const endpoint = env.VITE_PUBLIC_SOLANA_RPC ?? clusterApiUrl(network)
 
