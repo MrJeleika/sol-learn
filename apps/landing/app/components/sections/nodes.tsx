@@ -5,13 +5,13 @@ import { NodesAnimation } from '../nodes/nodes-animation/index'
 export function Nodes() {
   return (
     <section className="bg-background min-h-screen relative text-foreground">
-      <div className="p-12 flex flex-col flex-1 gap-12">
+      <div className="sm:p-12 p-6 flex flex-col flex-1 sm:gap-12 gap-6">
         <h2 className="text-2xl font-bold">Overview</h2>
-        <div className="flex gap-12">
-          <div className="flex w-1/2 flex-col gap-6">
+        <div className="flex lg:flex-row flex-col gap-12">
+          <div className="flex w-full lg:w-1/2 flex-col gap-6">
             <NodesText />
           </div>
-          <div className="flex -translate-y-10 w-1/2 justify-end gap-8">
+          <div className="flex -translate-y-10 w-full lg:w-1/2 justify-end gap-8">
             <NodesAnimation />
           </div>
         </div>
