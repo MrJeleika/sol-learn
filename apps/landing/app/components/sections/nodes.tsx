@@ -1,10 +1,11 @@
 import MovingLine from '../ui/moving-line'
 import { NodesText } from '../nodes/nodes-text'
 import { NodesAnimation } from '../nodes/nodes-animation/index'
+import { movingLineItems } from '../../constants/moving-line/moving-line-config'
 
 export function Nodes() {
   return (
-    <section className="bg-background min-h-screen relative text-foreground">
+    <section className="bg-background min-h-screen sm:pt-12 pt-6 relative text-foreground">
       <div className="sm:p-12 p-6 flex flex-col flex-1 sm:gap-12 gap-6">
         <h2 className="text-2xl font-bold">Overview</h2>
         <div className="flex lg:flex-row flex-col gap-12">
@@ -17,13 +18,7 @@ export function Nodes() {
         </div>
       </div>
       <div className="absolute w-screen left-0 bottom-10 overflow-x-hidden">
-        <MovingLine
-          items={[
-            { label: 'Node 1', text: 'Node 1', color: '#24ffa7' },
-            { label: 'Node 2', text: 'Node 2', color: '#519ed4' },
-            { label: 'Node 3', text: 'Node 3', color: '#9945ff' },
-          ]}
-        />
+        <MovingLine items={movingLineItems} />
       </div>
     </section>
   )

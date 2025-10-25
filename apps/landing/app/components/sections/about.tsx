@@ -4,7 +4,7 @@ import { FlipButton } from '../ui/flip-button'
 
 export function About() {
   return (
-    <section className="bg-primary min-h-screen text-background">
+    <section className="bg-primary min-h-screen sm:pt-12 pt-6 text-background">
       <div className="sm:p-12 p-6 flex flex-col sm:gap-12 gap-6">
         <h2 className="text-2xl font-bold text-background">About</h2>
         <div className="flex lg:flex-row flex-col gap-12">
