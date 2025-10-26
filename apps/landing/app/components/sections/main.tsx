@@ -14,9 +14,9 @@ export function Main() {
         speed="slow"
         waveOpacity={0.3}
         className="w-full text-foreground"
-        containerClassName="[&>canvas]:-rotate-45 max-sm:[&>canvas]:-rotate-0 [&>canvas]:w-[150%] max-md:[&>canvas]:translate-y-[20%] max-lg:[&>canvas]:translate-y-[10%]"
+        containerClassName="[&>canvas]:-rotate-45 max-sm:[&>canvas]:-rotate-0 [&>canvas]:w-[150%] max-md:[&>canvas]:translate-y-[20%] [&>canvas]:translate-y-[10%]"
       >
-        <div className="sm:pt-[22vh] pt-[10vh] px-3 sm:px-10 xl:px-20 flex flex-col justify-center overflow-hidden">
+        <div className="sm:pt-[22vh] pt-[10vh] px-3 sm:px-6 xl:px-12 flex flex-col justify-center overflow-hidden">
           <h1 className="xl:text-7xl text-[28px] sm:text-4xl font-bold  relative z-20">
             Your{' '}
             <GradientText
