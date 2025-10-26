@@ -51,7 +51,7 @@ export const Header = () => {
           {menuConfig.map((category) => (
             <NavigationMenuItem key={category.id}>
               <div className="relative border-border border rounded-t-[6px]">
-                <NavigationMenuTrigger className=" relative z-30 ">
+                <NavigationMenuTrigger className="cursor-pointer relative z-30 ">
                   <p className="text-sm font-medium text-foreground">{category.label}</p>
                 </NavigationMenuTrigger>
                 <div

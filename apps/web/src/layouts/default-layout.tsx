@@ -1,4 +1,4 @@
-import { Suspense, memo } from 'react'
+import { memo } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -10,9 +10,7 @@ const DefaultLayout = memo(() => {
     <Providers>
       <div className="relative">
         <Header />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
         <Toaster />
       </div>
     </Providers>

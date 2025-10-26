@@ -5,12 +5,6 @@ export const textNodeConfig = {
   label: 'TEXT',
   handles: [
     {
-      position: Position.Left,
-      type: 'target',
-      dataField: '_in',
-      label: undefined,
-    },
-    {
       position: Position.Right,
       type: 'source',
       dataField: 'text',

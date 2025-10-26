@@ -89,7 +89,7 @@ export const CustomNode = ({
         style={{ height: nodeStyles.height ?? 'auto', minHeight }}
         className={cn(
           'relative z-20',
-          'p-3 rounded-[8px] transition-all bg-background border-border border',
+          'p-3 rounded-[8px] transition-all bg-background border-border border shadow-md',
           className,
           selected && 'border-active-border bg-border'
         )}

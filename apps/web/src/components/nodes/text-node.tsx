@@ -7,7 +7,7 @@ import { getNodeStyles } from '@/utils/node/node-style.utils'
 import type { NodeProps } from '@xyflow/react'
 
 export const TextNode = (props: NodeProps<TextNodeType>) => {
-  const [text, setText] = useState('')
+  const [text, setText] = useState(props.data.text)
   const { updateNodeData } = useTypedReactFlow()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

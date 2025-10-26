@@ -42,31 +42,29 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
     <>
       <div
         ref={draggableRef}
-        style={{ backgroundColor: nodeStyles.color }}
         className={cn(
           'dndnode',
-          'relative rounded-[8px] cursor-pointer pointer-events-auto py-3 bg-background border-border w-full border z-20',
+          'group relative cursor-pointer pointer-events-auto w-full z-20',
+          'rounded-[8px] overflow-hidden border border-border bg-background/60 hover:bg-background transition-colors',
           className
         )}
       >
-        <div className="border border-border rounded-[8px] w-full h-3 bg-background absolute top-[-1px] left-0"></div>
-        <div className="rounded-[8px] w-full text-foreground">
-          <div className="flex items-center justify-center gap-1">
+        <div
+          className={cn(
+            'absolute top-0 left-0 bottom-0 w-full hover:bg-background transition-all duration-300 ease-out',
+            'rounded-[8px]'
+          )}
+          style={{
+            background: `linear-gradient(90deg, ${nodeStyles.color} 0%, #171717 90%`,
+          }}
+        ></div>
+
+        <div className="relative w-full text-foreground">
+          <div className="flex items-center justify-center gap-1 px-4 py-3">
             <p className="uppercase text-[10px] leading-[12px] text-center font-bold">{nodeConfig.label}</p>
           </div>
         </div>
-        <div className="border-border rounded-[8px] w-full h-3 bg-background absolute bottom-0 left-0"></div>
       </div>
-      {/* <div
-        className={cn(
-          'rounded-[8px] absolute top-0 left-0 py-3 bg-background border-border w-full border z-10',
-          className
-        )}
-      >
-        <div style={{ backgroundColor: nodeStyles.color }} className="rounded-[8px] w-full text-foreground">
-          <p className="uppercase text-[10px] leading-[12px] text-center font-bold">{nodeConfig.label}</p>
-        </div>
-      </div> */}
     </>
   )
 }
