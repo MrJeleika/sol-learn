@@ -1,8 +1,31 @@
+'use client'
+import { useEffect, useRef, useState } from 'react'
+import { SolutionTitle } from '@/app/components/solution/solution-title'
 import { SectionCard } from '../about/section-card'
 import { SOLUTION_CARDS } from '@/app/constants/solution/solution-cards'
 import { FlickeringGrid } from '../ui/bg-grid'
 
 export function Solution() {
+  const [bottomVisible, setBottomVisible] = useState(false)
+  const bottomSentinelRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const el = bottomSentinelRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => setBottomVisible(true))
+        } else {
+          requestAnimationFrame(() => setBottomVisible(false))
+        }
+      },
+      { threshold: 0, rootMargin: '0px 0px -1px 0px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className="bg-primary-2 min-h-screen relative text-foreground">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[60vh] z-0">
@@ -33,11 +56,7 @@ export function Solution() {
           }}
         />
       </div>
-      <div className="sticky top-0 pt-12 z-20 bg-primary-2/80 backdrop-blur-sm">
-        <div className="sm:px-12 px-6 py-6">
-          <h2 className="text-2xl font-bold">Problem → Solution</h2>
-        </div>
-      </div>
+      <SolutionTitle bottomVisible={bottomVisible} />
       <div className="sm:px-12 px-6 pb-24">
         <div className="relative mx-auto max-w-screen-2xl z-10" style={{ height: `${SOLUTION_CARDS.length * 70}vh` }}>
           {SOLUTION_CARDS.map((card, i) => (
@@ -58,6 +77,7 @@ export function Solution() {
           ))}
         </div>
       </div>
+      <div ref={bottomSentinelRef} className="absolute bottom-0 left-0 h-px w-px" />
     </section>
   )
 }
