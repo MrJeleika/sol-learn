@@ -22,7 +22,7 @@ export const SolutionTitle = ({ bottomVisible }: SolutionTitleProps) => {
         onAnimationComplete={() => {
           if (bottomVisible) setReleased(true)
         }}
-        className={cn('sm:px-12 px-6 py-6 bg-primary-2 will-change-transform', bottomVisible ? '' : 'pt-18')}
+        className={cn('sm:px-12 px-6 py-6 bg-primary-2 will-change-transform', bottomVisible ? '' : 'pt-12 sm:pt-18')}
       >
         <h2 className="text-2xl font-bold">Problem → Solution</h2>
       </motion.div>
