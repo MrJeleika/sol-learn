@@ -5,9 +5,9 @@ import { FooterLogo } from '../ui/icons/footer'
 export function Footer() {
   return (
     <footer className="bg-background text-foreground">
-      <div className="@container w-full mb-6 px-6">
+      <div className="@container w-full mb-6 px-6 pt-6">
         <FooterLogo className="w-full h-full" />
-        <div className="flex items-start max-lg:flex-col max-lg:gap-6 lg:justify-between">
+        <div className="flex items-start max-lg:flex-col max-lg:gap-6 lg:justify-between max-sm:mt-4">
           <div className="flex flex-col gap-2">
             <p>Solana development is easy! Prove me wrong.</p>
             <p>© {new Date().getFullYear()} SOL Learn. All rights reserved.</p>
