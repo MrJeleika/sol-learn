@@ -1,16 +1,9 @@
 import { useReactFlow, type XYPosition } from '@xyflow/react'
 import { useCallback } from 'react'
 import { generateNodeId } from '@/utils/crypto/crypto.utils'
-import { DraggableNode } from '@/components/node-select/draggable-node'
-import { menuConfig } from '@/constants/menu-config'
+import { DesktopMenu } from './desktop-menu'
+import { MobileMenu } from './mobile-menu'
 import type { NodeType } from '@/types/node'
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '../ui/navigation-menu'
 
 export const Header = () => {
   const { screenToFlowPosition, setNodes } = useReactFlow()
@@ -46,33 +39,8 @@ export const Header = () => {
         <img src="/logo-light.svg" alt="logo" className="w-10 h-10" />
         <h1 className="font-mono">SOL LEARN</h1>
       </div>
-      <NavigationMenu viewport={false}>
-        <NavigationMenuList className="gap-4">
-          {menuConfig.map((category) => (
-            <NavigationMenuItem key={category.id}>
-              <div className="relative border-border border rounded-t-[6px]">
-                <NavigationMenuTrigger className="cursor-pointer relative z-30 ">
-                  <p className="text-sm font-medium text-foreground">{category.label}</p>
-                </NavigationMenuTrigger>
-                <div
-                  className="absolute -bottom-1 z-20 left-0 right-0 h-3 rounded-b-[6px]"
-                  style={{ backgroundColor: category.color }}
-                />
-              </div>
-              <NavigationMenuContent className="overflow-visible! p-0 border-none ">
-                <div className="grid grid-cols-1 gap-2 p-4 w-[200px] bg-background rounded-[8px] border border-border">
-                  {category.nodes.map((nodeType) => (
-                    <div key={nodeType} className="relative z-50">
-                      <DraggableNode type={nodeType} onDrop={handleNodeDrop} />
-                    </div>
-                  ))}
-                </div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          ))}
-        </NavigationMenuList>
-      </NavigationMenu>
-      <div></div>
+      <DesktopMenu onDrop={handleNodeDrop} />
+      <MobileMenu onDrop={handleNodeDrop} />
     </header>
   )
 }

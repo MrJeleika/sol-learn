@@ -1,7 +1,14 @@
 import { cn } from '@/lib/utils'
 import { NodeTypeEnum, type NodeType } from '@/types/node'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
-import { Handle, Position, useReactFlow, useUpdateNodeInternals, type NodeProps } from '@xyflow/react'
+import {
+  Handle,
+  Position,
+  useReactFlow,
+  useUpdateNodeInternals,
+  useNodeConnections,
+  type NodeProps,
+} from '@xyflow/react'
 import type { PropsWithChildren } from 'react'
 import { getNodeConfig } from '@/utils/node/node-config-registry'
 import type { NodeActionConfig } from '@/types/node-action'
@@ -29,6 +36,8 @@ export const CustomNode = ({
   extraHandles,
 }: Props) => {
   const { setNodes, setEdges } = useReactFlow()
+  const sourceConnections = useNodeConnections({ handleType: 'source', id })
+  const targetConnections = useNodeConnections({ handleType: 'target', id })
   const updateNodeInternals = useUpdateNodeInternals()
 
   const nodeStyles = getNodeStyles(type as NodeType)
@@ -103,12 +112,19 @@ export const CustomNode = ({
           handleIndices[posKey] = index + 1
 
           const handleId = id + '-' + handle.dataField + '-' + handle.position
+          const isConnected =
+            handle.type === 'source'
+              ? (sourceConnections ?? []).some((c) => c.sourceHandle === handleId)
+              : (targetConnections ?? []).some((c) => c.targetHandle === handleId)
           return (
             <Handle
               key={handleId}
               id={handleId}
               onDoubleClick={() => addDisplayNodeOnDoubleClick(handleId, handle.position)}
-              className="top-1/2"
+              className={cn(
+                'top-1/2 w-1.5! h-1.5! min-w-1.5! min-h-1.5! relative rounded-full! border! border-sidebar-foreground!',
+                isConnected ? 'bg-foreground!' : 'bg-transparent!'
+              )}
               type={handle.type}
               position={handle.position}
               style={{ marginTop: offsetFromCenter }}
@@ -117,6 +133,7 @@ export const CustomNode = ({
               data-handle-type={handle.type}
               data-type={(handle as HandleConfig & { dataType?: string }).dataType}
             >
+              {!isConnected && <div className="pointer-events-none absolute inset-1 rounded-full bg-background"></div>}
               <div
                 className={cn(
                   'absolute text-[7px] whitespace-nowrap top-1/2 translate-y-[-50%]',

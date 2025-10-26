@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   icons: {
     icon: logoPath,
     shortcut: logoPath,
-    apple: thumbnailPath,
+    apple: logoPath,
   },
   alternates: {
     canonical: siteUrl,

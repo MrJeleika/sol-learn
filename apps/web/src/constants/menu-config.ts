@@ -12,7 +12,7 @@ export const menuConfig: MenuCategory[] = [
     id: 'input',
     label: 'Input',
     color: '#39214a',
-    nodes: [NodeTypeEnum.KEYPAIR, NodeTypeEnum.TEXT, NodeTypeEnum.NUMBER],
+    nodes: [NodeTypeEnum.DISPLAY, NodeTypeEnum.TEXT, NodeTypeEnum.NUMBER],
   },
   {
     id: 'transactions',
@@ -30,18 +30,12 @@ export const menuConfig: MenuCategory[] = [
     id: 'programs',
     label: 'Programs',
     color: '#5a1d5f',
-    nodes: [NodeTypeEnum.IDL, NodeTypeEnum.PROGRAM_INSTRUCTIONS, NodeTypeEnum.INSTRUCTIONS],
+    nodes: [NodeTypeEnum.IDL, NodeTypeEnum.PROGRAM_INSTRUCTIONS, NodeTypeEnum.INSTRUCTIONS, NodeTypeEnum.PDA],
   },
   {
     id: 'crypto',
     label: 'Crypto',
     color: '#265c75',
-    nodes: [
-      NodeTypeEnum.HASH,
-      NodeTypeEnum.SIGN,
-      NodeTypeEnum.VERIFY_SIGNATURE,
-      NodeTypeEnum.PDA,
-      NodeTypeEnum.DISPLAY,
-    ],
+    nodes: [NodeTypeEnum.HASH, NodeTypeEnum.SIGN, NodeTypeEnum.VERIFY_SIGNATURE, NodeTypeEnum.KEYPAIR],
   },
 ]

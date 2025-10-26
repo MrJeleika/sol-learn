@@ -44,7 +44,7 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
         ref={draggableRef}
         className={cn(
           'dndnode',
-          'group relative cursor-pointer pointer-events-auto w-full z-20',
+          'group relative cursor-pointer pointer-events-auto w-full z-10002',
           'rounded-[8px] overflow-hidden border border-border bg-background/60 hover:bg-background transition-colors',
           className
         )}
