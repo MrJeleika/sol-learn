@@ -58,14 +58,11 @@ export function Solution() {
       </div>
       <SolutionTitle bottomVisible={bottomVisible} />
       <div className="sm:px-12 px-6 pb-24">
-        <div
-          className="relative mx-auto max-w-screen-2xl max-sm:pt-24 z-10"
-          style={{ height: `${SOLUTION_CARDS.length * 70}vh` }}
-        >
+        <div className="relative mx-auto max-w-screen-2xl z-10" style={{ height: `${SOLUTION_CARDS.length * 70}vh` }}>
           {SOLUTION_CARDS.map((card, i) => (
             <div
               key={card.title}
-              className="sticky top-24 flex items-center justify-center h-[70vh]"
+              className="sticky top-32 sm:top-24 flex items-center justify-center h-[70vh]"
               style={{ zIndex: i, transform: `translateY(${i * 12}px)` }}
             >
               <div className="w-full rounded-[24px] border border-border bg-background shadow-[0_10px_40px_rgba(0,0,0,0.25)] p-8">
