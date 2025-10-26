@@ -15,11 +15,13 @@ import {
   TEXT_ROTATION,
   TYPE_PER_CHAR_MS,
 } from './constants'
-import { sha256Hex, type Anchors, getMidLeft, getMidRight } from './utils'
+import { sha256Hex, type Anchors, getMidLeft, getMidRight, getMidBottom, getMidTop } from './utils'
+import { useBreakpoint } from '../../ui/use-breakpoint'
 import { useAnimateConnectors, useOnceInView } from './hooks'
 import { Connectors } from './connectors'
 
 export const NodesAnimation = () => {
+  const isSmUp = useBreakpoint('sm')
   const { ref, inView } = useOnceInView()
   const containerRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
@@ -53,10 +55,14 @@ export const NodesAnimation = () => {
         hashLeft: getMidLeft(bh, c),
         hashRight: getMidRight(bh, c),
         displayLeft: getMidLeft(bd, c),
+        textBottom: getMidBottom(bt, c),
+        hashTop: getMidTop(bh, c),
+        hashBottom: getMidBottom(bh, c),
+        displayTop: getMidTop(bd, c),
       })
     }, CONNECTOR_DURATION_MS)
     return () => window.clearTimeout(timeout)
-  }, [inView])
+  }, [inView, isSmUp])
 
   const { line1, line2, done } = useAnimateConnectors(anchors)
 
@@ -105,7 +111,10 @@ export const NodesAnimation = () => {
 
   return (
     <div ref={ref} className="w-full">
-      <div ref={containerRef} className="relative w-full grid grid-cols-3 grid-rows-3 gap-6 min-h-[400px]">
+      <div
+        ref={containerRef}
+        className="relative w-full grid grid-cols-3 grid-rows-3 gap-20 sm:gap-6 min-h-[400px] sm:justify-items-stretch sm:items-stretch justify-items-center items-center"
+      >
         <motion.div
           ref={textRef}
           className="col-start-1 row-start-1 justify-self-start"
@@ -113,7 +122,7 @@ export const NodesAnimation = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.0 }}
         >
-          <BaseNode label="TEXT" color={TEXT_COLOR} width={300} height={110} isHovered>
+          <BaseNode label="TEXT" color={TEXT_COLOR} width={280} height={110} isHovered>
             <div className="text-lg leading-5 text-foreground">
               {isTyping ? (
                 <TypingEffect key={currentText} as="span" className="font-medium" text={currentText} />
@@ -128,24 +137,24 @@ export const NodesAnimation = () => {
 
         <motion.div
           ref={displayRef}
-          className="col-start-3 row-start-2 justify-self-end"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="col-start-2 row-start-3 sm:col-start-3 sm:row-start-2 justify-self-end"
+          initial={{ opacity: 0, y: 24, x: isSmUp ? 0 : 110 }}
+          animate={inView ? { opacity: 1, y: 0, x: isSmUp ? 0 : 110 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
         >
-          <BaseNode label="DISPLAY" color={DISPLAY_COLOR} width={320} height={110} isHovered>
+          <BaseNode label="DISPLAY" color={DISPLAY_COLOR} width={280} height={110} isHovered>
             <div className="text-base font-mono break-all">{hashResult}</div>
           </BaseNode>
         </motion.div>
 
         <motion.div
           ref={hashRef}
-          className="col-start-2 row-start-3  justify-self-center"
+          className="col-start-3 row-start-2 sm:col-start-2 sm:row-start-3 justify-self-center"
           initial={{ opacity: 0, y: 24, x: -50 }}
           animate={inView ? { opacity: 1, y: 0, x: -50 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
         >
-          <BaseNode label="HASH" color={HASH_COLOR} width={160} height={110} isHovered>
+          <BaseNode label="HASH" color={HASH_COLOR} width={160} height={105} isHovered>
             <div className="text-sm text-muted-foreground font-mono">hash()</div>
           </BaseNode>
         </motion.div>

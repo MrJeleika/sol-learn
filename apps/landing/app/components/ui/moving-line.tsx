@@ -16,7 +16,9 @@ export function MovingLine({ items, speed = 40, className, itemClassName }: Movi
   return (
     <div className="w-full flex relative ">
       <Marquee className={className}>
-        <MarqueeFade side="left" />
+        <div className="max-sm:hidden">
+          <MarqueeFade side="left" />
+        </div>
         <MarqueeContent speed={speed} pauseOnHover autoFill>
           {items.map((item, idx) => (
             <MarqueeItem key={`${item.label}-${idx}`} className={cn('mx-4', itemClassName)}>
@@ -37,7 +39,9 @@ export function MovingLine({ items, speed = 40, className, itemClassName }: Movi
             </MarqueeItem>
           ))}
         </MarqueeContent>
-        <MarqueeFade side="right" />
+        <div className="max-sm:hidden">
+          <MarqueeFade side="right" />
+        </div>
       </Marquee>
     </div>
   )

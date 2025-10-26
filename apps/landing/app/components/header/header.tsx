@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { AnimationOverlay } from '../animation-overlay'
-import { Button } from '../ui/button'
 
 export function Header() {
   const [showAnimation, setShowAnimation] = useState(false)
@@ -38,7 +37,6 @@ export function Header() {
             </div>
           </div>
         </div>
-        <Button>Menu</Button>
       </header>
     </>
   )
