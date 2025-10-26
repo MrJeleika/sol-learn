@@ -4,7 +4,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 const siteName = 'Sol Learn'
 const siteDescription =
   'An interactive educational platform that makes Solana blockchain development accessible through visual programming. Using an intuitive node-based interface, learners can drag-and-drop components to build and understand Solana transactions, programs, and cryptographic operations.'
-const thumbnailPath = '/thumbnail.png'
+const thumbnailPath = 'https://sol-learn.me/thumbnail.png'
 const logoPath = '/logo-light.svg'
 const twitterHandle = '@sollearn'
 
@@ -16,16 +16,7 @@ export const metadata: Metadata = {
     template: '%s | ' + siteName,
   },
   description: siteDescription,
-  keywords: [
-    'Solana',
-    'Blockchain',
-    'Education',
-    'Visual Programming',
-    'Crypto',
-    'Web3',
-    'Anchor',
-    'Rust',
-  ],
+  keywords: ['Solana', 'Blockchain', 'Education', 'Visual Programming', 'Crypto', 'Web3', 'Anchor', 'Rust'],
   authors: [{ name: 'Sol Learn' }],
   creator: 'Sol Learn',
   publisher: 'Sol Learn',
@@ -82,5 +73,3 @@ export const metadata: Metadata = {
   },
   themeColor: '#141414',
 }
-
-
