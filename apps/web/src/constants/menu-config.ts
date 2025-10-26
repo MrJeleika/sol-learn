@@ -11,7 +11,7 @@ export const menuConfig: MenuCategory[] = [
   {
     id: 'input',
     label: 'Input',
-    color: '#39214a',
+    color: '#531d2b',
     nodes: [NodeTypeEnum.DISPLAY, NodeTypeEnum.TEXT, NodeTypeEnum.NUMBER],
   },
   {

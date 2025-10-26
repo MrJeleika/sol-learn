@@ -40,29 +40,17 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
 
   return (
     <>
-      <div
-        ref={draggableRef}
-        className={cn(
-          'dndnode',
-          'group relative cursor-pointer pointer-events-auto w-full z-10002',
-          'rounded-[8px] overflow-hidden border border-border bg-background/60 hover:bg-background transition-colors',
-          className
-        )}
-      >
-        <div
-          className={cn(
-            'absolute top-0 left-0 bottom-0 w-full hover:bg-background transition-all duration-300 ease-out',
-            'rounded-[8px]'
-          )}
-          style={{
-            background: `linear-gradient(90deg, ${nodeStyles.color} 0%, #171717 90%`,
-          }}
-        ></div>
-
-        <div className="relative w-full text-foreground">
-          <div className="flex items-center justify-center gap-1 px-4 py-3">
-            <p className="uppercase text-[10px] leading-[12px] text-center font-bold">{nodeConfig.label}</p>
+      <div ref={draggableRef} className={cn('dndnode', className)}>
+        <div className="relative border-border md:w-[180px] border rounded-t-[6px]">
+          <div className="cursor-grab active:cursor-grabbing relative z-30 group inline-flex h-9 w-full items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-border">
+            <p className="text-sm font-medium text-foreground capitalize text-center">
+              {nodeConfig.label.toLowerCase()}
+            </p>
           </div>
+          <div
+            className="absolute -bottom-1 z-20 left-0 right-0 h-3 rounded-b-[6px]"
+            style={{ backgroundColor: nodeStyles.color }}
+          />
         </div>
       </div>
     </>
