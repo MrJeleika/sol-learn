@@ -8,7 +8,7 @@ export function Nodes() {
     <section className="bg-background min-h-screen sm:pt-12 pt-6 relative text-foreground">
       <div className="sm:p-12 p-6 flex flex-col flex-1 sm:gap-12 gap-6 max-lg:pb-[120px]">
         <h2 className="text-2xl font-bold">Overview</h2>
-        <div className="flex lg:flex-row flex-col-reverse gap-12">
+        <div className="flex lg:flex-row flex-col-reverse pb-10 sm:pb-20 gap-12">
           <div className="flex w-full lg:w-1/2 flex-col gap-6">
             <NodesText />
           </div>
