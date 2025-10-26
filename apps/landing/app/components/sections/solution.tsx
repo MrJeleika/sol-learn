@@ -57,8 +57,11 @@ export function Solution() {
         />
       </div>
       <SolutionTitle bottomVisible={bottomVisible} />
-      <div className="sm:px-12 px-6 pb-24 pt-24">
-        <div className="relative mx-auto max-w-screen-2xl z-10" style={{ height: `${SOLUTION_CARDS.length * 70}vh` }}>
+      <div className="sm:px-12 px-6 pb-24">
+        <div
+          className="relative mx-auto max-w-screen-2xl max-sm:pt-24 z-10"
+          style={{ height: `${SOLUTION_CARDS.length * 70}vh` }}
+        >
           {SOLUTION_CARDS.map((card, i) => (
             <div
               key={card.title}
