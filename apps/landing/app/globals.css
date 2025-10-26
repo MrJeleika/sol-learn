@@ -121,8 +121,6 @@
   }
 }
 
-/* Kode Mono is loaded via next/font in app/layout.tsx */
-
 body {
   letter-spacing: var(--tracking-normal);
   background: var(--background);

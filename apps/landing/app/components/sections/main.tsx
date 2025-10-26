@@ -14,23 +14,24 @@ export function Main() {
         speed="slow"
         waveOpacity={0.3}
         className="w-full text-foreground"
-        containerClassName="[&>canvas]:-rotate-45 [&>canvas]:w-[150%] "
+        containerClassName="[&>canvas]:-rotate-45 max-sm:[&>canvas]:-rotate-0 [&>canvas]:w-[150%] max-md:[&>canvas]:translate-y-[20%] max-lg:[&>canvas]:translate-y-[10%]"
       >
-        <div className="pt-[22vh] px-10 xl:px-20 flex flex-col justify-center overflow-hidden">
-          <h1 className="text-7xl font-bold  max-w-[800px] relative z-20">
+        <div className="sm:pt-[22vh] pt-[10vh] px-3 sm:px-10 xl:px-20 flex flex-col justify-center overflow-hidden">
+          <h1 className="xl:text-7xl text-[28px] sm:text-4xl font-bold  relative z-20">
             Your{' '}
             <GradientText
               text="Solana"
               gradient="linear-gradient(225deg, #24ffa7 0%, #519ed4 25%, #9945ff 50%, #519ed4 75%, #24ffa7 100%)"
             />{' '}
+            <br />
             learning platform
           </h1>
-          <div className="w-[800px] h-40 relative">
-            <p className="absolute z-50 top-4 text-[22px]">Build, Learn and Grow</p>
+          <div className="sm:w-1/2 w-full h-32 xl:h-40 relative">
+            <p className="absolute z-50 top-4 xl:text-[22px] lg:text-lg">Build, Learn and Grow</p>
             <div className="absolute inset-x-0 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-full blur-sm" />
             <div className="absolute inset-x-0 top-0 bg-linear-to-r from-transparent via-indigo-500 to-transparent h-px w-full" />
-            <div className="absolute inset-x-40 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/2 blur-sm" />
-            <div className="absolute inset-x-40 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-px w-1/2" />
+            <div className="absolute sm:inset-x-40 inset-x-10 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/2 blur-sm" />
+            <div className="absolute sm:inset-x-40 inset-x-10 top-0 bg-linear-to-r from-transparent via-sky-500 to-transparent h-px w-1/2" />
             <SparklesCore
               background="transparent"
               minSize={0.4}
@@ -41,8 +42,13 @@ export function Main() {
             />
             <div className="absolute inset-0 w-full h-full bg-background mask-[radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
           </div>
-          <a href="https://app.sol-learn.me/" target="_blank" rel="noopener noreferrer">
-            <FlipButton frontClassName="bg-primary text-background" frontText="Launch App" backText="Launch App" />
+          <a href="https://app.sol-learn.me/" target="_blank" className="max-sm:w-full" rel="noopener noreferrer">
+            <FlipButton
+              frontClassName="bg-primary text-background"
+              frontText="Launch App"
+              className="max-sm:w-full"
+              backText="Launch App"
+            />
           </a>
         </div>
       </WavyBackground>
