@@ -25,7 +25,8 @@ export const useTransactionBySignature = (signature: string, network: Network | 
     queryKey: ['transactionBySignature', signature, network, key],
     queryFn: async () => {
       if (!network) return { transactionJson: '', slot: '', blockTime: '' }
-      return getTransactionBySignature(signature, network)
+
+      return await getTransactionBySignature(signature, network)
     },
     enabled: isValidSignature(signature) && isExist(network),
   })
