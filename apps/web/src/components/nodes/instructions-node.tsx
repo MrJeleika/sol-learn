@@ -7,7 +7,7 @@ import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { useNodeActions } from '@/hooks/flow/use-node-actions'
 import { Transaction } from '@solana/web3.js'
 import type { NodeProps } from '@xyflow/react'
-import { Position } from '@xyflow/react'
+import { Position, useUpdateNodeInternals } from '@xyflow/react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { getInstructionById } from '@/constants/solana/instructions-config'
 
@@ -15,6 +15,7 @@ type InstructionKind = 'systemTransfer' | 'computeUnitLimit' | 'computeUnitPrice
 
 export const InstructionsNode = (props: NodeProps<InstructionsNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
+  const updateNodeInternals = useUpdateNodeInternals()
 
   const resolved = useTypedNodesData<'transactionIn'>(props.id)
 
@@ -41,6 +42,10 @@ export const InstructionsNode = (props: NodeProps<InstructionsNodeType>) => {
     }
     return handles
   }, [selected])
+
+  useEffect(() => {
+    updateNodeInternals(props.id)
+  }, [extraHandles, props.id, updateNodeInternals])
 
   useEffect(() => {
     const run = async () => {

@@ -5,12 +5,13 @@ import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
 import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import type { NodeProps } from '@xyflow/react'
-import { Position } from '@xyflow/react'
+import { Position, useUpdateNodeInternals } from '@xyflow/react'
 import type { HandleConfig } from '@/types/node-handle'
 import { getPda } from '@/utils/solana/pda.utils'
 
 export const PdaNode = (props: NodeProps<PdaNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
+  const updateNodeInternals = useUpdateNodeInternals()
 
   const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.PDA>>(props.id)
 
@@ -36,6 +37,10 @@ export const PdaNode = (props: NodeProps<PdaNodeType>) => {
   const { pda } = useMemo(() => {
     return getPda(programId, seeds)
   }, [programId, seeds])
+
+  useEffect(() => {
+    updateNodeInternals(props.id)
+  }, [extraHandles, props.id, updateNodeInternals])
 
   useEffect(() => {
     if (pda) {

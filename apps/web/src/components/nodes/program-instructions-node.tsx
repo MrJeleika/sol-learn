@@ -8,13 +8,14 @@ import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { useNodeActions } from '@/hooks/flow/use-node-actions'
 import { Transaction } from '@solana/web3.js'
 import type { NodeProps } from '@xyflow/react'
-import { Position } from '@xyflow/react'
+import { Position, useUpdateNodeInternals } from '@xyflow/react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
 import { getIdlTypeString, buildProgramInstruction } from '@/utils/idl'
 
 export const ProgramInstructionsNode = (props: NodeProps<ProgramInstructionsNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
+  const updateNodeInternals = useUpdateNodeInternals()
 
   const resolved = useTypedNodesData<'idl' | 'programId' | 'transactionIn'>(props.id)
 
@@ -59,7 +60,6 @@ export const ProgramInstructionsNode = (props: NodeProps<ProgramInstructionsNode
       })
     }
 
-    // Add argument handles
     for (const arg of selectedInstructionDef.args) {
       handles.push({
         position: Position.Left,
@@ -73,7 +73,10 @@ export const ProgramInstructionsNode = (props: NodeProps<ProgramInstructionsNode
     return handles
   }, [selectedInstructionDef])
 
-  // Build transaction when inputs change
+  useEffect(() => {
+    updateNodeInternals(props.id)
+  }, [extraHandles, props.id, updateNodeInternals])
+
   useEffect(() => {
     const run = async () => {
       if (!idl || !programId || !selectedInstructionDef) {

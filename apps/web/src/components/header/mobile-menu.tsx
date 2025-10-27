@@ -4,12 +4,25 @@ import type { NodeType } from '@/types/node'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Menu } from 'lucide-react'
+import { useState } from 'react'
 
 interface MobileMenuProps {
   onDrop: (nodeType: NodeType, screen: { x: number; y: number }) => void
 }
 
 export function MobileMenu({ onDrop }: MobileMenuProps) {
+  const [isDragging, setIsDragging] = useState(false)
+  const [openAccordion, setOpenAccordion] = useState<string | undefined>(menuConfig[0]?.id)
+
+  const handleDragStart = (categoryId: string) => {
+    setIsDragging(true)
+    setOpenAccordion(categoryId)
+  }
+
+  const handleDragEnd = () => {
+    setIsDragging(false)
+  }
+
   return (
     <div className="md:hidden">
       <Sheet>
@@ -18,7 +31,16 @@ export function MobileMenu({ onDrop }: MobileMenuProps) {
         </SheetTrigger>
         <SheetContent side="right" className="z-10000 w-[60%] sm:max-w-[320px] p-0 overflow-visible">
           <div className="p-4 pt-12">
-            <Accordion type="single" collapsible defaultValue={menuConfig[0]?.id}>
+            <Accordion
+              type="single"
+              collapsible
+              value={isDragging ? openAccordion : openAccordion}
+              onValueChange={(value) => {
+                if (!isDragging) {
+                  setOpenAccordion(value)
+                }
+              }}
+            >
               {menuConfig.map((category) => (
                 <AccordionItem key={category.id} value={category.id} className="border-b border-border">
                   <AccordionTrigger className="py-3">
@@ -34,7 +56,12 @@ export function MobileMenu({ onDrop }: MobileMenuProps) {
                     <div className="grid grid-cols-1 gap-2 p-2">
                       {category.nodes.map((nodeType) => (
                         <div key={nodeType}>
-                          <DraggableNode type={nodeType} onDrop={onDrop} />
+                          <DraggableNode
+                            type={nodeType}
+                            onDrop={onDrop}
+                            onDragStart={() => handleDragStart(category.id)}
+                            onDragEnd={handleDragEnd}
+                          />
                         </div>
                       ))}
                     </div>

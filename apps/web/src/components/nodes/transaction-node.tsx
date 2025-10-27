@@ -67,7 +67,7 @@ export const TransactionNode = (props: NodeProps<TransactionNodeType>) => {
 
   return (
     <CustomNode {...props} actions={actions}>
-      <div className="mt-2 flex items-center gap-2 text-[10px] leading-[12px]">
+      <div className="mt-2 flex items-center gap-2 text-[10px] leading-[12px] justify-center">
         {status === 'pending' && (
           <>
             <Loader2 className="size-3 animate-spin" />

@@ -9,6 +9,7 @@ export const signNodeConfig = {
       type: 'target',
       dataField: 'privateKey',
       label: 'Private Key',
+      dataType: 'privateKey',
     },
     {
       position: Position.Left,
@@ -21,6 +22,7 @@ export const signNodeConfig = {
       type: 'source',
       dataField: 'signature',
       label: 'Signature',
+      dataType: 'signature',
     },
   ],
   actions: [],

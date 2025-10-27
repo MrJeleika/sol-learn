@@ -9,15 +9,22 @@ import { getNodeConfig } from '@/utils/node/node-config-registry'
 export interface DraggableNodeProps {
   type: NodeType
   onDrop: (nodeType: NodeType, position: XYPosition) => void
+  onDragStart?: () => void
+  onDragEnd?: () => void
   className?: string
 }
 
-export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) => {
+export const DraggableNode = ({ type, onDrop, onDragStart, onDragEnd, className }: DraggableNodeProps) => {
   const draggableRef = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState<XYPosition>({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
 
   useDraggable(draggableRef as RefObject<HTMLElement>, {
     position: position,
+    onDragStart: () => {
+      setIsDragging(true)
+      onDragStart?.()
+    },
     onDrag: ({ offsetX, offsetY }) => {
       // Calculate position relative to the viewport
       setPosition({
@@ -26,11 +33,13 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
       })
     },
     onDragEnd: ({ event }) => {
+      setIsDragging(false)
       setPosition({ x: 0, y: 0 })
       onDrop(type, {
         x: event.clientX,
         y: event.clientY,
       })
+      onDragEnd?.()
     },
   })
 
@@ -46,7 +55,12 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
 
   return (
     <>
-      <div ref={draggableRef} onClick={handleClick} className={cn('dndnode', className)}>
+      <div
+        ref={draggableRef}
+        onClick={handleClick}
+        className={cn('dndnode pointer-events-auto', isDragging && 'fixed', className)}
+        style={{ zIndex: isDragging ? 99999 : undefined }}
+      >
         <div className="relative border-border md:w-[180px] border rounded-t-[6px]">
           <div className="cursor-grab active:cursor-grabbing relative z-30 group inline-flex h-9 w-full items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-border">
             <p className="text-sm font-medium text-foreground capitalize text-center">
