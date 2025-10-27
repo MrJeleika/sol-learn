@@ -38,9 +38,15 @@ export const DraggableNode = ({ type, onDrop, className }: DraggableNodeProps) =
 
   const nodeStyles = getNodeStyles(type)
 
+  const handleClick = () => {
+    const centerX = window.innerWidth / 2
+    const centerY = window.innerHeight / 2
+    onDrop(type, { x: centerX, y: centerY })
+  }
+
   return (
     <>
-      <div ref={draggableRef} className={cn('dndnode', className)}>
+      <div ref={draggableRef} onClick={handleClick} className={cn('dndnode', className)}>
         <div className="relative border-border md:w-[180px] border rounded-t-[6px]">
           <div className="cursor-grab active:cursor-grabbing relative z-30 group inline-flex h-9 w-full items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-border">
             <p className="text-sm font-medium text-foreground capitalize text-center">
