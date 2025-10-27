@@ -36,6 +36,12 @@ export const menuConfig: MenuCategory[] = [
     id: 'crypto',
     label: 'Crypto',
     color: '#265c75',
-    nodes: [NodeTypeEnum.HASH, NodeTypeEnum.SIGN, NodeTypeEnum.VERIFY_SIGNATURE, NodeTypeEnum.KEYPAIR],
+    nodes: [
+      NodeTypeEnum.HASH,
+      NodeTypeEnum.SIGN,
+      NodeTypeEnum.VERIFY_SIGNATURE,
+      NodeTypeEnum.KEYPAIR,
+      NodeTypeEnum.PRIVATE_KEY,
+    ],
   },
 ]

@@ -4,12 +4,17 @@ import type { KeypairNodeData, KeypairNodeType } from '@/types/nodes/keypair-nod
 import { Keypair } from '@solana/web3.js'
 import { useNodeActions } from '@/hooks/flow/use-node-actions'
 import type { ActionsFor, NodeTypeEnum } from '@/types/node'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { transformKeypair } from '@/utils/crypto/crypto.utils'
 import type { NodeProps } from '@xyflow/react'
 
 export const KeypairNode = (props: NodeProps<KeypairNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
+
+  useEffect(() => {
+    const keypair = Keypair.generate()
+    updateNodeData<KeypairNodeData>(props.id, transformKeypair(keypair))
+  }, [updateNodeData, props.id])
 
   const handleGenerateKeypair = useCallback(() => {
     const keypair = Keypair.generate()

@@ -3,6 +3,7 @@ import type { NodeConfig } from '@/types/node-config'
 import { textNodeConfig } from './data/text-node-data'
 import { hashNodeConfig } from './data/hash-node-data'
 import { keypairNodeConfig } from './data/keypair-node-data'
+import { privateKeyNodeConfig } from './data/private-key-node-data'
 import { signNodeConfig } from './data/sign-node-data'
 import { displayNodeConfig } from './data/display-node-data'
 import { numberNodeConfig } from './data/number-node-config'
@@ -21,6 +22,7 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.TEXT]: textNodeConfig,
   [NodeTypeEnum.HASH]: hashNodeConfig,
   [NodeTypeEnum.KEYPAIR]: keypairNodeConfig,
+  [NodeTypeEnum.PRIVATE_KEY]: privateKeyNodeConfig,
   [NodeTypeEnum.SIGN]: signNodeConfig,
   [NodeTypeEnum.DISPLAY]: displayNodeConfig,
   [NodeTypeEnum.NUMBER]: numberNodeConfig,

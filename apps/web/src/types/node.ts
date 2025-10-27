@@ -4,6 +4,7 @@ export enum NodeTypeEnum {
   TEXT = 'TEXT',
   HASH = 'HASH',
   KEYPAIR = 'KEYPAIR',
+  PRIVATE_KEY = 'PRIVATE_KEY',
   SIGN = 'SIGN',
   DISPLAY = 'DISPLAY',
   NUMBER = 'NUMBER',
