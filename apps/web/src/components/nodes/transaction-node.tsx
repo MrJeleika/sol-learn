@@ -90,8 +90,8 @@ export const TransactionNode = (props: NodeProps<TransactionNodeType>) => {
       const connection = getSolanaConnection(inputs.network as Network)
       const feePayerKeypair = Keypair.fromSecretKey(bs58.decode(inputs.privateKey))
 
-      const tx = new Transaction()
-      tx.add(...inputs.transaction.instructions)
+      const tx = inputs.transaction
+
       tx.feePayer = feePayerKeypair.publicKey
       tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
 
@@ -124,6 +124,7 @@ export const TransactionNode = (props: NodeProps<TransactionNodeType>) => {
       tx.sign(...allSigners)
 
       const raw = tx.serialize()
+
       const sig = await connection.sendRawTransaction(raw, { skipPreflight: false })
 
       await connection.confirmTransaction({ signature: sig, ...(await connection.getLatestBlockhash()) }, 'confirmed')
@@ -163,7 +164,6 @@ export const TransactionNode = (props: NodeProps<TransactionNodeType>) => {
           </>
         )}
       </div>
-      {props.data?.signature && <div className="mt-1 text-[8px] break-all">{String(props.data.signature)}</div>}
     </CustomNode>
   )
 }

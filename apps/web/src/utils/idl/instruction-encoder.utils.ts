@@ -1,14 +1,16 @@
 import { PublicKey } from '@solana/web3.js'
 import type { IdlInstruction } from '@/types/nodes/idl-node'
+import { sha256 } from 'js-sha256'
 
 export const encodeInstructionData = (
   instructionName: string,
   args: Record<string, unknown>,
   instruction: IdlInstruction
 ): Buffer => {
-  const discriminator = Buffer.alloc(8)
-  const nameHash = Buffer.from(instructionName).toString('hex').slice(0, 16)
-  discriminator.write(nameHash, 'hex')
+  // Anchor discriminator: first 8 bytes of SHA256("global:<instruction_name>")
+  const discriminatorStr = `global:${instructionName}`
+  const hash = sha256(discriminatorStr)
+  const discriminator = Buffer.from(hash, 'hex').slice(0, 8)
 
   const argsData: Buffer[] = []
 

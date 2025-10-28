@@ -8,6 +8,8 @@ import { Textarea } from '../ui/textarea'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
 import { Check } from 'lucide-react'
 import { toast } from 'sonner'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { PROGRAMS } from '@/constants/programs/programs'
 
 export const IdlNode = (props: NodeProps<IdlNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
@@ -48,9 +50,32 @@ export const IdlNode = (props: NodeProps<IdlNodeType>) => {
     setIdlJson(e.target.value)
   }
 
+  const handleProgramSelect = (value: string) => {
+    const program = PROGRAMS.find((p) => p.programId === value)
+    if (program) {
+      setProgramId(program.programId)
+      setIdlJson(JSON.stringify(program.idl, null, 2))
+    }
+  }
+
   return (
     <CustomNode {...props}>
       <div className="flex flex-col gap-2.5 px-4 py-2 pr-10">
+        <div>
+          <label className="text-[8px] text-foreground block">Default Programs</label>
+          <Select onValueChange={handleProgramSelect}>
+            <SelectTrigger color={nodeStyles.color}>
+              <SelectValue placeholder="Select a program..." />
+            </SelectTrigger>
+            <SelectContent>
+              {PROGRAMS.map((program) => (
+                <SelectItem key={program.programId} value={program.programId}>
+                  {program.idl.name || program.programId}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <div>
           <label className="text-[8px] text-foreground block">Program ID</label>
           <Input
