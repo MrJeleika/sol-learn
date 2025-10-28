@@ -2,7 +2,23 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-function Textarea({ className, color, ...props }: React.ComponentProps<'textarea'> & { color: string }) {
+function Textarea({
+  className,
+  color,
+  onKeyDown,
+  onKeyUp,
+  ...props
+}: React.ComponentProps<'textarea'> & { color: string }) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    e.stopPropagation()
+    onKeyDown?.(e)
+  }
+
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    e.stopPropagation()
+    onKeyUp?.(e)
+  }
+
   return (
     <textarea
       style={
@@ -17,6 +33,8 @@ function Textarea({ className, color, ...props }: React.ComponentProps<'textarea
         'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
         className
       )}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
       {...props}
     />
   )

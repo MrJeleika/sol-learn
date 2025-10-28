@@ -15,8 +15,14 @@ export function About() {
             </a>
           </div>
           <div className="grid lg:-translate-y-10 lg:w-3/4 w-full grid-cols-1 lg:grid-cols-2 gap-8">
-            {ABOUT_CARDS.map((card) => (
-              <SectionCard key={card.title} title={card.title} description={card.description} icon={card.icon} />
+            {ABOUT_CARDS.map((card, index) => (
+              <SectionCard
+                key={card.title}
+                title={card.title}
+                description={card.description}
+                icon={card.icon}
+                index={index}
+              />
             ))}
           </div>
         </div>

@@ -21,10 +21,26 @@ function SelectTrigger({
   size = 'default',
   children,
   color,
+  onKeyDown,
+  onKeyUp,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: 'sm' | 'default'
 }) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    if (onKeyDown) {
+      onKeyDown(e)
+    }
+  }
+
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    if (onKeyUp) {
+      onKeyUp(e)
+    }
+  }
+
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
@@ -38,6 +54,8 @@ function SelectTrigger({
         "border-active-border data-[placeholder]:text-muted-foreground data-[state=open]:border-primary [&_svg:not([class*='text-'])]:text-muted-foreground aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-full items-center justify-between gap-2 rounded-[8px] border bg-transparent px-2 py-1 text-[8px] leading-[9px] whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
       {...props}
     >
       {children}

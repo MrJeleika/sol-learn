@@ -1,4 +1,5 @@
-import { Transaction, PublicKey } from '@solana/web3.js'
+import { Transaction, PublicKey, Keypair } from '@solana/web3.js'
+import bs58 from 'bs58'
 
 export const getRequiredSigners = (transaction: Transaction | null): PublicKey[] => {
   if (!transaction) return []
@@ -19,4 +20,12 @@ export const getRequiredSigners = (transaction: Transaction | null): PublicKey[]
 export const truncatePubkey = (pubkey: string): string => {
   if (pubkey.length <= 8) return pubkey
   return `${pubkey.slice(0, 4)}...${pubkey.slice(-4)}`
+}
+
+export const createKeypairFromPrivateKey = (privateKeyBase58: string): Keypair | null => {
+  try {
+    return Keypair.fromSecretKey(bs58.decode(privateKeyBase58))
+  } catch {
+    return null
+  }
 }

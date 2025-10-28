@@ -26,7 +26,6 @@ export const TransactionViewNode = (props: NodeProps<TransactionViewNodeType>) =
   }, [resolved])
 
   const { data: txData } = useTransactionBySignature(data.signature, data.network, key)
-  console.log(txData)
   useEffect(() => {
     if (txData) {
       updateNodeData<TransactionViewNodeData>(props.id, {

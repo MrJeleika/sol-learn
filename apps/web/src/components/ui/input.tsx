@@ -2,7 +2,24 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-function Input({ className, type, color, ...props }: React.ComponentProps<'input'> & { color: string }) {
+function Input({
+  className,
+  type,
+  color,
+  onKeyDown,
+  onKeyUp,
+  ...props
+}: React.ComponentProps<'input'> & { color: string }) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.stopPropagation()
+    onKeyDown?.(e)
+  }
+
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.stopPropagation()
+    onKeyUp?.(e)
+  }
+
   return (
     <input
       type={type}
@@ -18,6 +35,8 @@ function Input({ className, type, color, ...props }: React.ComponentProps<'input
         'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
         className
       )}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
       {...props}
     />
   )

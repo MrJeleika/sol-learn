@@ -1,118 +1,16 @@
-import { useEffect, useMemo, useState } from 'react'
 import { CustomNode } from '../ui/custom-node'
-import type { ProgramInstructionsNodeData, ProgramInstructionsNodeType } from '@/types/nodes/program-instructions-node'
-import type { Idl, IdlInstruction } from '@/types/nodes/idl-node'
-import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
+import type { ProgramInstructionsNodeType } from '@/types/nodes/program-instructions-node'
 import type { ActionsFor, NodeTypeEnum } from '@/types/node'
-import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { useNodeActions } from '@/hooks/flow/use-node-actions'
-import { Transaction } from '@solana/web3.js'
 import type { NodeProps } from '@xyflow/react'
-import { Position, useUpdateNodeInternals } from '@xyflow/react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { getNodeStyles } from '@/utils/node/node-style.utils'
-import { getIdlTypeString, buildProgramInstruction } from '@/utils/idl'
+import { getIdlTypeString } from '@/utils/idl'
+import { useProgramInstructionsNode } from '@/hooks/nodes/use-program-instructions-node'
 
 export const ProgramInstructionsNode = (props: NodeProps<ProgramInstructionsNodeType>) => {
-  const { updateNodeData } = useTypedReactFlow()
-  const updateNodeInternals = useUpdateNodeInternals()
-
-  const resolved = useTypedNodesData<'idl' | 'programId' | 'transactionIn'>(props.id)
-
-  const { idl, programId, transactionIn } = useMemo(() => {
-    return {
-      idl: (resolved.idl?.value as Idl | null) ?? null,
-      programId: (resolved.programId?.value as string) ?? '',
-      transactionIn: (resolved.transactionIn?.value as Transaction | null) ?? null,
-    }
-  }, [resolved])
-
-  const [selectedInstruction, setSelectedInstruction] = useState<string>('')
-  const [selectedInstructionDef, setSelectedInstructionDef] = useState<IdlInstruction | null>(null)
-
-  useEffect(() => {
-    if (idl && selectedInstruction) {
-      const def = idl.instructions.find((i) => i.name === selectedInstruction)
-      setSelectedInstructionDef(def ?? null)
-    } else {
-      setSelectedInstructionDef(null)
-    }
-  }, [idl, selectedInstruction])
-
-  const extraHandles = useMemo(() => {
-    const handles: {
-      position: Position
-      type: 'target' | 'source'
-      dataField: string
-      label: string
-      dataType?: string
-    }[] = []
-
-    if (!selectedInstructionDef) return handles
-
-    for (const account of selectedInstructionDef.accounts) {
-      handles.push({
-        position: Position.Left,
-        type: 'target',
-        dataField: `account_${account.name}`,
-        label: `${account.name}${account.isSigner ? ' (signer)' : ''}${account.isMut ? ' (mut)' : ''}`,
-        dataType: 'publicKey',
-      })
-    }
-
-    for (const arg of selectedInstructionDef.args) {
-      handles.push({
-        position: Position.Left,
-        type: 'target',
-        dataField: `arg_${arg.name}`,
-        label: `${arg.name}: ${getIdlTypeString(arg.type)}`,
-        dataType: 'any',
-      })
-    }
-
-    return handles
-  }, [selectedInstructionDef])
-
-  useEffect(() => {
-    updateNodeInternals(props.id)
-  }, [extraHandles, props.id, updateNodeInternals])
-
-  useEffect(() => {
-    const run = async () => {
-      if (!idl || !programId || !selectedInstructionDef) {
-        updateNodeData<ProgramInstructionsNodeData>(props.id, {
-          transactionOut: transactionIn ?? new Transaction(),
-          selectedInstruction,
-        })
-        return
-      }
-
-      try {
-        const resolvedMap = resolved as unknown as Record<string, { value: unknown }>
-
-        const transaction = await buildProgramInstruction({
-          programId,
-          instructionDef: selectedInstructionDef,
-          resolvedInputs: resolvedMap,
-          baseTransaction: transactionIn,
-        })
-
-        updateNodeData<ProgramInstructionsNodeData>(props.id, {
-          transactionOut: transaction,
-          selectedInstruction,
-          idl,
-          programId,
-        })
-      } catch (error) {
-        console.error('Error building instruction:', error)
-        updateNodeData<ProgramInstructionsNodeData>(props.id, {
-          transactionOut: transactionIn ?? new Transaction(),
-          selectedInstruction,
-        })
-      }
-    }
-    run().catch(() => undefined)
-  }, [props.id, idl, programId, transactionIn, selectedInstruction, selectedInstructionDef, resolved, updateNodeData])
+  const { idl, selectedInstruction, setSelectedInstruction, selectedInstructionDef, extraHandles } =
+    useProgramInstructionsNode(props.id)
 
   const actions = useNodeActions<ActionsFor<NodeTypeEnum.PROGRAM_INSTRUCTIONS>>(props.type, {})
 
