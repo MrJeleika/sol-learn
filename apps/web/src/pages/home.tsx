@@ -108,7 +108,7 @@ export default function Home() {
         isValidConnection={isValidConnection}
         fitView
         selectionOnDrag={true}
-        selectionMode={SelectionMode.Partial}
+        selectionMode={SelectionMode.Full}
         panOnDrag={false}
         className="bg-teal-50"
       >
