@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { SolutionTitle } from '@/app/components/solution/solution-title'
-import { SectionCard } from '../about/section-card'
+import { SolutionCard } from '@/app/components/solution/solution-card'
 import { SOLUTION_CARDS } from '@/app/constants/solution/solution-cards'
 import { FlickeringGrid } from '../ui/bg-grid'
 
@@ -65,14 +65,7 @@ export function Solution() {
               className="sticky top-32 sm:top-24 flex items-center justify-center h-[70vh]"
               style={{ zIndex: i, transform: `translateY(${i * 12}px)` }}
             >
-              <div className="w-full rounded-[24px] border border-border bg-background shadow-[0_10px_40px_rgba(0,0,0,0.25)] p-8">
-                <div className="flex items-start justify-between">
-                  <span className="text-sm opacity-60">{String(i + 1).padStart(2, '0')}</span>
-                </div>
-                <div className="mt-4">
-                  <SectionCard title={card.title} description={card.description} icon={card.icon} />
-                </div>
-              </div>
+              <SolutionCard title={card.title} description={card.description} icon={card.icon} index={i} />
             </div>
           ))}
         </div>
