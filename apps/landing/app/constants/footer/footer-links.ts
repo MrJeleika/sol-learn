@@ -20,8 +20,8 @@ export const FOOTER_LINKS = [
     Icon: Send,
   },
   {
-    href: 'https://pitchdeck.hypermatic.com/slides/mhani8fg33481/?token=aDI2WCVHUUBLbkBxcDU%3D&g=8&t=g',
-    label: 'Pitch Deck',
+    href: 'https://www.loom.com/share/529e4e7cf56648a0874ee7230639fb3f',
+    label: 'Pitch',
     Icon: Presentation,
   },
 ]
