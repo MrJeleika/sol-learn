@@ -6,13 +6,18 @@ import { formatUnits } from '@/utils/format/format.utils'
 import { getSolanaConnection } from '@/constants/solana/connection'
 
 export const getSolanaBalance = async (pubkey: string, network: Network) => {
-  const connection = getSolanaConnection(network)
+  try {
+    const connection = getSolanaConnection(network)
 
-  const balance = await connection.getBalance(new PublicKey(pubkey))
+    const balance = await connection.getBalance(new PublicKey(pubkey))
 
-  const parsedBalance = formatUnits(balance, 9)
+    const parsedBalance = formatUnits(balance, 9)
 
-  return { rawBalance: balance.toString(), uiBalance: parsedBalance.toString() }
+    return { rawBalance: balance.toString(), uiBalance: parsedBalance.toString() }
+  } catch (error) {
+    console.error('Error getting Solana balance:', error)
+    return { rawBalance: '0', uiBalance: '0' }
+  }
 }
 
 export const useSolanaBalance = (pubkey: string, network: Network | null, key: number) => {

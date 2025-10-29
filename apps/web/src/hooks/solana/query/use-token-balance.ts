@@ -5,12 +5,17 @@ import { getSolanaConnection } from '@/constants/solana/connection'
 import { getATA } from '@/utils/solana/solana.utils'
 
 export const getTokenBalance = async (pubkey: string, network: Network, token: string) => {
-  const connection = getSolanaConnection(network)
-  const ata = await getATA(pubkey, token)
+  try {
+    const connection = getSolanaConnection(network)
+    const ata = await getATA(pubkey, token)
 
-  const balance = await connection.getTokenAccountBalance(ata)
+    const balance = await connection.getTokenAccountBalance(ata)
 
-  return { rawBalance: balance.value.amount.toString(), uiBalance: balance.value.uiAmountString }
+    return { rawBalance: balance.value.amount.toString(), uiBalance: balance.value.uiAmountString }
+  } catch (error) {
+    console.error('Error getting token balance:', error)
+    return { rawBalance: '0', uiBalance: '0' }
+  }
 }
 
 export const useTokenBalance = (pubkey: string, network: Network | null, token: string, key: number) => {

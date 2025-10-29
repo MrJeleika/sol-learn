@@ -27,10 +27,15 @@ export const INSTRUCTIONS: InstructionDef[] = [
       { key: 'amountUi', label: 'Amount (SOL)', type: 'uiAmount' },
     ],
     build: async (_base, inputs) => {
-      const from = new PublicKey(String(inputs.fromPubkey))
-      const to = new PublicKey(String(inputs.toPubkey))
-      const lamports = Math.round(Number(inputs.amountUi) * 1e9)
-      return [SystemProgram.transfer({ fromPubkey: from, toPubkey: to, lamports })]
+      try {
+        const from = new PublicKey(String(inputs.fromPubkey))
+        const to = new PublicKey(String(inputs.toPubkey))
+        const lamports = Math.round(Number(inputs.amountUi) * 1e9)
+        return [SystemProgram.transfer({ fromPubkey: from, toPubkey: to, lamports })]
+      } catch (error) {
+        console.error('Error building system transfer instruction:', error)
+        return []
+      }
     },
   },
   {
@@ -60,18 +65,23 @@ export const INSTRUCTIONS: InstructionDef[] = [
       { key: 'amountUi', label: 'Amount (token)', type: 'uiAmount' },
     ],
     build: async (_base, inputs) => {
-      const owner = String(inputs.ownerPubkey)
-      const to = String(inputs.toPubkey)
-      const mint = String(inputs.mint)
-      const decimals = Number(inputs.decimals)
-      const amount = BigInt(Math.round(Number(inputs.amountUi) * 10 ** decimals))
+      try {
+        const owner = String(inputs.ownerPubkey)
+        const to = String(inputs.toPubkey)
+        const mint = String(inputs.mint)
+        const decimals = Number(inputs.decimals)
+        const amount = BigInt(Math.round(Number(inputs.amountUi) * 10 ** decimals))
 
-      const sourceAta = await getATA(owner, mint)
-      const destAta = await getATA(to, mint)
+        const sourceAta = await getATA(owner, mint)
+        const destAta = await getATA(to, mint)
 
-      // Delayed import to avoid pulling spl-token at top-level if tree-shaken
-      const { createTransferInstruction } = await import('@solana/spl-token')
-      return [createTransferInstruction(sourceAta, destAta, new PublicKey(owner), Number(amount))]
+        // Delayed import to avoid pulling spl-token at top-level if tree-shaken
+        const { createTransferInstruction } = await import('@solana/spl-token')
+        return [createTransferInstruction(sourceAta, destAta, new PublicKey(owner), Number(amount))]
+      } catch (error) {
+        console.error('Error building SPL transfer instruction:', error)
+        return []
+      }
     },
   },
   {
@@ -82,11 +92,16 @@ export const INSTRUCTIONS: InstructionDef[] = [
       { key: 'mint', label: 'Mint', type: 'mint' },
     ],
     build: async (_base, inputs) => {
-      const owner = new PublicKey(String(inputs.ownerPubkey))
-      const mint = new PublicKey(String(inputs.mint))
-      const ata = await getATA(owner.toBase58(), mint.toBase58())
-      const { createAssociatedTokenAccountInstruction } = await import('@solana/spl-token')
-      return [createAssociatedTokenAccountInstruction(owner, ata, owner, mint)]
+      try {
+        const owner = new PublicKey(String(inputs.ownerPubkey))
+        const mint = new PublicKey(String(inputs.mint))
+        const ata = await getATA(owner.toBase58(), mint.toBase58())
+        const { createAssociatedTokenAccountInstruction } = await import('@solana/spl-token')
+        return [createAssociatedTokenAccountInstruction(owner, ata, owner, mint)]
+      } catch (error) {
+        console.error('Error building SPL create ATA instruction:', error)
+        return []
+      }
     },
   },
 ]

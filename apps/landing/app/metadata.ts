@@ -5,7 +5,7 @@ const siteName = 'SOL Learn'
 const siteDescription =
   'An interactive educational platform that makes Solana blockchain development accessible through visual programming. Using an intuitive node-based interface, learners can drag-and-drop components to build and understand Solana transactions, programs, and cryptographic operations.'
 const thumbnailPath = 'https://sol-learn.me/thumbnail.png'
-const logoPath = '/logo-light.svg'
+const logoPath = '/logo-light-bg.webp'
 const twitterHandle = '@solana_learn'
 
 export const metadata: Metadata = {

@@ -29,53 +29,62 @@ export const buildProgramInstruction = async ({
   resolvedInputs,
   baseTransaction,
 }: BuildInstructionParams): Promise<Transaction> => {
-  const base = baseTransaction ?? new Transaction()
-  const ixs = [...base.instructions]
+  try {
+    const base = baseTransaction ?? new Transaction()
+    const ixs = [...base.instructions]
 
-  const accountMetas: { pubkey: PublicKey; isSigner: boolean; isWritable: boolean }[] = []
+    const accountMetas: { pubkey: PublicKey; isSigner: boolean; isWritable: boolean }[] = []
 
-  for (const account of instructionDef.accounts) {
-    const pubkeyValue = resolvedInputs[`account_${account.name}`]?.value
+    for (const account of instructionDef.accounts) {
+      const pubkeyValue = resolvedInputs[`account_${account.name}`]?.value
 
-    if (pubkeyValue) {
-      accountMetas.push({
-        pubkey: new PublicKey(String(pubkeyValue)),
-        isSigner: account.isSigner,
-        isWritable: account.isMut,
-      })
-    } else {
-      const commonProgramId = getCommonProgramId(account.name)
-      if (commonProgramId) {
-        accountMetas.push({
-          pubkey: commonProgramId,
-          isSigner: account.isSigner,
-          isWritable: account.isMut,
-        })
+      if (pubkeyValue) {
+        try {
+          accountMetas.push({
+            pubkey: new PublicKey(String(pubkeyValue)),
+            isSigner: account.isSigner,
+            isWritable: account.isMut,
+          })
+        } catch (error) {
+          console.error(`Error parsing public key for account ${account.name}:`, error)
+        }
+      } else {
+        const commonProgramId = getCommonProgramId(account.name)
+        if (commonProgramId) {
+          accountMetas.push({
+            pubkey: commonProgramId,
+            isSigner: account.isSigner,
+            isWritable: account.isMut,
+          })
+        }
       }
     }
-  }
 
-  const args: Record<string, unknown> = {}
-  for (const arg of instructionDef.args) {
-    const argValue = resolvedInputs[`arg_${arg.name}`]?.value
-    if (argValue !== undefined) {
-      args[`arg_${arg.name}`] = argValue
+    const args: Record<string, unknown> = {}
+    for (const arg of instructionDef.args) {
+      const argValue = resolvedInputs[`arg_${arg.name}`]?.value
+      if (argValue !== undefined) {
+        args[`arg_${arg.name}`] = argValue
+      }
     }
+
+    const data = encodeInstructionData(instructionDef.name, args, instructionDef)
+
+    const programIdPubkey = new PublicKey(programId)
+    const instruction = new TransactionInstruction({
+      keys: accountMetas,
+      programId: programIdPubkey,
+      data,
+    })
+
+    ixs.push(instruction)
+
+    const out = new Transaction()
+    if (ixs.length > 0) out.add(...ixs)
+
+    return out
+  } catch (error) {
+    console.error('Error building program instruction:', error)
+    return baseTransaction ?? new Transaction()
   }
-
-  const data = encodeInstructionData(instructionDef.name, args, instructionDef)
-
-  const programIdPubkey = new PublicKey(programId)
-  const instruction = new TransactionInstruction({
-    keys: accountMetas,
-    programId: programIdPubkey,
-    data,
-  })
-
-  ixs.push(instruction)
-
-  const out = new Transaction()
-  if (ixs.length > 0) out.add(...ixs)
-
-  return out
 }
