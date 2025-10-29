@@ -1,4 +1,4 @@
-import { Github, Presentation, Send } from 'lucide-react'
+import { Github, Send } from 'lucide-react'
 import { XLogo } from '@/app/components/ui/icons/X'
 
 export const FOOTER_LINKS = [
@@ -18,11 +18,6 @@ export const FOOTER_LINKS = [
     href: 'https://t.me/MrJeleika',
     label: 'Telegram',
     Icon: Send,
-  },
-  {
-    href: 'https://www.loom.com/share/529e4e7cf56648a0874ee7230639fb3f',
-    label: 'Pitch',
-    Icon: Presentation,
   },
 ]
 

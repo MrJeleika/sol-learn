@@ -13,14 +13,14 @@ export function Footer() {
             <p>© {new Date().getFullYear()} SOL Learn. All rights reserved.</p>
           </div>
           <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-8 gap-y-4">
-            {FOOTER_LINKS.map((link) => (
+            {FOOTER_LINKS.map((link, index) => (
               <FooterLink
                 key={link.href}
                 href={link.href}
                 label={link.label}
                 Icon={link.Icon}
                 iconClassName={link.iconClassName}
-                className={link.className}
+                className={`${link.className} ${index === 2 ? 'sm:col-start-2' : ''}`}
               />
             ))}
           </div>
