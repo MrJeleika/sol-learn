@@ -20,7 +20,7 @@ export const FOOTER_LINKS = [
     Icon: Send,
   },
   {
-    href: 'https://t.me/solana_learn',
+    href: 'https://pitchdeck.hypermatic.com/slides/mhani8fg33481/?token=aDI2WCVHUUBLbkBxcDU%3D&g=8&t=g',
     label: 'Pitch Deck',
     Icon: Presentation,
   },
