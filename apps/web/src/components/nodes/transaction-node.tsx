@@ -35,7 +35,6 @@ export const TransactionNode = (props: NodeProps<TransactionNodeType>) => {
           </>
         )}
       </div>
-      {props.data?.signature && <div className="mt-1 text-[8px] break-all">{String(props.data.signature)}</div>}
     </CustomNode>
   )
 }
