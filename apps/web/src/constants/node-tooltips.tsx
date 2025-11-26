@@ -8,12 +8,18 @@ import { HighlightedText } from '@/components/text/highlighted-text'
 const NODE_TOOLTIP_LINKS: Partial<Record<NodeType, string>> = {
   NETWORK: 'https://docs.solana.com/clusters',
   KEYPAIR: 'https://solana.com/ru/developers/courses/intro-to-solana/intro-to-cryptography',
+  PRIVATE_KEY: 'https://solana.com/docs/intro/dev#keypairs',
   PDA: 'https://docs.solana.com/developing/programming-model/program-derived-addresses',
   BALANCE: 'https://docs.solana.com/lamports-and-sol',
   HASH: 'https://en.wikipedia.org/wiki/Cryptographic_hash_function',
   SIGN: 'https://docs.solana.com/terminology#signature',
   VERIFY_SIGNATURE: 'https://docs.solana.com/developing/runtime-facilities/programs#ed25519-program',
   TRANSACTION_VIEW: 'https://docs.solana.com/developing/programming-model/transactions',
+  TRANSACTION_BUILDER: 'https://solana.com/docs/core/transactions',
+  INSTRUCTIONS: 'https://solana.com/docs/core/transactions#instructions',
+  TRANSACTION: 'https://solana.com/docs/core/transactions#sending-transactions',
+  IDL: 'https://solana.com/docs/programs/anchor/idl',
+  PROGRAM_INSTRUCTIONS: 'https://solana.com/docs/core/cpi',
 }
 
 export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
@@ -45,6 +51,17 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
         </li>
       </ul>
       <p>Public key can be derived from the secret key, but not the other way around.</p>
+    </>
+  ),
+  PRIVATE_KEY: (
+    <>
+      <p>
+        Input a <BoldText>Private Key</BoldText> (base58 string) to control a specific account.
+      </p>
+      <p>This node allows you to sign transactions with a specific wallet/account.</p>
+      <p className="text-destructive font-bold mt-2">
+        WARNING: Never paste your mainnet private keys into untrusted applications.
+      </p>
     </>
   ),
   PDA: (
@@ -101,6 +118,55 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
       <p>Inspect a transaction: message, accounts, instructions, and signatures.</p>
       <p>Great for learning account metas, program ids, and instruction composition.</p>
     </div>
+  ),
+  TRANSACTION_BUILDER: (
+    <>
+      <p>
+        Creates a new, empty <BoldText>Transaction</BoldText> object.
+      </p>
+      <p>
+        Think of this as a shopping cart. You start with an empty cart, then use <BoldText>Instruction</BoldText> nodes
+        to add items to it.
+      </p>
+    </>
+  ),
+  INSTRUCTIONS: (
+    <>
+      <p>
+        Adds an <BoldText>Instruction</BoldText> to a transaction.
+      </p>
+      <p>An instruction is a single directive to a program, like "Transfer SOL" or "Create Account".</p>
+      <p>
+        Connect the transaction from a builder or another instruction node, configure the action, and pass it along.
+      </p>
+    </>
+  ),
+  TRANSACTION: (
+    <>
+      <p>
+        The <BoldText>Sender</BoldText> node. Takes a fully built transaction and submits it to the Solana network.
+      </p>
+      <p>It handles the actual execution. You'll see the status directly on the node.</p>
+    </>
+  ),
+  IDL: (
+    <>
+      <p>
+        Loads a Solana Program's <BoldText>Interface Description Language</BoldText> (IDL).
+      </p>
+      <p>
+        The IDL is like a menu for a program—it tells the editor what instructions (actions) are available and what
+        arguments they need.
+      </p>
+    </>
+  ),
+  PROGRAM_INSTRUCTIONS: (
+    <>
+      <p>Interact with custom programs using their IDL.</p>
+      <p>
+        Once an IDL is connected, this node dynamically generates inputs for any instruction defined in that program.
+      </p>
+    </>
   ),
   TEXT: <div>Type anything you want!</div>,
   DISPLAY: (
