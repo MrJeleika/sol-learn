@@ -14119,6 +14119,7 @@ __metadata:
     sonner: "npm:^2.0.7"
     tailwind-merge: "npm:^3.3.1"
     tailwindcss: "npm:^4.1.13"
+    tweetnacl: "npm:^1.0.3"
     typescript: "npm:~5.8.3"
     typescript-eslint: "npm:^8.44.0"
     vite: "npm:^7.1.7"

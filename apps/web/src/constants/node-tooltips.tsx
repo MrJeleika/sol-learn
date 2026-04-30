@@ -101,6 +101,15 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
     </>
   ),
   NUMBER: <p>Type any number you want!</p>,
+  ADD: <p>Add two numeric inputs.</p>,
+  SUBTRACT: <p>Subtract the second numeric input from the first.</p>,
+  MULTIPLY: <p>Multiply two numeric inputs.</p>,
+  DIVIDE: <p>Divide the first numeric input by the second.</p>,
+  MODULO: <p>Output the remainder after dividing the first numeric input by the second.</p>,
+  EXPONENT: <p>Raise the first numeric input to the power of the second.</p>,
+  ROUND: <p>Round the numeric input to the nearest integer.</p>,
+  MIN: <p>Output the smaller of two numeric inputs.</p>,
+  MAX: <p>Output the larger of two numeric inputs.</p>,
   SIGN: (
     <div>
       <p>Sign bytes or transactions with a provided keypair.</p>

@@ -1,4 +1,4 @@
-import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
+import { ErrorBoundary as ReactErrorBoundary, type FallbackProps } from 'react-error-boundary'
 import type { ReactNode } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion'
 import { Copy } from 'lucide-react'
@@ -8,9 +8,16 @@ interface ErrorBoundaryProps {
   children: ReactNode
 }
 
-const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => {
+const getErrorMessage = (error: unknown) => {
+  if (error instanceof Error) return error.toString()
+  return String(error)
+}
+
+const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
+  const errorMessage = getErrorMessage(error)
+
   const handleCopyError = async () => {
-    await navigator.clipboard.writeText(error.toString())
+    await navigator.clipboard.writeText(errorMessage)
     toast.success('Error copied to clipboard')
   }
 
@@ -34,7 +41,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetError
           Reload
         </button>
 
-        {error && (
+        {errorMessage && (
           <div className="mt-4 max-w-2xl w-full">
             <Accordion type="single" collapsible>
               <AccordionItem value="error-details" className="border-border">
@@ -50,7 +57,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetError
                     >
                       <Copy className="w-4 h-4 text-muted-foreground hover:text-foreground" />
                     </button>
-                    <pre className="p-4 bg-muted rounded overflow-auto text-xs">{error.toString()}</pre>
+                    <pre className="p-4 bg-muted rounded overflow-auto text-xs">{errorMessage}</pre>
                   </div>
                 </AccordionContent>
               </AccordionItem>

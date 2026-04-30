@@ -15,6 +15,22 @@ export const menuConfig: MenuCategory[] = [
     nodes: [NodeTypeEnum.DISPLAY, NodeTypeEnum.TEXT, NodeTypeEnum.NUMBER],
   },
   {
+    id: 'math',
+    label: 'Math',
+    color: '#3d4f91',
+    nodes: [
+      NodeTypeEnum.ADD,
+      NodeTypeEnum.SUBTRACT,
+      NodeTypeEnum.MULTIPLY,
+      NodeTypeEnum.DIVIDE,
+      NodeTypeEnum.MODULO,
+      NodeTypeEnum.EXPONENT,
+      NodeTypeEnum.ROUND,
+      NodeTypeEnum.MIN,
+      NodeTypeEnum.MAX,
+    ],
+  },
+  {
     id: 'transactions',
     label: 'Transactions',
     color: '#2a5f2b',
