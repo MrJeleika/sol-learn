@@ -11,6 +11,16 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.DISPLAY]: { color: '#531d2b', width: 300 },
   [NodeTypeEnum.NUMBER]: { color: '#531d2b', width: 100 },
 
+  [NodeTypeEnum.ADD]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.SUBTRACT]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MULTIPLY]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.DIVIDE]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MODULO]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.EXPONENT]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.ROUND]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MIN]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MAX]: { color: '#3d4f91', width: 100 },
+
   [NodeTypeEnum.TRANSACTION_BUILDER]: { color: '#2a5f2b', width: 100 },
   [NodeTypeEnum.TRANSACTION]: { color: '#2a5f2b', width: 300 },
   [NodeTypeEnum.TRANSACTION_VIEW]: { color: '#2a5f2b', width: 300 },

@@ -6,6 +6,7 @@ import { TextNode } from '@/components/nodes/text-node'
 import { NodeTypeEnum, type NodeType } from '@/types/node'
 import { DisplayNode } from '@/components/nodes/display-node'
 import { NumberNode } from '@/components/nodes/number-node'
+import { MathNode } from '@/components/nodes/math-node'
 import { VerifySignatureNode } from '@/components/nodes/verify-signature-node'
 import { NetworkNode } from '@/components/nodes/network-node'
 import { BalanceNode } from '@/components/nodes/balance-node'
@@ -26,6 +27,15 @@ export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
   [NodeTypeEnum.SIGN]: SignNode,
   [NodeTypeEnum.DISPLAY]: DisplayNode,
   [NodeTypeEnum.NUMBER]: NumberNode,
+  [NodeTypeEnum.ADD]: MathNode,
+  [NodeTypeEnum.SUBTRACT]: MathNode,
+  [NodeTypeEnum.MULTIPLY]: MathNode,
+  [NodeTypeEnum.DIVIDE]: MathNode,
+  [NodeTypeEnum.MODULO]: MathNode,
+  [NodeTypeEnum.EXPONENT]: MathNode,
+  [NodeTypeEnum.ROUND]: MathNode,
+  [NodeTypeEnum.MIN]: MathNode,
+  [NodeTypeEnum.MAX]: MathNode,
   [NodeTypeEnum.VERIFY_SIGNATURE]: VerifySignatureNode,
   [NodeTypeEnum.NETWORK]: NetworkNode,
   [NodeTypeEnum.BALANCE]: BalanceNode,
