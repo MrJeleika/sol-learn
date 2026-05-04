@@ -6,4 +6,5 @@ export type HandleConfig = {
   label?: string
   dataField: string
   dataType?: string
+  maxConnections?: number
 }

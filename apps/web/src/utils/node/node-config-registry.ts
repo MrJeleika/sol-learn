@@ -7,6 +7,17 @@ import { privateKeyNodeConfig } from './data/private-key-node-data'
 import { signNodeConfig } from './data/sign-node-data'
 import { displayNodeConfig } from './data/display-node-data'
 import { numberNodeConfig } from './data/number-node-config'
+import {
+  addNodeConfig,
+  divideNodeConfig,
+  exponentNodeConfig,
+  maxNodeConfig,
+  minNodeConfig,
+  moduloNodeConfig,
+  multiplyNodeConfig,
+  roundNodeConfig,
+  subtractNodeConfig,
+} from './data/math-node-data'
 import { verifySignatureNodeConfig } from './data/verify-signature-node'
 import { networkNodeConfig } from './data/network-node-data'
 import { balanceNodeConfig } from './data/balance-node-data'
@@ -34,6 +45,15 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.SIGN]: signNodeConfig,
   [NodeTypeEnum.DISPLAY]: displayNodeConfig,
   [NodeTypeEnum.NUMBER]: numberNodeConfig,
+  [NodeTypeEnum.ADD]: addNodeConfig,
+  [NodeTypeEnum.SUBTRACT]: subtractNodeConfig,
+  [NodeTypeEnum.MULTIPLY]: multiplyNodeConfig,
+  [NodeTypeEnum.DIVIDE]: divideNodeConfig,
+  [NodeTypeEnum.MODULO]: moduloNodeConfig,
+  [NodeTypeEnum.EXPONENT]: exponentNodeConfig,
+  [NodeTypeEnum.ROUND]: roundNodeConfig,
+  [NodeTypeEnum.MIN]: minNodeConfig,
+  [NodeTypeEnum.MAX]: maxNodeConfig,
   [NodeTypeEnum.VERIFY_SIGNATURE]: verifySignatureNodeConfig,
   [NodeTypeEnum.NETWORK]: networkNodeConfig,
   [NodeTypeEnum.BALANCE]: balanceNodeConfig,

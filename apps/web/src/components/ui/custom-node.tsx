@@ -132,6 +132,7 @@ export const CustomNode = ({
               data-id={handleId}
               data-handle-type={handle.type}
               data-type={(handle as HandleConfig & { dataType?: string }).dataType}
+              data-max-connections={handle.maxConnections}
             >
               {!isConnected && <div className="pointer-events-none absolute inset-1 rounded-full bg-background"></div>}
               <div
