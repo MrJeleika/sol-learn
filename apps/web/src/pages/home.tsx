@@ -9,6 +9,7 @@ import {
   type Connection,
   type IsValidConnection,
   type Node,
+  type Edge,
   SelectionMode,
 } from '@xyflow/react'
 import { nodeMap } from '@/utils/node/node-map'
@@ -25,29 +26,56 @@ const initialNodes: Node[] = [
 ]
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
 
+const getHandleMaxConnections = (handleId?: string | null) => {
+  if (!handleId) return undefined
+
+  const handleEl = document.querySelector(`[data-id="${handleId}"]`) as HTMLElement | null
+  const raw = handleEl?.getAttribute('data-max-connections')
+  if (!raw) return undefined
+
+  const maxConnections = Number(raw)
+  return Number.isFinite(maxConnections) ? maxConnections : undefined
+}
+
+const canConnectToTargetHandle = (targetHandle: string | null | undefined, edges: Edge[]) => {
+  const maxConnections = getHandleMaxConnections(targetHandle)
+  if (maxConnections === undefined) return true
+
+  const currentConnections = edges.filter((edge) => edge.targetHandle === targetHandle).length
+  return currentConnections < maxConnections
+}
+
 export default function Home() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 
   const onConnect = useCallback(
     (params: Connection) => {
-      setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot))
+      setEdges((edgesSnapshot) => {
+        if (!canConnectToTargetHandle(params.targetHandle, edgesSnapshot)) return edgesSnapshot
+        return addEdge(params, edgesSnapshot)
+      })
       const all = Array.from(document.querySelectorAll('[data-handle-type]')) as HTMLElement[]
       for (const el of all) el.classList.remove('handle--dim', 'handle--highlight')
       document.body.removeAttribute('data-connecting-type')
     },
     [setEdges]
   )
-  const isValidConnection: IsValidConnection = useCallback((edge) => {
-    if (!('sourceHandle' in edge) || !('targetHandle' in edge)) return true
-    const c = edge as Connection
-    const sourceEl = document.querySelector(`[data-id="${c.sourceHandle}"]`) as HTMLElement | null
-    const targetEl = document.querySelector(`[data-id="${c.targetHandle}"]`) as HTMLElement | null
-    const srcType = sourceEl?.getAttribute('data-type')
-    const tgtType = targetEl?.getAttribute('data-type')
-    if (!srcType || !tgtType) return true
-    return srcType === tgtType
-  }, [])
+  const isValidConnection: IsValidConnection = useCallback(
+    (edge) => {
+      if (!('sourceHandle' in edge) || !('targetHandle' in edge)) return true
+      const c = edge as Connection
+      if (!canConnectToTargetHandle(c.targetHandle, edges)) return false
+
+      const sourceEl = document.querySelector(`[data-id="${c.sourceHandle}"]`) as HTMLElement | null
+      const targetEl = document.querySelector(`[data-id="${c.targetHandle}"]`) as HTMLElement | null
+      const srcType = sourceEl?.getAttribute('data-type')
+      const tgtType = targetEl?.getAttribute('data-type')
+      if (!srcType || !tgtType) return true
+      return srcType === tgtType
+    },
+    [edges]
+  )
   const onConnectStart = useCallback(
     (_: unknown, params: { handleId: string | null; nodeId: string | null; handleType: string | null }) => {
       if (!params?.handleId) return
@@ -56,9 +84,12 @@ export default function Home() {
       if (!srcType) return
       const allTargets = Array.from(document.querySelectorAll('[data-handle-type="target"]')) as HTMLElement[]
       for (const el of allTargets) {
+        const targetHandle = el.getAttribute('data-id')
         const tgtType = el.getAttribute('data-type')
-        if (!tgtType) {
+        const hasAvailableSlot = canConnectToTargetHandle(targetHandle, edges)
+        if (!tgtType || !hasAvailableSlot) {
           el.classList.remove('handle--dim', 'handle--highlight')
+          if (!hasAvailableSlot) el.classList.add('handle--dim')
           continue
         }
         if (tgtType === srcType) {
@@ -69,7 +100,7 @@ export default function Home() {
         }
       }
     },
-    []
+    [edges]
   )
   const onConnectEnd = useCallback(() => {
     const all = Array.from(document.querySelectorAll('[data-handle-type]')) as HTMLElement[]
