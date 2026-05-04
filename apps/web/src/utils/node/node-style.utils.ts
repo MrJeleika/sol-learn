@@ -11,6 +11,16 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.DISPLAY]: { color: '#531d2b', width: 300 },
   [NodeTypeEnum.NUMBER]: { color: '#531d2b', width: 100 },
 
+  [NodeTypeEnum.ADD]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.SUBTRACT]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MULTIPLY]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.DIVIDE]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MODULO]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.EXPONENT]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.ROUND]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MIN]: { color: '#3d4f91', width: 100 },
+  [NodeTypeEnum.MAX]: { color: '#3d4f91', width: 100 },
+
   [NodeTypeEnum.TRANSACTION_BUILDER]: { color: '#2a5f2b', width: 100 },
   [NodeTypeEnum.TRANSACTION]: { color: '#2a5f2b', width: 300 },
   [NodeTypeEnum.TRANSACTION_VIEW]: { color: '#2a5f2b', width: 300 },
@@ -28,6 +38,15 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.SIGN]: { color: '#265c75', width: 150 },
   [NodeTypeEnum.VERIFY_SIGNATURE]: { color: '#265c75', width: 150 },
   [NodeTypeEnum.PRIVATE_KEY]: { color: '#265c75', width: 300 },
+
+  [NodeTypeEnum.STRING_COMBINE]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_LENGTH]: { color: '#7a3f24', width: 180 },
+  [NodeTypeEnum.STRING_SUBSTRING]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_SPLIT]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_SEARCH]: { color: '#7a3f24', width: 190 },
+  [NodeTypeEnum.STRING_REPLACE]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_ENCODE]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_DECODE]: { color: '#7a3f24', width: 240 },
 }
 
 export const getNodeStyles = (nodeType?: NodeType) => {

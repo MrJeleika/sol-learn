@@ -7,6 +7,17 @@ import { privateKeyNodeConfig } from './data/private-key-node-data'
 import { signNodeConfig } from './data/sign-node-data'
 import { displayNodeConfig } from './data/display-node-data'
 import { numberNodeConfig } from './data/number-node-config'
+import {
+  addNodeConfig,
+  divideNodeConfig,
+  exponentNodeConfig,
+  maxNodeConfig,
+  minNodeConfig,
+  moduloNodeConfig,
+  multiplyNodeConfig,
+  roundNodeConfig,
+  subtractNodeConfig,
+} from './data/math-node-data'
 import { verifySignatureNodeConfig } from './data/verify-signature-node'
 import { networkNodeConfig } from './data/network-node-data'
 import { balanceNodeConfig } from './data/balance-node-data'
@@ -17,6 +28,14 @@ import { instructionsNodeConfig } from './data/instructions-node-data'
 import { transactionNodeConfig } from './data/transaction-node-data'
 import { idlNodeConfig } from './data/idl-node-data'
 import { programInstructionsNodeConfig } from './data/program-instructions-node-data'
+import { stringCombineNodeConfig } from './data/string-combine-node-data'
+import { stringLengthNodeConfig } from './data/string-length-node-data'
+import { stringSubstringNodeConfig } from './data/string-substring-node-data'
+import { stringSplitNodeConfig } from './data/string-split-node-data'
+import { stringSearchNodeConfig } from './data/string-search-node-data'
+import { stringReplaceNodeConfig } from './data/string-replace-node-data'
+import { stringEncodeNodeConfig } from './data/string-encode-node-data'
+import { stringDecodeNodeConfig } from './data/string-decode-node-data'
 
 export const nodeConfigRegistry = {
   [NodeTypeEnum.TEXT]: textNodeConfig,
@@ -26,6 +45,15 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.SIGN]: signNodeConfig,
   [NodeTypeEnum.DISPLAY]: displayNodeConfig,
   [NodeTypeEnum.NUMBER]: numberNodeConfig,
+  [NodeTypeEnum.ADD]: addNodeConfig,
+  [NodeTypeEnum.SUBTRACT]: subtractNodeConfig,
+  [NodeTypeEnum.MULTIPLY]: multiplyNodeConfig,
+  [NodeTypeEnum.DIVIDE]: divideNodeConfig,
+  [NodeTypeEnum.MODULO]: moduloNodeConfig,
+  [NodeTypeEnum.EXPONENT]: exponentNodeConfig,
+  [NodeTypeEnum.ROUND]: roundNodeConfig,
+  [NodeTypeEnum.MIN]: minNodeConfig,
+  [NodeTypeEnum.MAX]: maxNodeConfig,
   [NodeTypeEnum.VERIFY_SIGNATURE]: verifySignatureNodeConfig,
   [NodeTypeEnum.NETWORK]: networkNodeConfig,
   [NodeTypeEnum.BALANCE]: balanceNodeConfig,
@@ -36,6 +64,14 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.TRANSACTION]: transactionNodeConfig,
   [NodeTypeEnum.IDL]: idlNodeConfig,
   [NodeTypeEnum.PROGRAM_INSTRUCTIONS]: programInstructionsNodeConfig,
+  [NodeTypeEnum.STRING_COMBINE]: stringCombineNodeConfig,
+  [NodeTypeEnum.STRING_LENGTH]: stringLengthNodeConfig,
+  [NodeTypeEnum.STRING_SUBSTRING]: stringSubstringNodeConfig,
+  [NodeTypeEnum.STRING_SPLIT]: stringSplitNodeConfig,
+  [NodeTypeEnum.STRING_SEARCH]: stringSearchNodeConfig,
+  [NodeTypeEnum.STRING_REPLACE]: stringReplaceNodeConfig,
+  [NodeTypeEnum.STRING_ENCODE]: stringEncodeNodeConfig,
+  [NodeTypeEnum.STRING_DECODE]: stringDecodeNodeConfig,
 } as const satisfies Record<NodeType, NodeConfig>
 
 export const getNodeConfig = (nodeType: NodeType) => {
