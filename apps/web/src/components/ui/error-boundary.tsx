@@ -8,9 +8,11 @@ interface ErrorBoundaryProps {
   children: ReactNode
 }
 
-const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => {
+const ErrorFallback = ({ error, resetErrorBoundary }: { error: unknown; resetErrorBoundary: () => void }) => {
+  const errorText = error instanceof Error ? error.toString() : String(error)
+
   const handleCopyError = async () => {
-    await navigator.clipboard.writeText(error.toString())
+    await navigator.clipboard.writeText(errorText)
     toast.success('Error copied to clipboard')
   }
 
@@ -34,7 +36,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetError
           Reload
         </button>
 
-        {error && (
+        {Boolean(error) && (
           <div className="mt-4 max-w-2xl w-full">
             <Accordion type="single" collapsible>
               <AccordionItem value="error-details" className="border-border">
@@ -50,7 +52,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error; resetError
                     >
                       <Copy className="w-4 h-4 text-muted-foreground hover:text-foreground" />
                     </button>
-                    <pre className="p-4 bg-muted rounded overflow-auto text-xs">{error.toString()}</pre>
+                    <pre className="p-4 bg-muted rounded overflow-auto text-xs">{errorText}</pre>
                   </div>
                 </AccordionContent>
               </AccordionItem>

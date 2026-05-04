@@ -16,6 +16,14 @@ import { InstructionsNode } from '@/components/nodes/instructions-node'
 import { TransactionNode } from '../../components/nodes/transaction-node'
 import { IdlNode } from '@/components/nodes/idl-node'
 import { ProgramInstructionsNode } from '@/components/nodes/program-instructions-node'
+import { StringCombineNode } from '@/components/nodes/string-combine-node'
+import { StringLengthNode } from '@/components/nodes/string-length-node'
+import { StringSubstringNode } from '@/components/nodes/string-substring-node'
+import { StringSplitNode } from '@/components/nodes/string-split-node'
+import { StringSearchNode } from '@/components/nodes/string-search-node'
+import { StringReplaceNode } from '@/components/nodes/string-replace-node'
+import { StringEncodeNode } from '@/components/nodes/string-encode-node'
+import { StringDecodeNode } from '@/components/nodes/string-decode-node'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
@@ -36,4 +44,12 @@ export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
   [NodeTypeEnum.TRANSACTION]: TransactionNode,
   [NodeTypeEnum.IDL]: IdlNode,
   [NodeTypeEnum.PROGRAM_INSTRUCTIONS]: ProgramInstructionsNode,
+  [NodeTypeEnum.STRING_COMBINE]: StringCombineNode,
+  [NodeTypeEnum.STRING_LENGTH]: StringLengthNode,
+  [NodeTypeEnum.STRING_SUBSTRING]: StringSubstringNode,
+  [NodeTypeEnum.STRING_SPLIT]: StringSplitNode,
+  [NodeTypeEnum.STRING_SEARCH]: StringSearchNode,
+  [NodeTypeEnum.STRING_REPLACE]: StringReplaceNode,
+  [NodeTypeEnum.STRING_ENCODE]: StringEncodeNode,
+  [NodeTypeEnum.STRING_DECODE]: StringDecodeNode,
 }

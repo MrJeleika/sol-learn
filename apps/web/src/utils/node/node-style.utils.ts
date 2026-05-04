@@ -28,6 +28,15 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.SIGN]: { color: '#265c75', width: 150 },
   [NodeTypeEnum.VERIFY_SIGNATURE]: { color: '#265c75', width: 150 },
   [NodeTypeEnum.PRIVATE_KEY]: { color: '#265c75', width: 300 },
+
+  [NodeTypeEnum.STRING_COMBINE]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_LENGTH]: { color: '#7a3f24', width: 180 },
+  [NodeTypeEnum.STRING_SUBSTRING]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_SPLIT]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_SEARCH]: { color: '#7a3f24', width: 190 },
+  [NodeTypeEnum.STRING_REPLACE]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_ENCODE]: { color: '#7a3f24', width: 240 },
+  [NodeTypeEnum.STRING_DECODE]: { color: '#7a3f24', width: 240 },
 }
 
 export const getNodeStyles = (nodeType?: NodeType) => {

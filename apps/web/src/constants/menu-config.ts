@@ -44,4 +44,19 @@ export const menuConfig: MenuCategory[] = [
       NodeTypeEnum.PRIVATE_KEY,
     ],
   },
+  {
+    id: 'string',
+    label: 'String',
+    color: '#7a3f24',
+    nodes: [
+      NodeTypeEnum.STRING_COMBINE,
+      NodeTypeEnum.STRING_LENGTH,
+      NodeTypeEnum.STRING_SUBSTRING,
+      NodeTypeEnum.STRING_SPLIT,
+      NodeTypeEnum.STRING_SEARCH,
+      NodeTypeEnum.STRING_REPLACE,
+      NodeTypeEnum.STRING_ENCODE,
+      NodeTypeEnum.STRING_DECODE,
+    ],
+  },
 ]
