@@ -21,6 +21,7 @@ const NODE_TOOLTIP_LINKS: Partial<Record<NodeType, string>> = {
   IDL: 'https://solana.com/docs/programs/anchor/idl',
   PROGRAM_INSTRUCTIONS: 'https://solana.com/docs/core/cpi',
   PROGRAM_ACCOUNT: 'https://solana.com/docs/programs/anchor/idl#accounts',
+  WALLET: 'https://docs.solana.com/wallet-guide',
   TOKEN_AMOUNT_TO_RAW: 'https://solana.com/docs/tokens/basics',
   RAW_TO_TOKEN_AMOUNT: 'https://solana.com/docs/tokens/basics',
   RENT_EXEMPT: 'https://solana.com/docs/core/accounts#rent',
@@ -238,6 +239,18 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
       <p>
         Connect an IDL, network, and account address. Pick which account type to decode and each field is exposed as a
         separate output.
+      </p>
+    </>
+  ),
+  WALLET: (
+    <>
+      <p>
+        Connect a browser wallet (Phantom, Solflare, etc.) and use it to sign transactions instead of pasting a private
+        key.
+      </p>
+      <p>
+        Plug the <BoldText>Wallet</BoldText> output into the Transaction node — the wallet will be prompted to sign when
+        you press Send.
       </p>
     </>
   ),

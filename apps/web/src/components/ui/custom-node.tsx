@@ -137,11 +137,13 @@ export const CustomNode = ({
               {!isConnected && <div className="pointer-events-none absolute inset-1 rounded-full bg-background"></div>}
               <div
                 className={cn(
-                  'absolute text-[7px] whitespace-nowrap top-1/2 translate-y-[-50%]',
+                  'absolute text-[7px] whitespace-nowrap top-1/2 translate-y-[-50%] leading-[8px]',
                   handle.type === 'target' ? 'left-1.5' : 'right-1.5'
                 )}
               >
-                {handle.label}
+                {handle.label?.includes('\n')
+                  ? handle.label.split('\n').map((line, i) => <div key={i}>{line}</div>)
+                  : handle.label}
               </div>
             </Handle>
           )

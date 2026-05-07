@@ -86,6 +86,12 @@ export const menuConfig: MenuCategory[] = [
     ],
   },
   {
+    id: 'wallet',
+    label: 'Wallet',
+    color: '#1f3d6b',
+    nodes: [NodeTypeEnum.WALLET],
+  },
+  {
     id: 'crypto',
     label: 'Crypto',
     color: '#265c75',
