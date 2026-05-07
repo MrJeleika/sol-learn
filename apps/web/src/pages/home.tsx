@@ -21,6 +21,7 @@ const publicKeyCompatibleTargetTypes = new Set(['publicKey', 'mint'])
 const numberCompatibleTargetTypes = new Set(['number', 'uiAmount', 'decimals'])
 const uiAmountCompatibleTargetTypes = new Set(['uiAmount', 'number'])
 const decimalsCompatibleTargetTypes = new Set(['decimals', 'number'])
+const walletCompatibleTargetTypes = new Set(['wallet', 'privateKey'])
 
 const getHandleMaxConnections = (handleId?: string | null) => {
   if (!handleId) return undefined
@@ -51,6 +52,7 @@ const areHandleTypesCompatible = (srcType?: string | null, tgtType?: string | nu
   if (srcType === 'number' && numberCompatibleTargetTypes.has(tgtType)) return true
   if (srcType === 'uiAmount' && uiAmountCompatibleTargetTypes.has(tgtType)) return true
   if (srcType === 'decimals' && decimalsCompatibleTargetTypes.has(tgtType)) return true
+  if (srcType === 'wallet' && walletCompatibleTargetTypes.has(tgtType)) return true
   return false
 }
 

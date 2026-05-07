@@ -1,43 +1,60 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Keypair, Transaction } from '@solana/web3.js'
 import { Position, useUpdateNodeInternals } from '@xyflow/react'
+import { useWallet } from '@solana/wallet-adapter-react'
 import type { Network } from '@/types/network'
 import type { TransactionNodeData, TransactionStatus } from '@/types/nodes/transactions/transaction-node'
+import type { WalletSignerValue } from '@/types/nodes/wallet/wallet-node'
 import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { getSolanaConnection } from '@/constants/solana/connection'
 import { createKeypairFromPrivateKey, getRequiredSigners, truncatePubkey } from '@/utils/solana/transaction.utils'
+
+const isWalletMarker = (value: unknown): value is WalletSignerValue =>
+  typeof value === 'object' && value !== null && (value as { kind?: unknown }).kind === 'wallet'
 
 export const useTransactionNode = (nodeId: string) => {
   const { updateNodeData } = useTypedReactFlow()
   const updateNodeInternals = useUpdateNodeInternals()
   const [status, setStatus] = useState<TransactionStatus>('idle')
 
+  const wallet = useWallet()
+
   const resolved = useTypedNodesData<'privateKey' | 'network' | 'transaction'>(nodeId)
 
   const inputs = useMemo(() => {
+    const rawSigner = resolved.privateKey?.value
+    const useWalletPath = isWalletMarker(rawSigner) && wallet.connected && !!wallet.publicKey
     return {
-      privateKey: (resolved.privateKey?.value as string) ?? '',
+      privateKey: typeof rawSigner === 'string' ? rawSigner : '',
+      useWalletPath,
       network: (resolved.network?.value as Network) ?? null,
       transaction: (resolved.transaction?.value as Transaction | null) ?? null,
     }
-  }, [resolved])
+  }, [resolved, wallet.connected, wallet.publicKey])
 
   const feePayerKeypair = useMemo(() => {
+    if (inputs.useWalletPath) return null
     if (!inputs.privateKey) return null
     return createKeypairFromPrivateKey(inputs.privateKey)
-  }, [inputs.privateKey])
+  }, [inputs.useWalletPath, inputs.privateKey])
+
+  const feePayerPublicKey = useMemo(() => {
+    if (inputs.useWalletPath && wallet.publicKey) return wallet.publicKey
+    if (feePayerKeypair) return feePayerKeypair.publicKey
+    return null
+  }, [inputs.useWalletPath, wallet.publicKey, feePayerKeypair])
 
   const requiredSigners = useMemo(() => {
     return getRequiredSigners(inputs.transaction)
   }, [inputs.transaction])
 
   const additionalSigners = useMemo(() => {
-    if (!inputs.privateKey || !feePayerKeypair) return []
+    if (!feePayerPublicKey) return []
     if (requiredSigners.length <= 1) return []
 
-    return requiredSigners.filter((signer) => signer.toBase58() !== feePayerKeypair.publicKey.toBase58())
-  }, [inputs.privateKey, feePayerKeypair, requiredSigners])
+    return requiredSigners.filter((signer) => signer.toBase58() !== feePayerPublicKey.toBase58())
+  }, [feePayerPublicKey, requiredSigners])
 
   const extraHandles = useMemo(() => {
     const handles: {
@@ -95,7 +112,8 @@ export const useTransactionNode = (nodeId: string) => {
   }, [additionalSigners, resolved])
 
   const handleSend = useCallback(async () => {
-    if (!feePayerKeypair || !inputs.network || !inputs.transaction) return
+    if (!inputs.network || !inputs.transaction) return
+    if (!feePayerPublicKey) return
     if (inputs.transaction.instructions.length === 0) {
       setStatus('failed')
       updateNodeData<TransactionNodeData>(nodeId, { status: 'failed' })
@@ -109,15 +127,27 @@ export const useTransactionNode = (nodeId: string) => {
       const connection = getSolanaConnection(inputs.network)
       const tx = inputs.transaction
 
-      tx.feePayer = feePayerKeypair.publicKey
+      tx.feePayer = feePayerPublicKey
       tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
 
-      const allSigners: Keypair[] = [feePayerKeypair, ...collectAdditionalSigners()]
+      let raw: Buffer | Uint8Array
 
-      tx.sign(...allSigners)
-      const raw = tx.serialize()
+      if (inputs.useWalletPath) {
+        if (!wallet.signTransaction) throw new Error('Connected wallet does not support signing')
+
+        const additional = collectAdditionalSigners()
+        if (additional.length > 0) tx.partialSign(...additional)
+
+        const signed = await wallet.signTransaction(tx as unknown as Parameters<typeof wallet.signTransaction>[0])
+        raw = (signed as Transaction).serialize()
+      } else {
+        if (!feePayerKeypair) throw new Error('Missing fee payer keypair')
+        const allSigners: Keypair[] = [feePayerKeypair, ...collectAdditionalSigners()]
+        tx.sign(...allSigners)
+        raw = tx.serialize()
+      }
+
       const sig = await connection.sendRawTransaction(raw, { skipPreflight: false })
-
       await connection.confirmTransaction({ signature: sig, ...(await connection.getLatestBlockhash()) }, 'confirmed')
 
       updateNodeData<TransactionNodeData>(nodeId, { signature: sig, status: 'success' })
@@ -127,7 +157,17 @@ export const useTransactionNode = (nodeId: string) => {
       updateNodeData<TransactionNodeData>(nodeId, { status: 'failed' })
       setStatus('failed')
     }
-  }, [feePayerKeypair, inputs.network, inputs.transaction, nodeId, updateNodeData, collectAdditionalSigners])
+  }, [
+    inputs.network,
+    inputs.transaction,
+    inputs.useWalletPath,
+    feePayerPublicKey,
+    feePayerKeypair,
+    wallet,
+    nodeId,
+    updateNodeData,
+    collectAdditionalSigners,
+  ])
 
   return {
     status,

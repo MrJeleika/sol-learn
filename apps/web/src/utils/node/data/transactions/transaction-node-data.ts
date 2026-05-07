@@ -4,7 +4,13 @@ import type { NodeConfig } from '@/types/node-config'
 export const transactionNodeConfig = {
   label: 'TRANSACTION',
   handles: [
-    { position: Position.Left, type: 'target', dataField: 'privateKey', label: 'Private Key', dataType: 'privateKey' },
+    {
+      position: Position.Left,
+      type: 'target',
+      dataField: 'privateKey',
+      label: 'Private Key\nWallet',
+      dataType: 'privateKey',
+    },
     { position: Position.Left, type: 'target', dataField: 'network', label: 'Network', dataType: 'network' },
     {
       position: Position.Left,
