@@ -20,6 +20,9 @@ const NODE_TOOLTIP_LINKS: Partial<Record<NodeType, string>> = {
   TRANSACTION: 'https://solana.com/docs/core/transactions#sending-transactions',
   IDL: 'https://solana.com/docs/programs/anchor/idl',
   PROGRAM_INSTRUCTIONS: 'https://solana.com/docs/core/cpi',
+  TOKEN_AMOUNT_TO_RAW: 'https://solana.com/docs/tokens/basics',
+  RAW_TO_TOKEN_AMOUNT: 'https://solana.com/docs/tokens/basics',
+  RENT_EXEMPT: 'https://solana.com/docs/core/accounts#rent',
 }
 
 export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
@@ -120,6 +123,43 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
     <p>Check whether an upstream value is present, such as a transaction signature or fetched account data.</p>
   ),
   IF: <p>Select between two values using a boolean condition. The selected value can feed the next node.</p>,
+  SOL_TO_LAMPORTS: (
+    <p>
+      Convert a SOL amount into <BoldText>lamports</BoldText>. Useful for comparing wallet balances against SOL
+      thresholds.
+    </p>
+  ),
+  LAMPORTS_TO_SOL: (
+    <p>
+      Convert <BoldText>lamports</BoldText> into a human-readable SOL amount.
+    </p>
+  ),
+  VALID_PUBLIC_KEY: (
+    <p>Validate and normalize a Solana public key. Outputs both the normalized address and a boolean validity check.</p>
+  ),
+  ATA: (
+    <p>
+      Derive an <BoldText>Associated Token Account</BoldText> address from an owner wallet and token mint.
+    </p>
+  ),
+  TOKEN_AMOUNT_TO_RAW: (
+    <p>
+      Convert a human token amount using mint <BoldText>decimals</BoldText> into the raw integer amount used by token
+      instructions and IDL args.
+    </p>
+  ),
+  RAW_TO_TOKEN_AMOUNT: (
+    <p>
+      Convert a raw token integer amount back into a human-readable amount using mint <BoldText>decimals</BoldText>.
+    </p>
+  ),
+  RENT_EXEMPT: (
+    <p>
+      Fetch the minimum <BoldText>lamports</BoldText> needed to make an account of a given byte size rent-exempt.
+    </p>
+  ),
+  STRING_ENCODE: <p>Encode text into base64, base58, or hex.</p>,
+  STRING_DECODE: <p>Decode base64, base58, or hex back into text.</p>,
   SIGN: (
     <div>
       <p>Sign bytes or transactions with a provided keypair.</p>

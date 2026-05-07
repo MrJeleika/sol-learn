@@ -17,6 +17,11 @@ import {
   notNodeConfig,
   orNodeConfig,
 } from './data/logic/logic-node-data'
+import { lamportsToSolNodeConfig, solToLamportsNodeConfig } from './data/utils/solana-units-node-data'
+import { validPublicKeyNodeConfig } from './data/utils/valid-public-key-node-data'
+import { ataNodeConfig } from './data/utils/ata-node-data'
+import { rawToTokenAmountNodeConfig, tokenAmountToRawNodeConfig } from './data/utils/token-amount-node-data'
+import { rentExemptNodeConfig } from './data/utils/rent-exempt-node-data'
 import {
   addNodeConfig,
   divideNodeConfig,
@@ -44,8 +49,8 @@ import { stringSubstringNodeConfig } from './data/string/string-substring-node-d
 import { stringSplitNodeConfig } from './data/string/string-split-node-data'
 import { stringSearchNodeConfig } from './data/string/string-search-node-data'
 import { stringReplaceNodeConfig } from './data/string/string-replace-node-data'
-import { stringEncodeNodeConfig } from './data/string/string-encode-node-data'
-import { stringDecodeNodeConfig } from './data/string/string-decode-node-data'
+import { stringEncodeNodeConfig } from './data/utils/string-encode-node-data'
+import { stringDecodeNodeConfig } from './data/utils/string-decode-node-data'
 
 export const nodeConfigRegistry = {
   [NodeTypeEnum.TEXT]: textNodeConfig,
@@ -72,6 +77,13 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.COMPARE]: compareNodeConfig,
   [NodeTypeEnum.HAS_VALUE]: hasValueNodeConfig,
   [NodeTypeEnum.IF]: ifNodeConfig,
+  [NodeTypeEnum.SOL_TO_LAMPORTS]: solToLamportsNodeConfig,
+  [NodeTypeEnum.LAMPORTS_TO_SOL]: lamportsToSolNodeConfig,
+  [NodeTypeEnum.VALID_PUBLIC_KEY]: validPublicKeyNodeConfig,
+  [NodeTypeEnum.ATA]: ataNodeConfig,
+  [NodeTypeEnum.TOKEN_AMOUNT_TO_RAW]: tokenAmountToRawNodeConfig,
+  [NodeTypeEnum.RAW_TO_TOKEN_AMOUNT]: rawToTokenAmountNodeConfig,
+  [NodeTypeEnum.RENT_EXEMPT]: rentExemptNodeConfig,
   [NodeTypeEnum.VERIFY_SIGNATURE]: verifySignatureNodeConfig,
   [NodeTypeEnum.NETWORK]: networkNodeConfig,
   [NodeTypeEnum.BALANCE]: balanceNodeConfig,

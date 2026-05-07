@@ -13,6 +13,12 @@ import { EqualNode } from '@/components/nodes/logic/equal-node'
 import { CompareNode } from '@/components/nodes/logic/compare-node'
 import { HasValueNode } from '@/components/nodes/logic/has-value-node'
 import { IfNode } from '@/components/nodes/logic/if-node'
+import { SolToLamportsNode } from '@/components/nodes/utils/sol-to-lamports-node'
+import { LamportsToSolNode } from '@/components/nodes/utils/lamports-to-sol-node'
+import { ValidPublicKeyNode } from '@/components/nodes/utils/valid-public-key-node'
+import { AtaNode } from '@/components/nodes/utils/ata-node'
+import { RawToTokenAmountNode, TokenAmountToRawNode } from '@/components/nodes/utils/token-amount-node'
+import { RentExemptNode } from '@/components/nodes/utils/rent-exempt-node'
 import { VerifySignatureNode } from '@/components/nodes/crypto/verify-signature-node'
 import { NetworkNode } from '@/components/nodes/network/network-node'
 import { BalanceNode } from '@/components/nodes/network/balance-node'
@@ -29,8 +35,8 @@ import { StringSubstringNode } from '@/components/nodes/string/string-substring-
 import { StringSplitNode } from '@/components/nodes/string/string-split-node'
 import { StringSearchNode } from '@/components/nodes/string/string-search-node'
 import { StringReplaceNode } from '@/components/nodes/string/string-replace-node'
-import { StringEncodeNode } from '@/components/nodes/string/string-encode-node'
-import { StringDecodeNode } from '@/components/nodes/string/string-decode-node'
+import { StringEncodeNode } from '@/components/nodes/utils/string-encode-node'
+import { StringDecodeNode } from '@/components/nodes/utils/string-decode-node'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
@@ -58,6 +64,13 @@ export const nodeMap: Record<NodeType, React.ComponentType<any>> = {
   [NodeTypeEnum.COMPARE]: CompareNode,
   [NodeTypeEnum.HAS_VALUE]: HasValueNode,
   [NodeTypeEnum.IF]: IfNode,
+  [NodeTypeEnum.SOL_TO_LAMPORTS]: SolToLamportsNode,
+  [NodeTypeEnum.LAMPORTS_TO_SOL]: LamportsToSolNode,
+  [NodeTypeEnum.VALID_PUBLIC_KEY]: ValidPublicKeyNode,
+  [NodeTypeEnum.ATA]: AtaNode,
+  [NodeTypeEnum.TOKEN_AMOUNT_TO_RAW]: TokenAmountToRawNode,
+  [NodeTypeEnum.RAW_TO_TOKEN_AMOUNT]: RawToTokenAmountNode,
+  [NodeTypeEnum.RENT_EXEMPT]: RentExemptNode,
   [NodeTypeEnum.VERIFY_SIGNATURE]: VerifySignatureNode,
   [NodeTypeEnum.NETWORK]: NetworkNode,
   [NodeTypeEnum.BALANCE]: BalanceNode,

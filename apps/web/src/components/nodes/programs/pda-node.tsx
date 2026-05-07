@@ -34,7 +34,7 @@ export const PdaNode = (props: NodeProps<PdaNodeType>) => {
     return handles
   }, [seeds])
 
-  const { pda } = useMemo(() => {
+  const { pda, bump } = useMemo(() => {
     return getPda(programId, seeds)
   }, [programId, seeds])
 
@@ -43,12 +43,11 @@ export const PdaNode = (props: NodeProps<PdaNodeType>) => {
   }, [extraHandles, props.id, updateNodeInternals])
 
   useEffect(() => {
-    if (pda) {
-      updateNodeData<PdaNodeData>(props.id, {
-        pda,
-      })
-    }
-  }, [pda, programId, props.id, updateNodeData])
+    updateNodeData<PdaNodeData>(props.id, {
+      pda,
+      bump,
+    })
+  }, [bump, pda, programId, props.id, updateNodeData])
 
   return <CustomNode {...props} extraHandles={extraHandles} />
 }
