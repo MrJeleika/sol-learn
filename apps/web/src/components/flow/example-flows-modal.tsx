@@ -18,7 +18,7 @@ export const ExampleFlowsModal = ({ open, onOpenChange }: Props) => {
       toast.error('This example is not yet configured')
       return
     }
-    const snapshot = readFlowFromUrl(example.shareUrl)
+    const snapshot = readFlowFromUrl(new URL(example.shareUrl, window.location.href).href)
     if (!snapshot) {
       toast.error('Could not load example flow')
       return
