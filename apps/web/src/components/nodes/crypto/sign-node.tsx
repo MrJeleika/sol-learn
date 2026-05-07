@@ -1,0 +1,27 @@
+import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
+import { CustomNode } from '../../ui/custom-node'
+import type { SignNodeData, SignNodeType } from '@/types/nodes/crypto/sign-node'
+import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
+import type { NodeTypeEnum, TargetFieldsForEnum } from '@/types/node'
+import { useEffect, useMemo } from 'react'
+import { sign } from '@/utils/crypto/crypto.utils'
+import type { NodeProps } from '@xyflow/react'
+
+export const SignNode = (props: NodeProps<SignNodeType>) => {
+  const { updateNodeData } = useTypedReactFlow()
+
+  const resolved = useTypedNodesData<TargetFieldsForEnum<NodeTypeEnum.SIGN>>(props.id)
+
+  const signature = useMemo(() => {
+    const privateKey = resolved.privateKey?.value as string
+    const message = resolved.message?.value as string
+    if (!privateKey || !message) return ''
+    return sign(message, privateKey)
+  }, [resolved])
+
+  useEffect(() => {
+    updateNodeData<SignNodeData>(props.id, { signature })
+  }, [signature, props.id, updateNodeData])
+
+  return <CustomNode {...props}></CustomNode>
+}

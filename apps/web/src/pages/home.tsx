@@ -26,6 +26,8 @@ const initialNodes: Node[] = [
 ]
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
 
+const textCompatibleTargetTypes = new Set(['text', 'publicKey', 'signature', 'privateKey'])
+
 const getHandleMaxConnections = (handleId?: string | null) => {
   if (!handleId) return undefined
 
@@ -43,6 +45,15 @@ const canConnectToTargetHandle = (targetHandle: string | null | undefined, edges
 
   const currentConnections = edges.filter((edge) => edge.targetHandle === targetHandle).length
   return currentConnections < maxConnections
+}
+
+const areHandleTypesCompatible = (srcType?: string | null, tgtType?: string | null) => {
+  if (!tgtType) return true
+  if (tgtType === 'any' || srcType === 'any') return true
+  if (!srcType) return false
+  if (srcType === tgtType) return true
+  if (srcType === 'text' && textCompatibleTargetTypes.has(tgtType)) return true
+  return false
 }
 
 export default function Home() {
@@ -71,8 +82,7 @@ export default function Home() {
       const targetEl = document.querySelector(`[data-id="${c.targetHandle}"]`) as HTMLElement | null
       const srcType = sourceEl?.getAttribute('data-type')
       const tgtType = targetEl?.getAttribute('data-type')
-      if (!srcType || !tgtType) return true
-      return srcType === tgtType
+      return areHandleTypesCompatible(srcType, tgtType)
     },
     [edges]
   )
@@ -81,18 +91,14 @@ export default function Home() {
       if (!params?.handleId) return
       const sourceEl = document.querySelector(`[data-id="${params.handleId}"]`) as HTMLElement | null
       const srcType = sourceEl?.getAttribute('data-type')
-      if (!srcType) return
       const allTargets = Array.from(document.querySelectorAll('[data-handle-type="target"]')) as HTMLElement[]
       for (const el of allTargets) {
         const targetHandle = el.getAttribute('data-id')
         const tgtType = el.getAttribute('data-type')
         const hasAvailableSlot = canConnectToTargetHandle(targetHandle, edges)
-        if (!tgtType || !hasAvailableSlot) {
-          el.classList.remove('handle--dim', 'handle--highlight')
-          if (!hasAvailableSlot) el.classList.add('handle--dim')
-          continue
-        }
-        if (tgtType === srcType) {
+        const isCompatible = areHandleTypesCompatible(srcType, tgtType)
+
+        if (hasAvailableSlot && isCompatible) {
           el.classList.remove('handle--dim')
         } else {
           el.classList.add('handle--dim')

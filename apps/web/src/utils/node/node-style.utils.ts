@@ -10,6 +10,7 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.TEXT]: { color: '#531d2b', width: 300 },
   [NodeTypeEnum.DISPLAY]: { color: '#531d2b', width: 300 },
   [NodeTypeEnum.NUMBER]: { color: '#531d2b', width: 100 },
+  [NodeTypeEnum.BOOLEAN]: { color: '#8a641f', width: 130 },
 
   [NodeTypeEnum.ADD]: { color: '#3d4f91', width: 100 },
   [NodeTypeEnum.SUBTRACT]: { color: '#3d4f91', width: 100 },
@@ -20,6 +21,14 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.ROUND]: { color: '#3d4f91', width: 100 },
   [NodeTypeEnum.MIN]: { color: '#3d4f91', width: 100 },
   [NodeTypeEnum.MAX]: { color: '#3d4f91', width: 100 },
+
+  [NodeTypeEnum.AND]: { color: '#8a641f', width: 120 },
+  [NodeTypeEnum.OR]: { color: '#8a641f', width: 120 },
+  [NodeTypeEnum.NOT]: { color: '#8a641f', width: 120 },
+  [NodeTypeEnum.EQUAL]: { color: '#8a641f', width: 150 },
+  [NodeTypeEnum.COMPARE]: { color: '#8a641f', width: 170 },
+  [NodeTypeEnum.HAS_VALUE]: { color: '#8a641f', width: 150 },
+  [NodeTypeEnum.IF]: { color: '#8a641f', width: 210 },
 
   [NodeTypeEnum.TRANSACTION_BUILDER]: { color: '#2a5f2b', width: 100 },
   [NodeTypeEnum.TRANSACTION]: { color: '#2a5f2b', width: 300 },
