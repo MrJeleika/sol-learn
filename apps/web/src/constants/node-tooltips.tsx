@@ -20,6 +20,7 @@ const NODE_TOOLTIP_LINKS: Partial<Record<NodeType, string>> = {
   TRANSACTION: 'https://solana.com/docs/core/transactions#sending-transactions',
   IDL: 'https://solana.com/docs/programs/anchor/idl',
   PROGRAM_INSTRUCTIONS: 'https://solana.com/docs/core/cpi',
+  PROGRAM_ACCOUNT: 'https://solana.com/docs/programs/anchor/idl#accounts',
   TOKEN_AMOUNT_TO_RAW: 'https://solana.com/docs/tokens/basics',
   RAW_TO_TOKEN_AMOUNT: 'https://solana.com/docs/tokens/basics',
   RENT_EXEMPT: 'https://solana.com/docs/core/accounts#rent',
@@ -226,6 +227,17 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
       <p>Interact with custom programs using their IDL.</p>
       <p>
         Once an IDL is connected, this node dynamically generates inputs for any instruction defined in that program.
+      </p>
+    </>
+  ),
+  PROGRAM_ACCOUNT: (
+    <>
+      <p>
+        Read and decode an <BoldText>on-chain account</BoldText> using its IDL definition.
+      </p>
+      <p>
+        Connect an IDL, network, and account address. Pick which account type to decode and each field is exposed as a
+        separate output.
       </p>
     </>
   ),

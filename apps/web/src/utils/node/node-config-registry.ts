@@ -43,6 +43,7 @@ import { instructionsNodeConfig } from './data/programs/instructions-node-data'
 import { transactionNodeConfig } from './data/transactions/transaction-node-data'
 import { idlNodeConfig } from './data/programs/idl-node-data'
 import { programInstructionsNodeConfig } from './data/programs/program-instructions-node-data'
+import { programAccountNodeConfig } from './data/programs/program-account-node-data'
 import { stringCombineNodeConfig } from './data/string/string-combine-node-data'
 import { stringLengthNodeConfig } from './data/string/string-length-node-data'
 import { stringSubstringNodeConfig } from './data/string/string-substring-node-data'
@@ -94,6 +95,7 @@ export const nodeConfigRegistry = {
   [NodeTypeEnum.TRANSACTION]: transactionNodeConfig,
   [NodeTypeEnum.IDL]: idlNodeConfig,
   [NodeTypeEnum.PROGRAM_INSTRUCTIONS]: programInstructionsNodeConfig,
+  [NodeTypeEnum.PROGRAM_ACCOUNT]: programAccountNodeConfig,
   [NodeTypeEnum.STRING_COMBINE]: stringCombineNodeConfig,
   [NodeTypeEnum.STRING_LENGTH]: stringLengthNodeConfig,
   [NodeTypeEnum.STRING_SUBSTRING]: stringSubstringNodeConfig,

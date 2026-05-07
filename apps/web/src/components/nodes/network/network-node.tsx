@@ -17,7 +17,7 @@ export const NetworkNode = (props: NodeProps<NetworkNodeType>) => {
 
   return (
     <CustomNode {...props}>
-      <Select onValueChange={handleChange}>
+      <Select value={props.data?.network ?? undefined} onValueChange={handleChange}>
         <SelectTrigger color={nodeStyles.color}>
           <SelectValue className="" placeholder="Select a network" />
         </SelectTrigger>
