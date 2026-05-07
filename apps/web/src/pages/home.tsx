@@ -4,27 +4,17 @@ import {
   addEdge,
   Controls,
   MiniMap,
-  useNodesState,
-  useEdgesState,
   type Connection,
   type IsValidConnection,
   type Node,
   type Edge,
+  type Viewport,
   SelectionMode,
 } from '@xyflow/react'
 import { nodeMap } from '@/utils/node/node-map'
-import { NodeTypeEnum } from '@/types/node'
-
-const initialNodes: Node[] = [
-  { id: 'default1', position: { x: 0, y: 0 }, type: NodeTypeEnum.TEXT, data: { text: 'Welcome to SOL Learn!' } },
-  {
-    id: 'default2',
-    position: { x: 0, y: 70 },
-    type: NodeTypeEnum.TEXT,
-    data: { text: "I hope we've made your Solana learning journey much easier!" },
-  },
-]
-const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
+import { useFlowStore } from '@/stores/flow-store'
+import { readFlowFromLocation, clearFlowHash } from '@/utils/flow/share'
+import { FlowToolbar } from '@/components/flow/flow-toolbar'
 
 const textCompatibleTargetTypes = new Set(['text', 'publicKey', 'signature', 'privateKey', 'mint'])
 const publicKeyCompatibleTargetTypes = new Set(['publicKey', 'mint'])
@@ -65,8 +55,23 @@ const areHandleTypesCompatible = (srcType?: string | null, tgtType?: string | nu
 }
 
 export default function Home() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+  const nodes = useFlowStore((s) => s.nodes)
+  const edges = useFlowStore((s) => s.edges)
+  const viewport = useFlowStore((s) => s.viewport)
+  const onNodesChange = useFlowStore((s) => s.onNodesChange)
+  const onEdgesChange = useFlowStore((s) => s.onEdgesChange)
+  const setNodes = useFlowStore((s) => s.setNodes)
+  const setEdges = useFlowStore((s) => s.setEdges)
+  const setViewport = useFlowStore((s) => s.setViewport)
+  const replaceFlow = useFlowStore((s) => s.replaceFlow)
+
+  useEffect(() => {
+    const shared = readFlowFromLocation()
+    if (shared) {
+      replaceFlow(shared)
+      clearFlowHash()
+    }
+  }, [replaceFlow])
 
   const onConnect = useCallback(
     (params: Connection) => {
@@ -121,6 +126,8 @@ export default function Home() {
     for (const el of all) el.classList.remove('handle--dim', 'handle--highlight')
   }, [])
 
+  const onViewportChange = useCallback((vp: Viewport) => setViewport(vp), [setViewport])
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.key === 'Delete' || e.key === 'Backspace') && e.target === document.body) {
@@ -150,8 +157,10 @@ export default function Home() {
         onConnect={onConnect}
         onConnectStart={onConnectStart}
         onConnectEnd={onConnectEnd}
+        onViewportChange={onViewportChange}
         isValidConnection={isValidConnection}
-        fitView
+        defaultViewport={viewport}
+        fitView={!viewport}
         selectionOnDrag={true}
         selectionMode={SelectionMode.Full}
         panOnDrag={false}
@@ -159,6 +168,7 @@ export default function Home() {
       >
         <MiniMap />
         <Controls />
+        <FlowToolbar />
       </ReactFlow>
     </div>
   )
