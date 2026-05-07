@@ -3887,6 +3887,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solana/wallet-adapter-base-ui@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "@solana/wallet-adapter-base-ui@npm:0.1.6"
+  dependencies:
+    "@solana/wallet-adapter-react": "npm:^0.15.39"
+  peerDependencies:
+    "@solana/web3.js": ^1.98.0
+    react: "*"
+  checksum: 10c0/c39a54bddaeab67a4866b4537b4e6238c3e92cba3e3a7883de54602f159e0c412dd485a54f9febcc8a9e247fbe2a0b0d6cd579abd97d9921d4a9d23598165535
+  languageName: node
+  linkType: hard
+
 "@solana/wallet-adapter-base@npm:^0.9.17, @solana/wallet-adapter-base@npm:^0.9.23, @solana/wallet-adapter-base@npm:^0.9.27":
   version: 0.9.27
   resolution: "@solana/wallet-adapter-base@npm:0.9.27"
@@ -4117,6 +4129,21 @@ __metadata:
   peerDependencies:
     "@solana/web3.js": ^1.98.0
   checksum: 10c0/9b9264ec57c6d87255f4ecddebfffb11a5ed1cf7c6e05faf95cf523938a4f0c12ff0c435ea0380b196ed8379df11f85b4384e7c09052d0e0203bdf8febad3d01
+  languageName: node
+  linkType: hard
+
+"@solana/wallet-adapter-react-ui@npm:^0.9.39":
+  version: 0.9.39
+  resolution: "@solana/wallet-adapter-react-ui@npm:0.9.39"
+  dependencies:
+    "@solana/wallet-adapter-base": "npm:^0.9.27"
+    "@solana/wallet-adapter-base-ui": "npm:^0.1.6"
+    "@solana/wallet-adapter-react": "npm:^0.15.39"
+  peerDependencies:
+    "@solana/web3.js": ^1.98.0
+    react: "*"
+    react-dom: "*"
+  checksum: 10c0/95264c0c538d352e67eebc5c381d46b7dfb670f9d35b4a5eb69648d71363c6202755b93f10c03202b2503a9cd3a4862f7561eddadcce5f01489058a7c37edaa7
   languageName: node
   linkType: hard
 
@@ -14102,6 +14129,7 @@ __metadata:
     "@radix-ui/react-tooltip": "npm:^1.2.8"
     "@solana/spl-token": "npm:^0.4.14"
     "@solana/wallet-adapter-react": "npm:^0.15.39"
+    "@solana/wallet-adapter-react-ui": "npm:^0.9.39"
     "@solana/wallet-adapter-wallets": "npm:^0.19.37"
     "@solana/web3.js": "npm:^1.98.4"
     "@t3-oss/env-core": "npm:^0.13.8"
