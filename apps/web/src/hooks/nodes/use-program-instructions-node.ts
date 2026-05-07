@@ -7,7 +7,7 @@ import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { getIdlTypeString, buildProgramInstruction } from '@/utils/idl'
 
-export const useProgramInstructionsNode = (nodeId: string) => {
+export const useProgramInstructionsNode = (nodeId: string, initialSelectedInstruction?: string) => {
   const { updateNodeData } = useTypedReactFlow()
   const updateNodeInternals = useUpdateNodeInternals()
 
@@ -21,7 +21,7 @@ export const useProgramInstructionsNode = (nodeId: string) => {
     }
   }, [resolved])
 
-  const [selectedInstruction, setSelectedInstruction] = useState<string>('')
+  const [selectedInstruction, setSelectedInstruction] = useState<string>(initialSelectedInstruction ?? '')
   const [selectedInstructionDef, setSelectedInstructionDef] = useState<IdlInstruction | null>(null)
 
   useEffect(() => {

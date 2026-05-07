@@ -10,7 +10,7 @@ import { useProgramInstructionsNode } from '@/hooks/nodes/use-program-instructio
 
 export const ProgramInstructionsNode = (props: NodeProps<ProgramInstructionsNodeType>) => {
   const { idl, selectedInstruction, setSelectedInstruction, selectedInstructionDef, extraHandles } =
-    useProgramInstructionsNode(props.id)
+    useProgramInstructionsNode(props.id, props.data?.selectedInstruction)
 
   const actions = useNodeActions<ActionsFor<NodeTypeEnum.PROGRAM_INSTRUCTIONS>>(props.type, {})
 

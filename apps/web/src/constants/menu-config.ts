@@ -77,7 +77,13 @@ export const menuConfig: MenuCategory[] = [
     id: 'programs',
     label: 'Programs',
     color: '#5a1d5f',
-    nodes: [NodeTypeEnum.IDL, NodeTypeEnum.PROGRAM_INSTRUCTIONS, NodeTypeEnum.INSTRUCTIONS, NodeTypeEnum.PDA],
+    nodes: [
+      NodeTypeEnum.IDL,
+      NodeTypeEnum.PROGRAM_INSTRUCTIONS,
+      NodeTypeEnum.PROGRAM_ACCOUNT,
+      NodeTypeEnum.INSTRUCTIONS,
+      NodeTypeEnum.PDA,
+    ],
   },
   {
     id: 'crypto',
