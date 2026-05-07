@@ -30,6 +30,16 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.HAS_VALUE]: { color: '#8a641f', width: 150 },
   [NodeTypeEnum.IF]: { color: '#8a641f', width: 210 },
 
+  [NodeTypeEnum.SOL_TO_LAMPORTS]: { color: '#2f6f6a', width: 180 },
+  [NodeTypeEnum.LAMPORTS_TO_SOL]: { color: '#2f6f6a', width: 180 },
+  [NodeTypeEnum.VALID_PUBLIC_KEY]: { color: '#2f6f6a', width: 200 },
+  [NodeTypeEnum.ATA]: { color: '#2f6f6a', width: 180 },
+  [NodeTypeEnum.TOKEN_AMOUNT_TO_RAW]: { color: '#2f6f6a', width: 210 },
+  [NodeTypeEnum.RAW_TO_TOKEN_AMOUNT]: { color: '#2f6f6a', width: 210 },
+  [NodeTypeEnum.RENT_EXEMPT]: { color: '#2f6f6a', width: 190 },
+  [NodeTypeEnum.STRING_ENCODE]: { color: '#2f6f6a', width: 240 },
+  [NodeTypeEnum.STRING_DECODE]: { color: '#2f6f6a', width: 240 },
+
   [NodeTypeEnum.TRANSACTION_BUILDER]: { color: '#2a5f2b', width: 100 },
   [NodeTypeEnum.TRANSACTION]: { color: '#2a5f2b', width: 300 },
   [NodeTypeEnum.TRANSACTION_VIEW]: { color: '#2a5f2b', width: 300 },
@@ -40,7 +50,7 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.IDL]: { color: '#5a1d5f', width: 350 },
   [NodeTypeEnum.PROGRAM_INSTRUCTIONS]: { color: '#5a1d5f', width: 350 },
   [NodeTypeEnum.INSTRUCTIONS]: { color: '#5a1d5f', width: 300 },
-  [NodeTypeEnum.PDA]: { color: '#5a1d5f', width: 100 },
+  [NodeTypeEnum.PDA]: { color: '#5a1d5f', width: 140 },
 
   [NodeTypeEnum.HASH]: { color: '#265c75', width: 150 },
   [NodeTypeEnum.KEYPAIR]: { color: '#265c75', width: 150 },
@@ -54,8 +64,6 @@ export const nodeStyles: Record<NodeType, NodeStyle> = {
   [NodeTypeEnum.STRING_SPLIT]: { color: '#7a3f24', width: 240 },
   [NodeTypeEnum.STRING_SEARCH]: { color: '#7a3f24', width: 190 },
   [NodeTypeEnum.STRING_REPLACE]: { color: '#7a3f24', width: 240 },
-  [NodeTypeEnum.STRING_ENCODE]: { color: '#7a3f24', width: 240 },
-  [NodeTypeEnum.STRING_DECODE]: { color: '#7a3f24', width: 240 },
 }
 
 export const getNodeStyles = (nodeType?: NodeType) => {

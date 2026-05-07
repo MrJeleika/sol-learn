@@ -3,6 +3,7 @@ import type { NodeTypeEnum } from '@/types/node'
 
 export type PdaNodeData = {
   pda: string
+  bump?: number
 }
 
 export type PdaNodeType = Node<PdaNodeData, NodeTypeEnum.PDA>

@@ -46,6 +46,22 @@ export const menuConfig: MenuCategory[] = [
     ],
   },
   {
+    id: 'utils',
+    label: 'Utils',
+    color: '#2f6f6a',
+    nodes: [
+      NodeTypeEnum.SOL_TO_LAMPORTS,
+      NodeTypeEnum.LAMPORTS_TO_SOL,
+      NodeTypeEnum.VALID_PUBLIC_KEY,
+      NodeTypeEnum.ATA,
+      NodeTypeEnum.TOKEN_AMOUNT_TO_RAW,
+      NodeTypeEnum.RAW_TO_TOKEN_AMOUNT,
+      NodeTypeEnum.RENT_EXEMPT,
+      NodeTypeEnum.STRING_ENCODE,
+      NodeTypeEnum.STRING_DECODE,
+    ],
+  },
+  {
     id: 'transactions',
     label: 'Transactions',
     color: '#2a5f2b',
@@ -86,8 +102,6 @@ export const menuConfig: MenuCategory[] = [
       NodeTypeEnum.STRING_SPLIT,
       NodeTypeEnum.STRING_SEARCH,
       NodeTypeEnum.STRING_REPLACE,
-      NodeTypeEnum.STRING_ENCODE,
-      NodeTypeEnum.STRING_DECODE,
     ],
   },
 ]
