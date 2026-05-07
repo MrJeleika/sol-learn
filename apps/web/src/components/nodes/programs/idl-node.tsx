@@ -13,9 +13,9 @@ import { PROGRAMS } from '@/constants/programs/programs'
 
 export const IdlNode = (props: NodeProps<IdlNodeType>) => {
   const { updateNodeData } = useTypedReactFlow()
-  const [idlJson, setIdlJson] = useState('')
-  const [programId, setProgramId] = useState('')
-  const [idl, setIdl] = useState<Idl | null>(null)
+  const [idlJson, setIdlJson] = useState(props.data?.idlJson ?? '')
+  const [programId, setProgramId] = useState(props.data?.programId ?? '')
+  const [idl, setIdl] = useState<Idl | null>(props.data?.idl ?? null)
 
   const nodeStyles = getNodeStyles(props.type)
 
@@ -63,7 +63,7 @@ export const IdlNode = (props: NodeProps<IdlNodeType>) => {
       <div className="flex flex-col gap-2.5 px-4 py-2 pr-10">
         <div>
           <label className="text-[8px] text-foreground block">Default Programs</label>
-          <Select onValueChange={handleProgramSelect}>
+          <Select value={programId || undefined} onValueChange={handleProgramSelect}>
             <SelectTrigger color={nodeStyles.color}>
               <SelectValue placeholder="Select a program..." />
             </SelectTrigger>
