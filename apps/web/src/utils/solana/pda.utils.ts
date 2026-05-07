@@ -24,10 +24,10 @@ export function getPda(programIdStr: string, seeds: unknown[]) {
   try {
     const programId = new PublicKey(programIdStr)
     const seedBuffers = seeds.filter((s) => s !== undefined).map((s) => toSeedBytes(s))
-    if (seedBuffers.length === 0) return { pda: '' }
-    const [pda] = PublicKey.findProgramAddressSync(seedBuffers, programId)
-    return { pda: pda.toBase58() }
+    if (seedBuffers.length === 0) return { pda: '', bump: undefined }
+    const [pda, bump] = PublicKey.findProgramAddressSync(seedBuffers, programId)
+    return { pda: pda.toBase58(), bump }
   } catch {
-    return { pda: '' }
+    return { pda: '', bump: undefined }
   }
 }

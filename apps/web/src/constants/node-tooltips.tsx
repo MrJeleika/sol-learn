@@ -20,6 +20,10 @@ const NODE_TOOLTIP_LINKS: Partial<Record<NodeType, string>> = {
   TRANSACTION: 'https://solana.com/docs/core/transactions#sending-transactions',
   IDL: 'https://solana.com/docs/programs/anchor/idl',
   PROGRAM_INSTRUCTIONS: 'https://solana.com/docs/core/cpi',
+  PROGRAM_ACCOUNT: 'https://solana.com/docs/programs/anchor/idl#accounts',
+  TOKEN_AMOUNT_TO_RAW: 'https://solana.com/docs/tokens/basics',
+  RAW_TO_TOKEN_AMOUNT: 'https://solana.com/docs/tokens/basics',
+  RENT_EXEMPT: 'https://solana.com/docs/core/accounts#rent',
 }
 
 export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
@@ -101,6 +105,7 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
     </>
   ),
   NUMBER: <p>Type any number you want!</p>,
+  BOOLEAN: <p>Emit a true or false value for testing branches or forcing a condition.</p>,
   ADD: <p>Add two numeric inputs.</p>,
   SUBTRACT: <p>Subtract the second numeric input from the first.</p>,
   MULTIPLY: <p>Multiply two numeric inputs.</p>,
@@ -110,6 +115,52 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
   ROUND: <p>Round the numeric input to the nearest integer.</p>,
   MIN: <p>Output the smaller of two numeric inputs.</p>,
   MAX: <p>Output the larger of two numeric inputs.</p>,
+  AND: <p>Output true only when both upstream checks are true.</p>,
+  OR: <p>Output true when at least one upstream check is true.</p>,
+  NOT: <p>Invert a boolean check.</p>,
+  EQUAL: <p>Compare two values after stable normalization. Useful for public keys, signatures, hashes, and text.</p>,
+  COMPARE: <p>Run a numeric comparison, for example balance greater than a threshold or slot after a known value.</p>,
+  HAS_VALUE: (
+    <p>Check whether an upstream value is present, such as a transaction signature or fetched account data.</p>
+  ),
+  IF: <p>Select between two values using a boolean condition. The selected value can feed the next node.</p>,
+  SOL_TO_LAMPORTS: (
+    <p>
+      Convert a SOL amount into <BoldText>lamports</BoldText>. Useful for comparing wallet balances against SOL
+      thresholds.
+    </p>
+  ),
+  LAMPORTS_TO_SOL: (
+    <p>
+      Convert <BoldText>lamports</BoldText> into a human-readable SOL amount.
+    </p>
+  ),
+  VALID_PUBLIC_KEY: (
+    <p>Validate and normalize a Solana public key. Outputs both the normalized address and a boolean validity check.</p>
+  ),
+  ATA: (
+    <p>
+      Derive an <BoldText>Associated Token Account</BoldText> address from an owner wallet and token mint.
+    </p>
+  ),
+  TOKEN_AMOUNT_TO_RAW: (
+    <p>
+      Convert a human token amount using mint <BoldText>decimals</BoldText> into the raw integer amount used by token
+      instructions and IDL args.
+    </p>
+  ),
+  RAW_TO_TOKEN_AMOUNT: (
+    <p>
+      Convert a raw token integer amount back into a human-readable amount using mint <BoldText>decimals</BoldText>.
+    </p>
+  ),
+  RENT_EXEMPT: (
+    <p>
+      Fetch the minimum <BoldText>lamports</BoldText> needed to make an account of a given byte size rent-exempt.
+    </p>
+  ),
+  STRING_ENCODE: <p>Encode text into base64, base58, or hex.</p>,
+  STRING_DECODE: <p>Decode base64, base58, or hex back into text.</p>,
   SIGN: (
     <div>
       <p>Sign bytes or transactions with a provided keypair.</p>
@@ -119,7 +170,9 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
   VERIFY_SIGNATURE: (
     <div>
       <p>Verify a signature against a message and public key.</p>
-      <p>Checks that a message was signed by the holder of the corresponding private key.</p>
+      <p>
+        Checks that a message was signed by the holder of the corresponding private key and outputs a boolean result.
+      </p>
     </div>
   ),
   TRANSACTION_VIEW: (
@@ -174,6 +227,17 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
       <p>Interact with custom programs using their IDL.</p>
       <p>
         Once an IDL is connected, this node dynamically generates inputs for any instruction defined in that program.
+      </p>
+    </>
+  ),
+  PROGRAM_ACCOUNT: (
+    <>
+      <p>
+        Read and decode an <BoldText>on-chain account</BoldText> using its IDL definition.
+      </p>
+      <p>
+        Connect an IDL, network, and account address. Pick which account type to decode and each field is exposed as a
+        separate output.
       </p>
     </>
   ),

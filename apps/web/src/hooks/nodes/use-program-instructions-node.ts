@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Transaction } from '@solana/web3.js'
 import { Position, useUpdateNodeInternals } from '@xyflow/react'
-import type { Idl, IdlInstruction } from '@/types/nodes/idl-node'
-import type { ProgramInstructionsNodeData } from '@/types/nodes/program-instructions-node'
+import type { Idl, IdlInstruction } from '@/types/nodes/programs/idl-node'
+import type { ProgramInstructionsNodeData } from '@/types/nodes/programs/program-instructions-node'
 import { useTypedNodesData } from '@/hooks/flow/use-typed-nodes-data'
 import { useTypedReactFlow } from '@/hooks/flow/use-typed-react-flow'
 import { getIdlTypeString, buildProgramInstruction } from '@/utils/idl'
 
-export const useProgramInstructionsNode = (nodeId: string) => {
+export const useProgramInstructionsNode = (nodeId: string, initialSelectedInstruction?: string) => {
   const { updateNodeData } = useTypedReactFlow()
   const updateNodeInternals = useUpdateNodeInternals()
 
@@ -21,7 +21,7 @@ export const useProgramInstructionsNode = (nodeId: string) => {
     }
   }, [resolved])
 
-  const [selectedInstruction, setSelectedInstruction] = useState<string>('')
+  const [selectedInstruction, setSelectedInstruction] = useState<string>(initialSelectedInstruction ?? '')
   const [selectedInstructionDef, setSelectedInstructionDef] = useState<IdlInstruction | null>(null)
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { PublicKey } from '@solana/web3.js'
-import type { IdlInstruction } from '@/types/nodes/idl-node'
+import type { IdlInstruction } from '@/types/nodes/programs/idl-node'
 import { sha256 } from 'js-sha256'
 
 export const encodeInstructionData = (

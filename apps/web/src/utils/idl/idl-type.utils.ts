@@ -1,4 +1,4 @@
-import type { IdlType } from '@/types/nodes/idl-node'
+import type { IdlType } from '@/types/nodes/programs/idl-node'
 
 export const getIdlTypeString = (type: IdlType): string => {
   if (typeof type === 'string') {
