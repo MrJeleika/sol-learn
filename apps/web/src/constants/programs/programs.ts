@@ -1,4 +1,4 @@
-import type { Idl } from '@/types/nodes/idl-node'
+import type { Idl } from '@/types/nodes/programs/idl-node'
 import { COUNTER_PROGRAM_ID } from './counter/counter'
 import counterIdl from './counter/counter.json'
 

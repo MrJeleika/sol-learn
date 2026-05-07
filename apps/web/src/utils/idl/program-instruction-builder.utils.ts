@@ -1,5 +1,5 @@
 import { Transaction, TransactionInstruction, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } from '@solana/web3.js'
-import type { IdlInstruction } from '@/types/nodes/idl-node'
+import type { IdlInstruction } from '@/types/nodes/programs/idl-node'
 import { encodeInstructionData } from './instruction-encoder.utils'
 
 const getCommonProgramId = (accountName: string): PublicKey | null => {

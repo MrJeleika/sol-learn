@@ -101,6 +101,7 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
     </>
   ),
   NUMBER: <p>Type any number you want!</p>,
+  BOOLEAN: <p>Emit a true or false value for testing branches or forcing a condition.</p>,
   ADD: <p>Add two numeric inputs.</p>,
   SUBTRACT: <p>Subtract the second numeric input from the first.</p>,
   MULTIPLY: <p>Multiply two numeric inputs.</p>,
@@ -110,6 +111,15 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
   ROUND: <p>Round the numeric input to the nearest integer.</p>,
   MIN: <p>Output the smaller of two numeric inputs.</p>,
   MAX: <p>Output the larger of two numeric inputs.</p>,
+  AND: <p>Output true only when both upstream checks are true.</p>,
+  OR: <p>Output true when at least one upstream check is true.</p>,
+  NOT: <p>Invert a boolean check.</p>,
+  EQUAL: <p>Compare two values after stable normalization. Useful for public keys, signatures, hashes, and text.</p>,
+  COMPARE: <p>Run a numeric comparison, for example balance greater than a threshold or slot after a known value.</p>,
+  HAS_VALUE: (
+    <p>Check whether an upstream value is present, such as a transaction signature or fetched account data.</p>
+  ),
+  IF: <p>Select between two values using a boolean condition. The selected value can feed the next node.</p>,
   SIGN: (
     <div>
       <p>Sign bytes or transactions with a provided keypair.</p>
@@ -119,7 +129,9 @@ export const NODE_TOOLTIPS: Partial<Record<NodeType, React.ReactNode>> = {
   VERIFY_SIGNATURE: (
     <div>
       <p>Verify a signature against a message and public key.</p>
-      <p>Checks that a message was signed by the holder of the corresponding private key.</p>
+      <p>
+        Checks that a message was signed by the holder of the corresponding private key and outputs a boolean result.
+      </p>
     </div>
   ),
   TRANSACTION_VIEW: (

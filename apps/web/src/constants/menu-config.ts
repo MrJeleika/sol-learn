@@ -31,6 +31,21 @@ export const menuConfig: MenuCategory[] = [
     ],
   },
   {
+    id: 'logic',
+    label: 'Logic',
+    color: '#8a641f',
+    nodes: [
+      NodeTypeEnum.BOOLEAN,
+      NodeTypeEnum.AND,
+      NodeTypeEnum.OR,
+      NodeTypeEnum.NOT,
+      NodeTypeEnum.EQUAL,
+      NodeTypeEnum.COMPARE,
+      NodeTypeEnum.HAS_VALUE,
+      NodeTypeEnum.IF,
+    ],
+  },
+  {
     id: 'transactions',
     label: 'Transactions',
     color: '#2a5f2b',
